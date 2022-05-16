@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.36">
+<file name="/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/0a4d1b38c8f2d361f57bf7da7dfa969e1692ec01/AddressManager.java">
+<error line="1" severity="warning" message="Missing package-info.java file." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocPackageCheck"/>
+<error line="17" column="1" severity="warning" message="&apos;package&apos; should be separated from previous statement." source="com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyLineSeparatorCheck"/>
+<error line="17" column="1" severity="warning" message="Missing an import control file." source="com.puppycrawl.tools.checkstyle.checks.imports.ImportControlCheck"/>
+<error line="17" column="1" severity="warning" message="Package name is not same as directory." source="com.puppycrawl.tools.checkstyle.checks.coding.PackageDeclarationCheck"/>
+<error line="23" column="1" severity="warning" message="Extra separation in import group before &apos;org.apache.activemq.artemis.api.core.SimpleString&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="33" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="33" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="33" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="33" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="35" severity="warning" message="First sentence should end with a period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck"/>
+<error line="41" severity="warning" message="Javadoc comment at column 0 has parse error. Details: no viable alternative at input &apos;    *&apos; while parsing JAVADOC_TAG" source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocTagContinuationIndentationCheck"/>
+<error line="43" severity="warning" message="@return tag should be present and have description." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="43" severity="warning" message="Line is longer than 80 characters (found 83)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="43" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="43" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="43" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="45" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="45" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="45" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="45" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="47" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="47" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="47" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="47" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="49" severity="warning" message="Line is longer than 80 characters (found 97)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="49" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="49" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="49" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="49" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="51" severity="warning" message="Line is longer than 80 characters (found 121)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="51" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="51" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="51" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="51" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="53" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="53" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="53" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="53" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="55" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="55" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="55" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="55" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="57" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="57" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="57" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="57" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="59" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="59" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="59" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="59" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="61" severity="warning" message="Summary javadoc is missing." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="62" severity="warning" message="At-clause should have a non-empty description." source="com.puppycrawl.tools.checkstyle.checks.javadoc.NonEmptyAtclauseDescriptionCheck"/>
+<error line="65" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="65" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="65" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="67" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="67" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="67" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="67" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="68" severity="warning" message="Line is longer than 80 characters (found 88)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="70" severity="warning" message="Summary javadoc is missing." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="71" severity="warning" message="At-clause should have a non-empty description." source="com.puppycrawl.tools.checkstyle.checks.javadoc.NonEmptyAtclauseDescriptionCheck"/>
+<error line="72" severity="warning" message="Line is longer than 80 characters (found 103)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="74" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="74" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="74" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="76" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="76" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="76" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="76" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="78" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="78" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="78" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="78" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+</file>
+</checkstyle>

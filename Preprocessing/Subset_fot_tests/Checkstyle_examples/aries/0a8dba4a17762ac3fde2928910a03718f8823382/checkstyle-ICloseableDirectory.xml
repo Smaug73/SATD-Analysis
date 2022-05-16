@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.36">
+<file name="/home/mcs001/febert/satd-repair/apache-commits/aries/0a8dba4a17762ac3fde2928910a03718f8823382/ICloseableDirectory.java">
+<error line="1" severity="warning" message="Missing package-info.java file." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocPackageCheck"/>
+<error line="19" column="1" severity="warning" message="&apos;package&apos; should be separated from previous statement." source="com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyLineSeparatorCheck"/>
+<error line="19" column="1" severity="warning" message="Missing an import control file." source="com.puppycrawl.tools.checkstyle.checks.imports.ImportControlCheck"/>
+<error line="19" column="1" severity="warning" message="Package name is not same as directory." source="com.puppycrawl.tools.checkstyle.checks.coding.PackageDeclarationCheck"/>
+<error line="24" severity="warning" message="Line is longer than 80 characters (found 95)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="25" severity="warning" message="Line is longer than 80 characters (found 101)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="26" severity="warning" message="Line is longer than 80 characters (found 104)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="30" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="30" severity="warning" message="First sentence should end with a period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck"/>
+<error line="30" column="1" severity="warning" message="File contains tab characters (this is the first instance)." source="com.puppycrawl.tools.checkstyle.checks.whitespace.FileTabCharacterCheck"/>
+<error line="33" severity="warning" message="@return tag should be present and have description." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="33" column="9" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="33" column="9" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="33" column="9" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+</file>
+</checkstyle>

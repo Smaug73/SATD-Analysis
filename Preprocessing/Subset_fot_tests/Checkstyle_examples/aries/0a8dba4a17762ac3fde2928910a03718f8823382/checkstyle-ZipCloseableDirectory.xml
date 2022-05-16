@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.36">
+<file name="/home/mcs001/febert/satd-repair/apache-commits/aries/0a8dba4a17762ac3fde2928910a03718f8823382/ZipCloseableDirectory.java">
+<error line="1" severity="warning" message="Missing package-info.java file." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocPackageCheck"/>
+<error line="19" column="1" severity="warning" message="&apos;package&apos; should be separated from previous statement." source="com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyLineSeparatorCheck"/>
+<error line="19" column="1" severity="warning" message="Missing an import control file." source="com.puppycrawl.tools.checkstyle.checks.imports.ImportControlCheck"/>
+<error line="19" column="1" severity="warning" message="Package name is not same as directory." source="com.puppycrawl.tools.checkstyle.checks.coding.PackageDeclarationCheck"/>
+<error line="25" column="1" severity="warning" message="Extra separation in import group before &apos;org.apache.aries.application.utils.filesystem.IOUtils&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="27" severity="warning" message="Type Javadoc comment is missing null tag." source="com.puppycrawl.tools.checkstyle.checks.javadoc.WriteTagCheck"/>
+<error line="27" column="1" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocTypeCheck"/>
+<error line="28" column="1" severity="warning" message="File contains tab characters (this is the first instance)." source="com.puppycrawl.tools.checkstyle.checks.whitespace.FileTabCharacterCheck"/>
+<error line="28" column="9" severity="warning" message="&apos;member def modifier&apos; has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="28" column="9" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="30" severity="warning" message="Line is longer than 80 characters (found 92)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="30" column="9" severity="warning" message="&apos;ctor def modifier&apos; has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="30" column="9" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="30" column="38" severity="warning" message="Parameter archive should be final." source="com.puppycrawl.tools.checkstyle.checks.FinalParametersCheck"/>
+<error line="30" column="52" severity="warning" message="Parameter parent should be final." source="com.puppycrawl.tools.checkstyle.checks.FinalParametersCheck"/>
+<error line="31" column="17" severity="warning" message="&apos;ctor def&apos; child has incorrect indentation level 16, expected level should be 8." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="33" column="17" severity="warning" message="&apos;ctor def&apos; child has incorrect indentation level 16, expected level should be 8." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="34" column="17" severity="warning" message="&apos;ctor def&apos; child has incorrect indentation level 16, expected level should be 8." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="35" column="9" severity="warning" message="&apos;ctor def rcurly&apos; has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="37" column="9" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="37" column="9" severity="warning" message="Class &apos;ZipCloseableDirectory&apos; looks like designed for extension (can be subclassed), but the method &apos;getZipFile&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;ZipCloseableDirectory&apos; final or making the method &apos;getZipFile&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
+<error line="37" column="9" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="38" column="17" severity="warning" message="&apos;method def&apos; child has incorrect indentation level 16, expected level should be 8." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="39" column="9" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="41" column="9" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="41" column="9" severity="warning" message="Annotation &apos;Override&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="41" column="9" severity="warning" message="Class &apos;ZipCloseableDirectory&apos; looks like designed for extension (can be subclassed), but the method &apos;cleanup&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;ZipCloseableDirectory&apos; final or making the method &apos;cleanup&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
+<error line="43" column="17" severity="warning" message="&apos;try&apos; has incorrect indentation level 16, expected level should be 8." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="44" column="25" severity="warning" message="&apos;try&apos; child has incorrect indentation level 24, expected level should be 12." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="45" column="17" severity="warning" message="&apos;try rcurly&apos; has incorrect indentation level 16, expected level should be 8." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="45" column="41" severity="warning" message="&apos;{&apos; is not followed by whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="45" column="41" severity="warning" message="Empty catch block." source="com.puppycrawl.tools.checkstyle.checks.blocks.EmptyCatchBlockCheck"/>
+<error line="45" column="42" severity="warning" message="&apos;}&apos; is not preceded with whitespace." source="com.puppycrawl.tools.checkstyle.checks.whitespace.WhitespaceAroundCheck"/>
+<error line="46" column="9" severity="warning" message="&apos;method def rcurly&apos; has incorrect indentation level 8, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+</file>
+</checkstyle>

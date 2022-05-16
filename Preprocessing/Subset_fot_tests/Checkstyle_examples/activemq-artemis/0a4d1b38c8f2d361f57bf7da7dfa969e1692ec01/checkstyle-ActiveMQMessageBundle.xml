@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.36">
+<file name="/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/0a4d1b38c8f2d361f57bf7da7dfa969e1692ec01/ActiveMQMessageBundle.java">
+<error line="1" severity="warning" message="Missing package-info.java file." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocPackageCheck"/>
+<error line="17" column="1" severity="warning" message="&apos;package&apos; should be separated from previous statement." source="com.puppycrawl.tools.checkstyle.checks.whitespace.EmptyLineSeparatorCheck"/>
+<error line="17" column="1" severity="warning" message="Missing an import control file." source="com.puppycrawl.tools.checkstyle.checks.imports.ImportControlCheck"/>
+<error line="17" column="1" severity="warning" message="Package name is not same as directory." source="com.puppycrawl.tools.checkstyle.checks.coding.PackageDeclarationCheck"/>
+<error line="22" column="1" severity="warning" message="Extra separation in import group before &apos;org.apache.activemq.artemis.api.core.ActiveMQAddressDoesNotExistException&apos;" source="com.puppycrawl.tools.checkstyle.checks.imports.CustomImportOrderCheck"/>
+<error line="56" severity="warning" message="&lt;p&gt; tag should be placed immediately before the first word, with no space after." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocParagraphCheck"/>
+<error line="56" severity="warning" message="&lt;p&gt; tag should be preceded with an empty line." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocParagraphCheck"/>
+<error line="57" severity="warning" message="Line is longer than 80 characters (found 98)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="59" severity="warning" message="&lt;p&gt; tag should be placed immediately before the first word, with no space after." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocParagraphCheck"/>
+<error line="59" severity="warning" message="&lt;p&gt; tag should be preceded with an empty line." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocParagraphCheck"/>
+<error line="60" severity="warning" message="Line is longer than 80 characters (found 91)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="63" column="1" severity="warning" message="Annotation &apos;MessageBundle&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="63" column="1" severity="warning" message="Class Fan-Out Complexity is 37 (max allowed is 20)." source="com.puppycrawl.tools.checkstyle.checks.metrics.ClassFanOutComplexityCheck"/>
+<error line="63" column="1" severity="warning" message="Number of public methods is 113 (max allowed is 100)." source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodCountCheck"/>
+<error line="63" column="1" severity="warning" message="Total number of methods is 113 (max allowed is 100)." source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodCountCheck"/>
+<error line="66" severity="warning" message="Line is longer than 80 characters (found 82)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="66" column="4" severity="warning" message="&apos;member def type&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="66" column="4" severity="warning" message="Implied modifier &apos;final&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="66" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="66" column="4" severity="warning" message="Implied modifier &apos;static&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="66" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocVariableCheck"/>
+<error line="68" severity="warning" message="Line is longer than 80 characters (found 101)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="68" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="68" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="68" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="68" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="68" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="68" column="18" severity="warning" message="&apos;119000&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="71" severity="warning" message="Line is longer than 80 characters (found 98)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="71" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="71" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="71" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="71" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="71" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="71" column="18" severity="warning" message="&apos;119001&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="74" severity="warning" message="Line is longer than 80 characters (found 118)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="74" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="74" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="74" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="74" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="74" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="74" column="18" severity="warning" message="&apos;119002&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="77" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="77" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="77" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="77" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="77" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="77" column="18" severity="warning" message="&apos;119003&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="80" severity="warning" message="Line is longer than 80 characters (found 128)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="80" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="80" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="80" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="80" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="80" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="80" column="18" severity="warning" message="&apos;119004&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="83" severity="warning" message="Line is longer than 80 characters (found 116)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="83" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="83" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="83" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="83" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="83" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="83" column="18" severity="warning" message="&apos;119005&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="84" severity="warning" message="Line is longer than 80 characters (found 82)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="86" severity="warning" message="Line is longer than 80 characters (found 94)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="86" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="86" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="86" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="86" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="86" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="86" column="18" severity="warning" message="&apos;119006&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="89" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="89" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="89" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="89" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="89" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="89" column="18" severity="warning" message="&apos;119007&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="92" severity="warning" message="Line is longer than 80 characters (found 121)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="92" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="92" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="92" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="92" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="92" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="92" column="18" severity="warning" message="&apos;119008&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="95" severity="warning" message="Line is longer than 80 characters (found 99)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="95" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="95" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="95" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="95" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="95" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="95" column="18" severity="warning" message="&apos;119009&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="96" severity="warning" message="Line is longer than 80 characters (found 109)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="98" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="98" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="98" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="98" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="98" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="98" column="18" severity="warning" message="&apos;119010&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="101" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="101" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="101" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="101" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="101" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="101" column="18" severity="warning" message="&apos;119011&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="104" severity="warning" message="Line is longer than 80 characters (found 101)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="104" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="104" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="104" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="104" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="104" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="104" column="18" severity="warning" message="&apos;119012&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="107" severity="warning" message="Line is longer than 80 characters (found 103)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="107" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="107" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="107" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="107" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="107" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="107" column="18" severity="warning" message="&apos;119013&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="110" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="110" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="110" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="110" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="110" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="110" column="18" severity="warning" message="&apos;119014&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="111" severity="warning" message="Line is longer than 80 characters (found 154)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="111" column="7" severity="warning" message="&apos;value&apos; has incorrect indentation level 6, expected level should be 7." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="112" severity="warning" message="Line is longer than 80 characters (found 84)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="114" severity="warning" message="Line is longer than 80 characters (found 143)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="114" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="114" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="114" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="114" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="114" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="114" column="18" severity="warning" message="&apos;119015&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="117" severity="warning" message="Line is longer than 80 characters (found 100)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="117" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="117" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="117" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="117" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="117" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="117" column="18" severity="warning" message="&apos;119017&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="120" severity="warning" message="Line is longer than 80 characters (found 102)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="120" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="120" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="120" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="120" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="120" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="120" column="18" severity="warning" message="&apos;119018&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="123" severity="warning" message="Line is longer than 80 characters (found 100)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="123" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="123" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="123" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="123" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="123" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="123" column="18" severity="warning" message="&apos;119019&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="126" severity="warning" message="Line is longer than 80 characters (found 95)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="126" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="126" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="126" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="126" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="126" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="126" column="18" severity="warning" message="&apos;119020&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="127" severity="warning" message="Line is longer than 80 characters (found 99)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="129" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="129" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="129" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="129" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="129" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="129" column="18" severity="warning" message="&apos;119021&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="132" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="132" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="132" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="132" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="132" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="132" column="18" severity="warning" message="&apos;119022&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="135" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="135" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="135" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="135" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="135" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="135" column="18" severity="warning" message="&apos;119023&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="138" severity="warning" message="Line is longer than 80 characters (found 100)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="138" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="138" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="138" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="138" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="138" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="138" column="18" severity="warning" message="&apos;119024&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="141" severity="warning" message="Line is longer than 80 characters (found 139)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="141" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="141" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="141" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="141" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="141" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="141" column="18" severity="warning" message="&apos;119025&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="142" severity="warning" message="Line is longer than 80 characters (found 104)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="144" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="144" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="144" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="144" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="144" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="144" column="18" severity="warning" message="&apos;119026&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="147" severity="warning" message="Line is longer than 80 characters (found 148)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="147" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="147" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="147" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="147" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="147" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="147" column="18" severity="warning" message="&apos;119027&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="148" severity="warning" message="Line is longer than 80 characters (found 97)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="150" severity="warning" message="Line is longer than 80 characters (found 117)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="150" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="150" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="150" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="150" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="150" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="150" column="18" severity="warning" message="&apos;119028&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="153" severity="warning" message="Line is longer than 80 characters (found 82)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="153" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="153" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="153" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="153" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="153" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="153" column="18" severity="warning" message="&apos;119029&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="156" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="156" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="156" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="156" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="156" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="156" column="18" severity="warning" message="&apos;119030&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="159" severity="warning" message="Line is longer than 80 characters (found 99)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="159" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="159" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="159" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="159" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="159" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="159" column="18" severity="warning" message="&apos;119031&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="162" severity="warning" message="Line is longer than 80 characters (found 133)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="162" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="162" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="162" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="162" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="162" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="162" column="18" severity="warning" message="&apos;119032&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="163" severity="warning" message="Line is longer than 80 characters (found 102)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="165" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="165" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="165" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="165" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="165" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="165" column="18" severity="warning" message="&apos;119033&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="168" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="168" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="168" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="168" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="168" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="168" column="18" severity="warning" message="&apos;119034&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="171" severity="warning" message="Line is longer than 80 characters (found 113)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="171" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="171" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="171" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="171" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="171" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="171" column="18" severity="warning" message="&apos;119035&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="172" severity="warning" message="Line is longer than 80 characters (found 81)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="174" severity="warning" message="Line is longer than 80 characters (found 93)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="174" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="174" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="174" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="174" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="174" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="174" column="18" severity="warning" message="&apos;119036&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="177" severity="warning" message="Line is longer than 80 characters (found 110)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="177" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="177" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="177" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="177" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="177" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="177" column="18" severity="warning" message="&apos;119038&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="180" severity="warning" message="Line is longer than 80 characters (found 123)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="180" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="180" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="180" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="180" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="180" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="180" column="18" severity="warning" message="&apos;119039&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="183" severity="warning" message="Line is longer than 80 characters (found 150)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="183" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="183" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="183" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="183" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="183" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="183" column="18" severity="warning" message="&apos;119040&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="186" severity="warning" message="Line is longer than 80 characters (found 139)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="186" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="186" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="186" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="186" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="186" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="186" column="18" severity="warning" message="&apos;119041&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="189" severity="warning" message="Line is longer than 80 characters (found 147)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="189" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="189" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="189" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="189" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="189" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="189" column="18" severity="warning" message="&apos;119042&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="192" severity="warning" message="Line is longer than 80 characters (found 137)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="192" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="192" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="192" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="192" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="192" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="192" column="18" severity="warning" message="&apos;119043&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="193" severity="warning" message="Line is longer than 80 characters (found 111)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="195" severity="warning" message="Line is longer than 80 characters (found 100)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="195" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="195" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="195" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="195" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="195" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="195" column="18" severity="warning" message="&apos;119044&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="198" severity="warning" message="Line is longer than 80 characters (found 120)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="198" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="198" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="198" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="198" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="198" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="198" column="18" severity="warning" message="&apos;119045&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="201" severity="warning" message="Line is longer than 80 characters (found 123)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="201" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="201" column="4" severity="warning" message="All overloaded methods should be placed next to each other. Placing non-overloaded methods in between overloaded methods with the same type is a violation. Previous overloaded method located at line &apos;180&apos;." source="com.puppycrawl.tools.checkstyle.checks.coding.OverloadMethodsDeclarationOrderCheck"/>
+<error line="201" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="201" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="201" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="201" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="201" column="18" severity="warning" message="&apos;119046&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="204" severity="warning" message="Line is longer than 80 characters (found 131)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="204" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="204" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="204" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="204" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="204" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="204" column="18" severity="warning" message="&apos;119047&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="207" severity="warning" message="Line is longer than 80 characters (found 151)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="207" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="207" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="207" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="207" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="207" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="207" column="18" severity="warning" message="&apos;119048&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="210" severity="warning" message="Line is longer than 80 characters (found 98)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="210" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="210" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="210" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="210" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="210" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="210" column="18" severity="warning" message="&apos;119049&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="213" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="213" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="213" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="213" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="213" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="213" column="18" severity="warning" message="&apos;119050&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="216" severity="warning" message="Line is longer than 80 characters (found 100)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="216" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="216" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="216" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="216" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="216" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="216" column="18" severity="warning" message="&apos;119051&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="219" severity="warning" message="Line is longer than 80 characters (found 126)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="219" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="219" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="219" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="219" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="219" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="219" column="18" severity="warning" message="&apos;119052&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="222" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="222" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="222" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="222" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="222" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="222" column="18" severity="warning" message="&apos;119054&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="225" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="225" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="225" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="225" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="225" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="225" column="18" severity="warning" message="&apos;119055&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="228" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="228" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="228" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="228" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="228" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="228" column="18" severity="warning" message="&apos;119056&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="231" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="231" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="231" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="231" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="231" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="231" column="18" severity="warning" message="&apos;119057&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="234" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="234" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="234" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="234" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="234" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="234" column="18" severity="warning" message="&apos;119058&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="237" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="237" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="237" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="237" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="237" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="237" column="18" severity="warning" message="&apos;119059&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="240" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="240" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="240" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="240" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="240" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="240" column="18" severity="warning" message="&apos;119060&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="243" severity="warning" message="Line is longer than 80 characters (found 113)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="243" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="243" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="243" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="243" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="243" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="243" column="18" severity="warning" message="&apos;119061&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="246" severity="warning" message="Line is longer than 80 characters (found 115)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="246" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="246" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="246" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="246" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="246" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="246" column="18" severity="warning" message="&apos;119062&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="249" severity="warning" message="Line is longer than 80 characters (found 111)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="249" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="249" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="249" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="249" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="249" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="249" column="18" severity="warning" message="&apos;119063&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="252" severity="warning" message="Line is longer than 80 characters (found 96)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="252" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="252" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="252" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="252" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="252" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="252" column="18" severity="warning" message="&apos;119064&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="255" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="255" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="255" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="255" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="255" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="255" column="18" severity="warning" message="&apos;119065&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="258" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="258" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="258" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="258" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="258" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="258" column="18" severity="warning" message="&apos;119066&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="261" severity="warning" message="Line is longer than 80 characters (found 110)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="261" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="261" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="261" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="261" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="261" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="261" column="18" severity="warning" message="&apos;119067&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="264" severity="warning" message="Line is longer than 80 characters (found 100)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="264" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="264" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="264" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="264" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="264" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="264" column="18" severity="warning" message="&apos;119068&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="267" severity="warning" message="Line is longer than 80 characters (found 96)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="267" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="267" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="267" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="267" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="267" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="267" column="18" severity="warning" message="&apos;119069&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="270" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="270" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="270" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="270" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="270" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="270" column="18" severity="warning" message="&apos;119070&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="273" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="273" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="273" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="273" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="273" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="273" column="18" severity="warning" message="&apos;119071&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="276" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="276" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="276" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="276" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="276" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="276" column="18" severity="warning" message="&apos;119072&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="279" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="279" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="279" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="279" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="279" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="279" column="18" severity="warning" message="&apos;119073&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="282" severity="warning" message="Line is longer than 80 characters (found 117)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="282" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="282" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="282" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="282" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="282" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="282" column="18" severity="warning" message="&apos;119074&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="283" severity="warning" message="Line is longer than 80 characters (found 107)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="285" severity="warning" message="Line is longer than 80 characters (found 130)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="285" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="285" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="285" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="285" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="285" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="285" column="18" severity="warning" message="&apos;119075&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="288" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="288" severity="warning" message="First sentence should end with a period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck"/>
+<error line="289" severity="warning" message="Line is longer than 80 characters (found 149)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="291" severity="warning" message="@return tag should be present and have description." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="291" severity="warning" message="Line is longer than 80 characters (found 146)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="291" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="291" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="291" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="291" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="291" column="18" severity="warning" message="&apos;119076&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="292" column="61" severity="warning" message="Expected @param tag for &apos;key&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="292" column="73" severity="warning" message="Expected @param tag for &apos;value&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="294" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="294" severity="warning" message="First sentence should end with a period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck"/>
+<error line="295" severity="warning" message="Line is longer than 80 characters (found 149)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="297" severity="warning" message="@return tag should be present and have description." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="297" severity="warning" message="Line is longer than 80 characters (found 98)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="297" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="297" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="297" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="297" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="297" column="18" severity="warning" message="&apos;119077&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="298" severity="warning" message="Line is longer than 80 characters (found 92)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="298" column="72" severity="warning" message="Expected @param tag for &apos;serverSessionString&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="300" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="300" severity="warning" message="First sentence should end with a period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck"/>
+<error line="301" severity="warning" message="Line is longer than 80 characters (found 151)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="303" severity="warning" message="@return tag should be present and have description." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="303" severity="warning" message="Line is longer than 80 characters (found 120)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="303" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="303" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="303" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="303" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="303" column="18" severity="warning" message="&apos;119078&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="304" severity="warning" message="Line is longer than 80 characters (found 109)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="304" column="91" severity="warning" message="Expected @param tag for &apos;key&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="304" column="103" severity="warning" message="Expected @param tag for &apos;value&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="306" severity="warning" message="First sentence of Javadoc is missing an ending period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.SummaryJavadocCheck"/>
+<error line="306" severity="warning" message="First sentence should end with a period." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocStyleCheck"/>
+<error line="307" severity="warning" message="Line is longer than 80 characters (found 149)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="309" severity="warning" message="@return tag should be present and have description." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="309" severity="warning" message="Line is longer than 80 characters (found 105)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="309" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="309" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="309" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="309" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="309" column="18" severity="warning" message="&apos;119079&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="310" severity="warning" message="Line is longer than 80 characters (found 87)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="310" column="69" severity="warning" message="Expected @param tag for &apos;key&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="310" column="81" severity="warning" message="Expected @param tag for &apos;value&apos;." source="com.puppycrawl.tools.checkstyle.checks.javadoc.JavadocMethodCheck"/>
+<error line="312" severity="warning" message="Line is longer than 80 characters (found 88)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="312" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="312" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="312" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="312" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="312" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="312" column="18" severity="warning" message="&apos;119080&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="315" severity="warning" message="Line is longer than 80 characters (found 124)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="315" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="315" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="315" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="315" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="315" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="315" column="18" severity="warning" message="&apos;119081&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="318" severity="warning" message="Line is longer than 80 characters (found 124)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="318" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="318" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="318" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="318" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="318" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="318" column="18" severity="warning" message="&apos;119082&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="319" severity="warning" message="Line is longer than 80 characters (found 112)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="321" severity="warning" message="Line is longer than 80 characters (found 123)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="321" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="321" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="321" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="321" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="321" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="321" column="18" severity="warning" message="&apos;119083&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="322" severity="warning" message="Line is longer than 80 characters (found 111)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="324" severity="warning" message="Line is longer than 80 characters (found 106)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="325" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="325" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="325" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="325" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="325" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="325" column="18" severity="warning" message="&apos;119099&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="326" column="7" severity="warning" message="&apos;format&apos; has incorrect indentation level 6, expected level should be 7." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="329" severity="warning" message="Line is longer than 80 characters (found 115)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="329" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="329" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="329" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="329" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="329" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="329" column="18" severity="warning" message="&apos;119100&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="330" column="7" severity="warning" message="&apos;format&apos; has incorrect indentation level 6, expected level should be 7." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="333" severity="warning" message="Line is longer than 80 characters (found 90)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="333" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="333" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="333" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="333" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="333" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="333" column="18" severity="warning" message="&apos;119101&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="334" column="7" severity="warning" message="&apos;format&apos; has incorrect indentation level 6, expected level should be 7." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="337" severity="warning" message="Line is longer than 80 characters (found 100)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="337" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="337" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="337" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="337" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="337" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="337" column="18" severity="warning" message="&apos;119102&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="340" severity="warning" message="Line is longer than 80 characters (found 95)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="340" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="340" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="340" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="340" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="340" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="340" column="18" severity="warning" message="&apos;119103&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="343" severity="warning" message="Line is longer than 80 characters (found 84)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="343" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="343" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="343" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="343" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="343" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="343" column="18" severity="warning" message="&apos;119104&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="346" severity="warning" message="Line is longer than 80 characters (found 113)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="346" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="346" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="346" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="346" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="346" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="346" column="18" severity="warning" message="&apos;119106&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="349" severity="warning" message="Line is longer than 80 characters (found 133)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="349" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="349" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="349" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="349" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="349" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="349" column="18" severity="warning" message="&apos;119107&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="350" severity="warning" message="Line is longer than 80 characters (found 88)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="352" severity="warning" message="Line is longer than 80 characters (found 121)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="352" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="352" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="352" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="352" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="352" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="352" column="18" severity="warning" message="&apos;119108&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="353" severity="warning" message="Line is longer than 80 characters (found 88)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="355" severity="warning" message="Line is longer than 80 characters (found 115)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="355" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="355" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="355" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="355" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="355" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="355" column="18" severity="warning" message="&apos;119109&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="358" severity="warning" message="Line is longer than 80 characters (found 134)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="358" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="358" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="358" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="358" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="358" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="358" column="18" severity="warning" message="&apos;119110&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="359" severity="warning" message="Line is longer than 80 characters (found 84)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="361" severity="warning" message="Line is longer than 80 characters (found 137)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="361" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="361" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="361" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="361" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="361" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="361" column="18" severity="warning" message="&apos;119111&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="362" severity="warning" message="Line is longer than 80 characters (found 82)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="364" severity="warning" message="Line is longer than 80 characters (found 90)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="364" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="364" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="364" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="364" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="364" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="364" column="18" severity="warning" message="&apos;119112&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="367" severity="warning" message="Line is longer than 80 characters (found 115)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="367" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="367" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="367" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="367" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="367" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="367" column="18" severity="warning" message="&apos;119113&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="370" severity="warning" message="Line is longer than 80 characters (found 152)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="370" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="370" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="370" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="370" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="370" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="370" column="18" severity="warning" message="&apos;119114&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="373" severity="warning" message="Line is longer than 80 characters (found 130)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="373" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="373" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="373" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="373" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="373" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="373" column="18" severity="warning" message="&apos;119115&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="376" severity="warning" message="Line is longer than 80 characters (found 102)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="376" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="376" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="376" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="376" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="376" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="376" column="18" severity="warning" message="&apos;119116&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="379" severity="warning" message="Line is longer than 80 characters (found 90)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="379" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="379" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="379" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="379" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="379" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="379" column="18" severity="warning" message="&apos;119117&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="382" severity="warning" message="Line is longer than 80 characters (found 101)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="382" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="382" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="382" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="382" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="382" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="382" column="18" severity="warning" message="&apos;119118&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="385" severity="warning" message="Line is longer than 80 characters (found 87)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="385" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="385" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="385" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="385" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="385" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="385" column="18" severity="warning" message="&apos;119119&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="388" severity="warning" message="Line is longer than 80 characters (found 139)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="388" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="388" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="388" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="388" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="388" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="388" column="18" severity="warning" message="&apos;119200&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="389" severity="warning" message="Line is longer than 80 characters (found 118)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="391" severity="warning" message="Line is longer than 80 characters (found 131)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="391" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="391" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="391" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="391" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="391" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="391" column="18" severity="warning" message="&apos;119201&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="392" severity="warning" message="Line is longer than 80 characters (found 170)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="394" severity="warning" message="Line is longer than 80 characters (found 167)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="394" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="394" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="394" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="394" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="394" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="394" column="18" severity="warning" message="&apos;119202&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="395" severity="warning" message="Line is longer than 80 characters (found 177)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="397" severity="warning" message="Line is longer than 80 characters (found 103)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="397" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="397" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="397" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="397" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="397" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="397" column="18" severity="warning" message="&apos;119203&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="398" severity="warning" message="Line is longer than 80 characters (found 82)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="400" severity="warning" message="Line is longer than 80 characters (found 103)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="400" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="400" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="400" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="400" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="400" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="400" column="18" severity="warning" message="&apos;119204&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="403" severity="warning" message="Line is longer than 80 characters (found 100)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="403" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="403" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="403" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="403" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="403" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="403" column="18" severity="warning" message="&apos;119205&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="406" severity="warning" message="Line is longer than 80 characters (found 123)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="406" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="406" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="406" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="406" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="406" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="406" column="18" severity="warning" message="&apos;119206&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="409" severity="warning" message="Line is longer than 80 characters (found 169)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="409" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="409" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="409" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="409" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="409" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="409" column="18" severity="warning" message="&apos;119207&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="410" severity="warning" message="Line is longer than 80 characters (found 81)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="412" severity="warning" message="Line is longer than 80 characters (found 97)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="414" severity="warning" message="Line is longer than 80 characters (found 100)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="414" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="414" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="414" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="414" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="414" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="414" column="18" severity="warning" message="&apos;119208&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="417" severity="warning" message="Line is longer than 80 characters (found 195)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="417" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="417" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="417" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="417" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="417" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="417" column="18" severity="warning" message="&apos;119209&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="418" severity="warning" message="Line is longer than 80 characters (found 91)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="420" severity="warning" message="Line is longer than 80 characters (found 150)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="420" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="420" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="420" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="420" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="420" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="420" column="18" severity="warning" message="&apos;119210&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="421" severity="warning" message="Line is longer than 80 characters (found 102)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="423" severity="warning" message="Line is longer than 80 characters (found 172)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="423" column="4" severity="warning" message="&apos;method def modifier&apos; has incorrect indentation level 3, expected level should be 4." source="com.puppycrawl.tools.checkstyle.checks.indentation.IndentationCheck"/>
+<error line="423" column="4" severity="warning" message="Annotation &apos;Message&apos; should be on the same line with its target." source="com.puppycrawl.tools.checkstyle.checks.annotation.AnnotationOnSameLineCheck"/>
+<error line="423" column="4" severity="warning" message="Implied modifier &apos;abstract&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="423" column="4" severity="warning" message="Implied modifier &apos;public&apos; should be explicit." source="com.puppycrawl.tools.checkstyle.checks.modifier.InterfaceMemberImpliedModifierCheck"/>
+<error line="423" column="4" severity="warning" message="Missing a Javadoc comment." source="com.puppycrawl.tools.checkstyle.checks.javadoc.MissingJavadocMethodCheck"/>
+<error line="423" column="18" severity="warning" message="&apos;119211&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="427" severity="warning" message="Line is longer than 80 characters (found 90)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+</file>
+</checkstyle>
