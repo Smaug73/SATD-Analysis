@@ -32,8 +32,11 @@ def add_columns_and_convert_paths(directory, tool):
                 for commit_to_analyse in Repository(repository, single=commit).traverse_commits():
                     modified_files_list= []
 
+                    accepted_changes = ['MODIFY', 'ADD']
+
                     for modified_file in commit_to_analyse.modified_files:
-                        modified_files_list.append(modified_file.new_path)
+                        if(modified_file.change_type.name in accepted_changes):
+                            modified_files_list.append(modified_file.new_path)
                         
                     # List with files which path was already converted or that were not modified in the commit under analysis
                     to_exclude = []
