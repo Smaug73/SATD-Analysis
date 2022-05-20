@@ -1,0 +1,5 @@
+"Problem","Package","File","Priority","Line","Description","Rule set","Rule"
+"1","org.apache.activemq.artemis.cli.commands.messages","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/a1b3fb3d41567d86fa031685f2101290344e0554/ConsumerThread.java","4","79","Useless parentheses.","Code Style","UselessParentheses"
+"2","org.apache.activemq.artemis.cli.commands.messages","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/a1b3fb3d41567d86fa031685f2101290344e0554/ConsumerThread.java","4","87","Useless parentheses.","Code Style","UselessParentheses"
+"3","org.apache.activemq.artemis.cli.commands.messages","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/a1b3fb3d41567d86fa031685f2101290344e0554/ConsumerThread.java","3","188","Avoid assignments in operands","Error Prone","AssignmentInOperand"
+"4","org.apache.activemq.artemis.cli.commands.messages","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/a1b3fb3d41567d86fa031685f2101290344e0554/ConsumerThread.java","3","219","A catch statement should never catch throwable since it includes errors.","Error Prone","AvoidCatchingThrowable"

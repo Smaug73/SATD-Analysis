@@ -1,0 +1,2 @@
+"Problem","Package","File","Priority","Line","Description","Rule set","Rule"
+"1","org.apache.activemq.artemis.tests.compatibility","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/71e664a705e8a54adb530e3c769ce936fb851fb7/ConnectionFactoryConfigurationSerializationTest.java","3","87","A catch statement should never catch throwable since it includes errors.","Error Prone","AvoidCatchingThrowable"

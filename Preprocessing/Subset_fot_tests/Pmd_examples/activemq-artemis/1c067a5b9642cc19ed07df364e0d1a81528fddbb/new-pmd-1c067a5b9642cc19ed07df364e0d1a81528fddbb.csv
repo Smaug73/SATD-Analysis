@@ -1,0 +1,2 @@
+Problem,Package,File,Priority,Line,Description,Rule set,Rule,Project,Commit
+1,org.apache.activemq.artemis.jms.example,examples/features/standard/interceptor-client/src/main/java/org/apache/activemq/artemis/jms/example/InterceptorExample.java,3,32,"All methods are static.  Consider using a utility class instead. Alternatively, you could add a private constructor or make the class abstract to silence this warning.",Design,UseUtilityClass,activemq-artemis,1c067a5b9642cc19ed07df364e0d1a81528fddbb

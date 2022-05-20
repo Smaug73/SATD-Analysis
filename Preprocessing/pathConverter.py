@@ -3,7 +3,17 @@ import argparse
 import os
 import pandas as pd
 
-
+# The method adds columns "Project" and "Commit" to each CSV
+# and converts the paths in the column "File" from local path to repository path.
+# In order to do that, the name of the file taken from the local path is compared with
+# modified files (added or changed) in the current commit. When there's a match, 
+# the absolute local path is overwritten with the repository path.
+# For checkstyle only the name of the file is used.
+# For PMD the package of the file is used too, in order to create a subpath of the file.
+# This is possible because in PMD results there is a reference to the package of the file analysed,
+# whereas in checkstyle results the only given information is the name of the file.
+# If there are 2 or more homonimous files, it is impossible to say to which file the checkstyle results
+# (or PMD if the subpath is also the same) are referring to.
 def add_columns_and_convert_paths(directory, tool):
 
     # Get the name of each project in the directory
@@ -17,8 +27,11 @@ def add_columns_and_convert_paths(directory, tool):
 
         print('\nProject: ' + project)
 
+        commit_count = 1
+
         for commit in commits:
-            print('\nCommit: ' + commit)
+            print('\nCommit: ' + commit + ' ' + str(commit_count) + '/' + str(len(commits)))
+            commit_count = commit_count + 1
 
             csv_violations = pd.read_csv(directory + '/' + project + '/' + commit + '/' + tool + '-' + commit + '.csv')
 
@@ -32,6 +45,7 @@ def add_columns_and_convert_paths(directory, tool):
                 for commit_to_analyse in Repository(repository, single=commit).traverse_commits():
                     modified_files_list= []
 
+                    # Only added or modified files are taken into account
                     accepted_changes = ['MODIFY', 'ADD']
 
                     for modified_file in commit_to_analyse.modified_files:

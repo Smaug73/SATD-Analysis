@@ -1,0 +1,4 @@
+"Problem","Package","File","Priority","Line","Description","Rule set","Rule"
+"1","org.apache.activemq.artemis.core.settings","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/45a4f6fc39f6aebdf27778fc1a7e1132842cd36b/RepositoryTest.java","3","274","Avoid empty catch blocks","Error Prone","EmptyCatchBlock"
+"2","org.apache.activemq.artemis.core.settings","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/45a4f6fc39f6aebdf27778fc1a7e1132842cd36b/RepositoryTest.java","3","280","Avoid empty catch blocks","Error Prone","EmptyCatchBlock"
+"3","org.apache.activemq.artemis.core.settings","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/45a4f6fc39f6aebdf27778fc1a7e1132842cd36b/RepositoryTest.java","3","289","Avoid using implementation types like 'ArrayList'; use the interface instead","Best Practices","LooseCoupling"

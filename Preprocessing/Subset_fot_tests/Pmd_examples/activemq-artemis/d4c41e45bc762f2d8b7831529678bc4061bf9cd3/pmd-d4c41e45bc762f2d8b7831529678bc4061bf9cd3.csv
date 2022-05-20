@@ -1,0 +1,4 @@
+"Problem","Package","File","Priority","Line","Description","Rule set","Rule"
+"1","org.apache.activemq.artemis.utils","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/d4c41e45bc762f2d8b7831529678bc4061bf9cd3/ActiveMQThreadPoolExecutor.java","2","56","Use of modifier volatile is not recommended.","Multithreading","AvoidUsingVolatile"
+"2","org.apache.activemq.artemis.utils","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/d4c41e45bc762f2d8b7831529678bc4061bf9cd3/ActiveMQThreadPoolExecutor.java","4","66","Useless parentheses.","Code Style","UselessParentheses"
+"3","org.apache.activemq.artemis.utils","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/d4c41e45bc762f2d8b7831529678bc4061bf9cd3/ActiveMQThreadPoolExecutor.java","3","74","This statement should have braces","Code Style","ControlStatementBraces"

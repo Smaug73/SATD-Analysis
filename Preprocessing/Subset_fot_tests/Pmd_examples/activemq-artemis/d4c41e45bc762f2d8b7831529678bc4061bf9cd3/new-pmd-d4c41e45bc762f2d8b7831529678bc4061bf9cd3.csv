@@ -1,0 +1,4 @@
+Problem,Package,File,Priority,Line,Description,Rule set,Rule,Project,Commit
+1,org.apache.activemq.artemis.utils,artemis-commons/src/main/java/org/apache/activemq/artemis/utils/ActiveMQThreadPoolExecutor.java,2,56,Use of modifier volatile is not recommended.,Multithreading,AvoidUsingVolatile,activemq-artemis,d4c41e45bc762f2d8b7831529678bc4061bf9cd3
+2,org.apache.activemq.artemis.utils,artemis-commons/src/main/java/org/apache/activemq/artemis/utils/ActiveMQThreadPoolExecutor.java,4,66,Useless parentheses.,Code Style,UselessParentheses,activemq-artemis,d4c41e45bc762f2d8b7831529678bc4061bf9cd3
+3,org.apache.activemq.artemis.utils,artemis-commons/src/main/java/org/apache/activemq/artemis/utils/ActiveMQThreadPoolExecutor.java,3,74,This statement should have braces,Code Style,ControlStatementBraces,activemq-artemis,d4c41e45bc762f2d8b7831529678bc4061bf9cd3

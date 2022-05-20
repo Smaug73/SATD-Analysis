@@ -1,0 +1,2 @@
+"Problem","Package","File","Priority","Line","Description","Rule set","Rule"
+"1","org.apache.activemq.artemis.jms.tests.message.foreign","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/fa191ba4c6db418452284cc6a752228de8c64421/ForeignMessageTest.java","2","53","Logger calls should be surrounded by log level guards.","Best Practices","GuardLogStatement"

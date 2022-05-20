@@ -1,0 +1,2 @@
+"Problem","Package","File","Priority","Line","Description","Rule set","Rule"
+"1","org.apache.activemq.artemis.cli.commands.user","/home/mcs001/febert/satd-repair/apache-commits/activemq-artemis/fb60795b59f24da9e01cade972721da1dda90803/ListUser.java","3","56","Avoid assignments in operands","Error Prone","AssignmentInOperand"

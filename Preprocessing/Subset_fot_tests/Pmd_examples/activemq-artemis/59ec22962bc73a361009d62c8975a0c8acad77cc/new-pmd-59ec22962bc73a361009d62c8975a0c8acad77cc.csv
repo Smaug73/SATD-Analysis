@@ -1,0 +1,3 @@
+Problem,Package,File,Priority,Line,Description,Rule set,Rule,Project,Commit
+1,org.apache.activemq.artemis.osgi,artemis-server-osgi/src/main/java/org/apache/activemq/artemis/osgi/ProtocolTracker.java,4,104,Useless parentheses.,Code Style,UselessParentheses,activemq-artemis,59ec22962bc73a361009d62c8975a0c8acad77cc
+2,org.apache.activemq.artemis.osgi,artemis-server-osgi/src/main/java/org/apache/activemq/artemis/osgi/ProtocolTracker.java,4,119,Useless parentheses.,Code Style,UselessParentheses,activemq-artemis,59ec22962bc73a361009d62c8975a0c8acad77cc

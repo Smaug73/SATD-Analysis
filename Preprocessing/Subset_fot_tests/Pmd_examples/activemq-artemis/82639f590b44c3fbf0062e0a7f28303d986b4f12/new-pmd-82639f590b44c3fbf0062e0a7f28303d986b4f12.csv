@@ -1,0 +1,3 @@
+Problem,Package,File,Priority,Line,Description,Rule set,Rule,Project,Commit
+1,org.apache.activemq.artemis.core.journal.impl,artemis-journal/src/main/java/org/apache/activemq/artemis/core/journal/impl/AbstractSequentialFileFactory.java,3,171,Document empty method body,Documentation,UncommentedEmptyMethodBody,activemq-artemis,82639f590b44c3fbf0062e0a7f28303d986b4f12
+1,org.apache.activemq.cli.test,artemis-cli/src/test/java/org/apache/activemq/cli/test/ArtemisTest.java,3,83,Ensure that resources like this Connection object are closed after use,Error Prone,CloseResource,activemq-artemis,82639f590b44c3fbf0062e0a7f28303d986b4f12
