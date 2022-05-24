@@ -49,6 +49,7 @@ def count_collisions(directory):
         # Counter of total java files modified (added or modified) in the project
         modified_java_files_project_count = 0
 
+        # Counter of files that need to be re-analysed
         count_files_to_reanalyse = 0
         
         for commit in Repository(repository, only_commits=commits).traverse_commits():
