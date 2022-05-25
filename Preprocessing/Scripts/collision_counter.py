@@ -140,27 +140,25 @@ def count_files_reanalysis_needed_pmd(directory, project, commit, homonymous_set
     # False => add an entry into homonymous_subpath_dict dictionary: key = subpath, value = repository path
     for i in range(0, len(csv_static_analysis) - 1):
         try:
-            package = csv_static_analysis.at[i, 'Package']
-            if package is None:
-                package = ''
-            else:
-                package = csv_static_analysis.at[i, 'Package'].replace('.', '/')
-            filename = csv_static_analysis.at[i, 'File'].split('/')[-1]
-            subpath = package + '/' + filename
-            if not(subpath in to_exclude) and (filename in modifications_dict) and (modifications_dict[filename] > 1):
-                to_exclude.append(subpath)
-                
-                for homonymous_file in homonymous_set:
-                    if homonymous_file.endswith(subpath):
-                        travesed_homonymous_files.add(homonymous_file)
-                        if subpath in homonymous_subpath_dict:
-                            to_reanalyse_set.add(homonymous_file)
-                            to_reanalyse_set.add(homonymous_subpath_dict[subpath])
-                        else:
-                            homonymous_subpath_dict[subpath] = homonymous_file
+            package = csv_static_analysis.at[i, 'Package'].replace('.', '/')
         except Exception as e:
             print(e)
             print('Exception for package: ' +  str(csv_static_analysis.at[i, 'Package']) + ' at line ' + str(i) + ' for commit ' + commit)
+            package = ''
+        filename = csv_static_analysis.at[i, 'File'].split('/')[-1]
+        subpath = package + '/' + filename
+        if not(subpath in to_exclude) and (filename in modifications_dict) and (modifications_dict[filename] > 1):
+            to_exclude.append(subpath)
+            
+            for homonymous_file in homonymous_set:
+                if homonymous_file.endswith(subpath):
+                    travesed_homonymous_files.add(homonymous_file)
+                    if subpath in homonymous_subpath_dict:
+                        to_reanalyse_set.add(homonymous_file)
+                        to_reanalyse_set.add(homonymous_subpath_dict[subpath])
+                    else:
+                        homonymous_subpath_dict[subpath] = homonymous_file
+        
     # If the homonymous file was not traversed, reanalysis is needed (cases 2 and 3)
     for homonymous_file in homonymous_set:
         if not(homonymous_file in travesed_homonymous_files):
