@@ -140,7 +140,11 @@ def count_files_reanalysis_needed_pmd(directory, project, commit, homonymous_set
     # False => add an entry into homonymous_subpath_dict dictionary: key = subpath, value = repository path
     for i in range(0, len(csv_static_analysis) - 1):
         try:
-            package = csv_static_analysis.at[i, 'Package'].replace('.', '/')
+            package = csv_static_analysis.at[i, 'Package']
+            if package is None:
+                package = ''
+            else:
+                package = csv_static_analysis.at[i, 'Package'].replace('.', '/')
             filename = csv_static_analysis.at[i, 'File'].split('/')[-1]
             subpath = package + '/' + filename
             if not(subpath in to_exclude) and (filename in modifications_dict) and (modifications_dict[filename] > 1):
