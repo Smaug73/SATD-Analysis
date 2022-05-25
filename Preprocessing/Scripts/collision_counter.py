@@ -7,14 +7,13 @@ import pandas as pd
 
 def count_collisions(directory):
     
-    csv_files_with_collisions = pd.DataFrame(columns=['Project', 'Commit', 'File Name', 'Num of Homonymous files']) 
-    csv_project_percentages = pd.DataFrame(columns=['Project', 'Total Modifications', 'Num of Homonymous Files', 'Total Commits', 'Num of Commits with Homonymous Files'])
-    csv_to_be_reanalysed_pmd = pd.DataFrame(columns=['Project', 'Commit', 'File'])
+    csv_files_with_collisions = pd.DataFrame(columns=['Project', 'Commit', 'File', 'Is PMD Needed'])
+    csv_collision_counter = pd.DataFrame(columns=['Project', 'Total Modifications', 'Num of Homonymous Files', 'Total Commits', 'Num of Commits with Homonymous Files'])
 
     # Index for acessing rows in csv_files_with_collisions DataFrame
     i = 0
 
-    # Index for acessing rows in csv_project_percentages DataFrame
+    # Index for acessing rows in csv_collision_counter DataFrame
     j = 0
 
     # Consider only the added and changed files
@@ -78,21 +77,26 @@ def count_collisions(directory):
                         modifications_dict_count[modified_file.filename] = 1
                         modifications_dict_paths[modified_file.filename] = modified_file.new_path
             
+
             for file_name in modifications_dict_count:
                 if modifications_dict_count[file_name] > 1:
-                    csv_files_with_collisions.loc[i] = [project, commit.hash, file_name, modifications_dict_count[file_name]]
-                    csv_files_with_collisions.to_csv(directory + '/files_with_collisions.csv', index=False)
                     homonymous_files_in_project_count = homonymous_files_in_project_count + modifications_dict_count[file_name]
-                    i = i + 1
-                    #print('Homonymous files in commit ' + commit.hash + ':')
-                    #for hom_file in homonymous_modified_files_set:
-                        #print(hom_file)
-            files_to_reanalyse_count = files_to_reanalyse_count + count_files_reanalysis_needed_pmd(directory, project, 
-                                        commit.hash, homonymous_modified_files_set, modifications_dict_count, csv_to_be_reanalysed_pmd)
 
+            files_to_reanalyse_count_commit, to_reanalyse_pmd = count_files_reanalysis_needed_pmd(directory, project, 
+                                        commit.hash, homonymous_modified_files_set, modifications_dict_count)
 
-        csv_project_percentages.loc[j] = [project, modified_java_files_project_count, homonymous_files_in_project_count, len(commits), len(commits_with_collision_set)]
-        csv_project_percentages.to_csv(directory + '/project_percentage.csv', index=False)
+            files_to_reanalyse_count = files_to_reanalyse_count + files_to_reanalyse_count_commit
+
+            for file_path in homonymous_modified_files_set:
+                if file_path in to_reanalyse_pmd:
+                    csv_files_with_collisions.loc[i] = [project, commit.hash, file_path, 1]
+                else:
+                    csv_files_with_collisions.loc[i] = [project, commit.hash, file_path, 0]
+                csv_files_with_collisions.to_csv(directory + '/files_with_collisions.csv', index=False)
+                i = i + 1
+
+        csv_collision_counter.loc[j] = [project, modified_java_files_project_count, homonymous_files_in_project_count, len(commits), len(commits_with_collision_set)]
+        csv_collision_counter.to_csv(directory + '/project_collisions_count.csv', index=False)
         j = j + 1
         print('Total modified java files: ' + str(modified_java_files_project_count))
         print('Total homonymous files: ' + str(homonymous_files_in_project_count))
@@ -107,7 +111,7 @@ def count_collisions(directory):
 #    Only the files that have a different subpath from the one obtained using the package of the file should be reanalysed
 # 3: None of the homonymous files have a row in the pmd results csv. 
 #    That means that no violation was discovered during the analysis, but we don't know on which file the said analysis was conducted
-def count_files_reanalysis_needed_pmd(directory, project, commit, homonymous_set, modifications_dict, csv_to_be_reanalysed_pmd):
+def count_files_reanalysis_needed_pmd(directory, project, commit, homonymous_set, modifications_dict):
     
     csv_static_analysis = pd.read_csv(directory + '/' + project + '/' + commit + '/pmd-' + commit + '.csv')
 
@@ -155,13 +159,8 @@ def count_files_reanalysis_needed_pmd(directory, project, commit, homonymous_set
         if not(homonymous_file in travesed_homonymous_files):
             to_reanalyse_set.add(homonymous_file)
 
-    # Add a new row in a new csv for each file that needs re-analysis
-    for to_reanalyse_file in to_reanalyse_set:
-        csv_to_be_reanalysed_pmd.loc[len(csv_to_be_reanalysed_pmd)] = [project, commit, to_reanalyse_file]
-                    
-    csv_to_be_reanalysed_pmd.to_csv(directory + '/files_to_be_reanalysed_pmd.csv', index=False)
 
-    return len(to_reanalyse_set)
+    return len(to_reanalyse_set), to_reanalyse_set
                
 
 
