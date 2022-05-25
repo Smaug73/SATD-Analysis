@@ -156,7 +156,7 @@ def count_files_reanalysis_needed_pmd(directory, project, commit, homonymous_set
                             homonymous_subpath_dict[subpath] = homonymous_file
         except Exception as e:
             print(e)
-            print('Exception for package: ' +  csv_static_analysis.at[i, 'Package'] + ' at line ' + i)
+            print('Exception for package: ' +  str(csv_static_analysis.at[i, 'Package']) + ' at line ' + str(i))
     # If the homonymous file was not traversed, reanalysis is needed (cases 2 and 3)
     for homonymous_file in homonymous_set:
         if not(homonymous_file in travesed_homonymous_files):
