@@ -126,7 +126,7 @@ def download_Modifiedfile(mod_file,project,commit):
         if mod_file.source_code is not None:
 
             # Rename the file with the path because of the possible re-writing of file with same name 
-            file = open(dir_commit + '/' + m.new_path.replace('/','#'), "w", encoding="utf-8")
+            file = open(dir_commit + '/' + mod_file.new_path.replace('/','#'), "w", encoding="utf-8")
 
             file.write(mod_file.source_code)
             file.close()
