@@ -2,7 +2,7 @@ from pydriller import Repository
 import argparse
 import os
 import pandas as pd
-
+from download_modFile_commit import download_Modifiedfile
 
 
 def count_collisions(directory):
@@ -23,6 +23,11 @@ def count_collisions(directory):
     projects = next(os.walk(directory))[1]
 
     for project in projects:
+        
+        projects_to_ignore = ['cxf', 'ant-ivy', 'isis', 'camel', 'syncope']
+        if project in projects_to_ignore: 
+            continue
+        
         repository = 'https://github.com/apache/' + project
 
         # Get the hash of each commit in the project directory
@@ -52,7 +57,7 @@ def count_collisions(directory):
 
             # Dictionary:
             # Key: Name of the file
-            # Value: Path of the file in the commit
+            # Value: Object Modified_file
             modifications_dict_paths = {}
 
             homonymous_modified_files_set = set()
@@ -70,30 +75,35 @@ def count_collisions(directory):
                     # and in the modifications_dict_paths dictionary
                     if modified_file.filename in modifications_dict_count:
                         modifications_dict_count[modified_file.filename] = modifications_dict_count[modified_file.filename] + 1
-                        homonymous_modified_files_set.add(modified_file.new_path)
+                        homonymous_modified_files_set.add(modified_file)
                         homonymous_modified_files_set.add(modifications_dict_paths[modified_file.filename])
                         commits_with_collision_set.add(commit.hash)
                     else:
                         modifications_dict_count[modified_file.filename] = 1
-                        modifications_dict_paths[modified_file.filename] = modified_file.new_path
+                        modifications_dict_paths[modified_file.filename] = modified_file
             
 
             for file_name in modifications_dict_count:
                 if modifications_dict_count[file_name] > 1:
                     homonymous_files_in_project_count = homonymous_files_in_project_count + modifications_dict_count[file_name]
 
+            homonymous_filepaths_set = set()
+            for mod_file in homonymous_modified_files_set:
+                homonymous_filepaths_set.add(mod_file.new_path)
+
             files_to_reanalyse_count_commit, to_reanalyse_pmd = count_files_reanalysis_needed_pmd(directory, project, 
-                                        commit.hash, homonymous_modified_files_set, modifications_dict_count)
+                                        commit.hash, homonymous_filepaths_set, modifications_dict_count)
 
             files_to_reanalyse_count = files_to_reanalyse_count + files_to_reanalyse_count_commit
 
-            for file_path in homonymous_modified_files_set:
-                if file_path in to_reanalyse_pmd:
-                    csv_files_with_collisions.loc[i] = [project, commit.hash, file_path, 1]
+            for mod_file in homonymous_modified_files_set:
+                if mod_file.new_path in to_reanalyse_pmd:
+                    csv_files_with_collisions.loc[i] = [project, commit.hash, mod_file.new_path, 1]
                 else:
-                    csv_files_with_collisions.loc[i] = [project, commit.hash, file_path, 0]
+                    csv_files_with_collisions.loc[i] = [project, commit.hash, mod_file.new_path, 0]
                 csv_files_with_collisions.to_csv(directory + '/files_with_collisions.csv', index=False)
                 i = i + 1
+                download_Modifiedfile(mod_file, project, commit.hash)
 
         csv_collision_counter.loc[j] = [project, modified_java_files_project_count, homonymous_files_in_project_count, len(commits), len(commits_with_collision_set)]
         csv_collision_counter.to_csv(directory + '/project_collisions_count.csv', index=False)
@@ -141,9 +151,9 @@ def count_files_reanalysis_needed_pmd(directory, project, commit, homonymous_set
     for i in range(0, len(csv_static_analysis) - 1):
         try:
             package = csv_static_analysis.at[i, 'Package'].replace('.', '/')
-        except Exception as e:
-            print(e)
-            print('Exception for package: ' +  str(csv_static_analysis.at[i, 'Package']) + ' at line ' + str(i) + ' for commit ' + commit)
+        except Exception:
+            #print(e)
+            #print('Exception for package: ' +  str(csv_static_analysis.at[i, 'Package']) + ' at line ' + str(i) + ' for commit ' + commit)
             package = ''
         filename = csv_static_analysis.at[i, 'File'].split('/')[-1]
         subpath = package + '/' + filename
