@@ -13,7 +13,6 @@ dir_repo_fix = ".."+os.sep+".."+os.sep+"Repository-fix"+os.sep
 # function for mkdir for store the file
 def mkdir_for_fix(project,commit_id):
     
-    print(f"Creating dir for Project : {str(project)}    Commit: {str(commit_id)}")
 
     try:
     
@@ -26,10 +25,12 @@ def mkdir_for_fix(project,commit_id):
 
         # create the project directory if it does not exist, otherwise skip it
         if os.path.isdir(dir_repo_fix + project) is False:
+            print(f"\nCreating directory for project: {str(project)} ")
             os.mkdir(dir_repo_fix + project)
 
         # create the commitID directory if it does not exist, otherwise skip it
         if os.path.isdir(dir_commit) is False:
+            print(f"\nCreating directory for commit: {str(commit_id)} in project: {str(project)} ")
             os.mkdir(dir_commit)
         # else:
         #     # print('No need to save files from commit: ' + commit_id)
@@ -77,7 +78,7 @@ def download_file_from_commit(project : str ,commit_id : str ,file_name : str):
 # Function for download file from ModifiedFile
 def download_Modifiedfile(mod_file : ModifiedFile,project : str ,commit: str):
     
-    print(f'Downloading file:  {mod_file.filename} ...')
+    print(f'Downloading file:  {mod_file.new_path} ...')
 
     try:
         # mkdir for store the file
@@ -87,7 +88,7 @@ def download_Modifiedfile(mod_file : ModifiedFile,project : str ,commit: str):
         if mod_file.filename in os.listdir(dir_commit):
             return
 
-        print('File found:  ',mod_file.filename)
+        #print('File found:  ', mod_file.new_path)
         # print(modified_file.source_code)
 
         # save the file
@@ -99,11 +100,11 @@ def download_Modifiedfile(mod_file : ModifiedFile,project : str ,commit: str):
             file.write(mod_file.source_code)
             file.close()
 
-            print(f'File:  {mod_file.filename}    Downloaded! ')
-            print(f'FilePath:  {dir_commit + os.sep + mod_file.filename}    Downloaded! ')
+            #print(f'File:  {mod_file.filename}    Downloaded! ')
+            print(f'{mod_file.new_path}  DOWNLOADED! ')
         
         else:
-            print(f'File:  {mod_file.filename}    NOT DOWNLOADED! ')
+            print(f'{mod_file.new_path}    NOT DOWNLOADED! ')
     
     except Exception as e:
         print(e)

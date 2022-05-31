@@ -5,7 +5,9 @@ import pandas as pd
 from download_modFile_commit import download_Modifiedfile
 
 
-def count_collisions(directory):
+def count_collisions(directory, projects):
+
+    print('Projects analysed in this process: ' + str(projects))
     
     csv_files_with_collisions = pd.DataFrame(columns=['Project', 'Commit', 'File', 'Is PMD Needed'])
     csv_collision_counter = pd.DataFrame(columns=['Project', 'Total Modifications', 'Num of Homonymous Files', 'Total Commits', 'Num of Commits with Homonymous Files'])
@@ -20,13 +22,13 @@ def count_collisions(directory):
     accepted_changes = ['MODIFY', 'ADD']
 
     # Get the name of each project in the directory
-    projects = next(os.walk(directory))[1]
+    # projects = next(os.walk(directory))[1]
+
+    string_projects_analysed = ''
+    for project in projects:
+       string_projects_analysed = string_projects_analysed + '_' + project 
 
     for project in projects:
-        
-        projects_to_ignore = ['cxf', 'ant-ivy', 'isis', 'camel', 'syncope']
-        if project in projects_to_ignore: 
-            continue
         
         repository = 'https://github.com/apache/' + project
 
@@ -96,21 +98,24 @@ def count_collisions(directory):
 
             files_to_reanalyse_count = files_to_reanalyse_count + files_to_reanalyse_count_commit
 
+            files_downloaded_count = 0
             for mod_file in homonymous_modified_files_set:
                 if mod_file.new_path in to_reanalyse_pmd:
                     csv_files_with_collisions.loc[i] = [project, commit.hash, mod_file.new_path, 1]
                 else:
                     csv_files_with_collisions.loc[i] = [project, commit.hash, mod_file.new_path, 0]
-                csv_files_with_collisions.to_csv(directory + '/files_with_collisions.csv', index=False)
+                csv_files_with_collisions.to_csv(directory + '/files_with_collisions' + string_projects_analysed + '.csv', index=False)
                 i = i + 1
                 download_Modifiedfile(mod_file, project, commit.hash)
+                files_downloaded_count = files_downloaded_count + 1
+                #print('\nFiles downloaded in project ' + project + ': ' + str(files_downloaded_count) + '/' + str(len(homonymous_modified_files_set)))
 
         csv_collision_counter.loc[j] = [project, modified_java_files_project_count, homonymous_files_in_project_count, len(commits), len(commits_with_collision_set)]
-        csv_collision_counter.to_csv(directory + '/project_collisions_count.csv', index=False)
+        csv_collision_counter.to_csv(directory + '/project_collisions_count' + string_projects_analysed + '.csv', index=False)
         j = j + 1
         print('Total modified java files: ' + str(modified_java_files_project_count))
         print('Total homonymous files: ' + str(homonymous_files_in_project_count))
-        print('Files to be reanalysed: ' + str(files_to_reanalyse_count))
+        print('Files to be reanalysed with PMD: ' + str(files_to_reanalyse_count))
         print('Commits with homonymous files: ' + str(len(commits_with_collision_set)))
 
 
@@ -193,6 +198,15 @@ if __name__ == "__main__":
         help='Projects directory',
     )
 
+    parser.add_argument(
+        '-p',
+        '--projects_to_analyse',
+        type=str,
+        nargs='+',
+        help='Projects to analyse',
+        required=True
+    )
+
 
     # Parsing the args
     args = parser.parse_args()
@@ -200,5 +214,6 @@ if __name__ == "__main__":
     # Projects Directory
     pathProjects = args.directory_projects
 
+    projects = args.projects_to_analyse
     
-    count_collisions(pathProjects)
+    count_collisions(pathProjects, projects)
