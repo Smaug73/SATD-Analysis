@@ -6,7 +6,7 @@ import pandas as pd
 # The method adds columns "Project" and "Commit" to each CSV
 # and converts the paths in the column "File" from local path to repository path.
 # In order to do that, the name of the file taken from the local path is compared with
-# modified files (added or changed) in the current commit. When there's a match, 
+# modified files (added, changed or renamed) in the current commit. When there's a match, 
 # the absolute local path is overwritten with the repository path.
 # For checkstyle only the name of the file is used.
 # For PMD the package of the file is used too, in order to create a subpath of the file.
@@ -45,8 +45,10 @@ def add_columns_and_convert_paths(directory, tool):
                 for commit_to_analyse in Repository(repository, single=commit).traverse_commits():
                     modified_files_list= []
 
-                    # Only added or modified files are taken into account
-                    accepted_changes = ['MODIFY', 'ADD']
+                    # Only added or modified files are taken into account 
+                    # (renamed too, not because they're needed but because in the CSV there are
+                    # files which were renamed in the commit)
+                    accepted_changes = ['MODIFY', 'ADD', 'RENAME']
 
                     for modified_file in commit_to_analyse.modified_files:
                         if(modified_file.change_type.name in accepted_changes):
@@ -63,15 +65,16 @@ def add_columns_and_convert_paths(directory, tool):
                         # Get the name of the file
                         violation_file_name = violation_file.split('/')[-1]
 
-                        # If there is a column "Package" in the CSV, use it to create the subpath of the file
-                        if 'Package' in csv_violations.columns:
+                        # If there is a column "Package" in the CSV, use it to create the subpath of the file.
+                        # If there's no column "Package" or if the field is empty, use just the name of the file
+                        try:
                             package = csv_violations.at[i, 'Package']
                             i = i + 1
-
+                            
                             # Create the subpath of the file in the CSV
                             package = package.replace('.', '/')
                             violation_file_subpath = package + '/' + violation_file_name
-                        else:
+                        except:
                             violation_file_subpath = violation_file_name
 
                         if not(violation_file_subpath in to_exclude):
