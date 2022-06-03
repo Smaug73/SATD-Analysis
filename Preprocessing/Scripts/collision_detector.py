@@ -1,5 +1,6 @@
 from pydriller import Repository
 import argparse
+import sys
 import os
 import pandas as pd
 from download_modFile_commit import download_Modifiedfile
@@ -127,9 +128,11 @@ def count_collisions(directory, projects):
 # 3: None of the homonymous files have a row in the pmd results csv. 
 #    That means that no violation was discovered during the analysis, but we don't know on which file the said analysis was conducted
 def count_files_reanalysis_needed_pmd(directory, project, commit, homonymous_set, modifications_dict):
-    
-    csv_static_analysis = pd.read_csv(directory + '/' + project + '/' + commit + '/pmd-' + commit + '.csv')
-
+    try:
+        csv_static_analysis = pd.read_csv(directory + '/' + project + '/' + commit + '/pmd-' + commit + '.csv')
+    except:
+        print('File: ' + directory + '/' + project + '/' + commit + '/pmd-' + commit + '.csv is empty')
+        return len(homonymous_set), homonymous_set
     # Dictionary:
     # Key: subpath obtained concatenating package and filename
     # Value: repository path ending with the key subpath
