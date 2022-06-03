@@ -1,3 +1,9 @@
+#Mbox
+.mbox
+
+#CommunitySmell data
+/CommunitySmell/kaiaulu/rawdata/
+
 # General
 .DS_Store
 .AppleDouble
