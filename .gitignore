@@ -1,8 +1,9 @@
 #Mbox
-.mbox
+*.mbox
 
 #CommunitySmell data
 /CommunitySmell/kaiaulu/rawdata/
+mboxFile/
 
 # General
 .DS_Store
