@@ -1,6 +1,5 @@
 from pydriller import Repository
 import argparse
-import sys
 import os
 import pandas as pd
 from download_modFile_commit import download_Modifiedfile
@@ -51,7 +50,11 @@ def count_collisions(directory, projects):
         # Set of commits with homonymous files
         commits_with_collision_set = set()
         
+        commits_count = 1
+
         for commit in Repository(repository, only_commits=commits).traverse_commits():
+            print('Commit ' + commit.hash + ' ' + str(len(commits)) + '/' + str(commits_count))
+            commits_count = commits_count + 1
 
             # Dictionary:
             # Key: Name of the file
@@ -67,7 +70,7 @@ def count_collisions(directory, projects):
 
             for modified_file in commit.modified_files:
                 # Consider the file only if it's a java file that has been added or changed in the commit under analysis
-                if (modified_file.filename.endswith('.java')) and (modified_file.change_type.name in accepted_changes):
+                if (modified_file.filename.endswith('.java')) and (modified_file.change_type.name in accepted_changes) and not(modified_file.filename == 'package-info.java'):
                     modified_java_files_project_count = modified_java_files_project_count + 1
 
                     # Check whether the file is already in the dictionary:
@@ -192,7 +195,7 @@ def count_files_reanalysis_needed_pmd(directory, project, commit, homonymous_set
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
-    description='Program for converting xml file from checkstyle analysis to csv')
+    description='Program for detecting homonymous files among the changed files of a commit. Checks if PMD re-analysis is needed')
 
     # Directory of projects being analysed
     parser.add_argument(
