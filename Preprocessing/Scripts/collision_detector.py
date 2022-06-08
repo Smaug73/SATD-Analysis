@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+#SBATCH --partition=tue.default.q
+#SBATCH --output=openme.out
+
 from pydriller import Repository
 import argparse
 import os
