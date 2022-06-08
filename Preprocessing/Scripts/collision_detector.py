@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 #SBATCH --partition=mcs.default.q
-#SBATCH --output=openme.out
+#SBATCH --output=collision_%j.out
 
 from pydriller import Repository
 import argparse
 import os
+import sys
+
+sys.path.append(os.getcwd())
 import pandas as pd
 from download_modFile_commit import download_Modifiedfile
 
