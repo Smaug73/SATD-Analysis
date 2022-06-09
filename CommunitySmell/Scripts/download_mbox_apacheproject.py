@@ -2,6 +2,8 @@
 import os
 import requests
 import datetime
+import argparse
+import subprocess as subprocess
 
 
 
@@ -139,7 +141,37 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
 
 if __name__ == "__main__":
 
+    # Args : directory of projects
+    parser = argparse.ArgumentParser(
+    description='Script for download mbox file for an apache project')
+
+    # Apache roject name
+    parser.add_argument(
+        'project_name',
+        type=str,
+        help='Apache projects name',
+    )
+
+    # Start date
+    parser.add_argument(
+        'start_date',
+        type=str,
+        help='Start date, formate:  YYYY-MM(year-mount)',
+    )
+
+    # End date
+    parser.add_argument(
+        'end_date',
+        type=str,
+        help='End date, formate:  YYYY-MM(year-mount)',
+    )
+
+    # Parsing the args
+    args = parser.parse_args()
+
+    download_mbox_start_end(args.project_name, args.star_date, args.end_date)
 
     # TEST ################################# 
     #download_mbox_file_mounth('tinkerpop','2019-05')
-    download_mbox_start_end('tinkerpop','2010-01','2020-12')
+    #download_mbox_start_end('activemq','2010-01','2020-12')
+    
