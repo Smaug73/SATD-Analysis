@@ -60,7 +60,7 @@ def count_collisions(directory, projects):
         commits_count = 1
 
         for commit in Repository(repository, only_commits=commits).traverse_commits():
-            print('Commit ' + commit.hash + ' ' + str(len(commits)) + '/' + str(commits_count))
+            print('Commit ' + commit.hash + ' ' + str(commits_count) + '/' + str(len(commits)))
             commits_count = commits_count + 1
 
             # Dictionary:
