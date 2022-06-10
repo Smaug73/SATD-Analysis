@@ -23,14 +23,16 @@ Information needed:
 
 '''
 
+#TO DO :
+#   aggiungere check per evitare di nuovo il cloning del repository
 
 
-import yaml
 import argparse
 import subprocess as subprocess
 import os
 import git
-
+from git import Repo
+import download_mbox_apacheproject
 
 
 
@@ -62,35 +64,72 @@ def mkdir_for_confFile(kaiaulu_path : str):
 
 
 # Function for create the configuration file for an apache project
-def configuration_file_builder(kaiaulu_path : str, project_name : str):
+def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file_path : str , start_date : str, end_date : str, size_days : str):
     
     try:
+        print(f"Creating conf file for : {str(project_name)} ...")
+
+        start_date = start_date+ " 00:00:00"
+        end_date = end_date+ " 00:00:00"
 
         # check witch is the default branch 
-
-        dict_file = str("project :\n"+
+        repo = Repo(args.kaiaulu_path+os.sep+"rawdata"+os.sep+"git_repo"+os.sep+project_name+os.sep)
+        head = repo.heads[0]
+        main_branch_name = head.name
+        
+        
+        configuration = str("project :\n"+
                         "  website : https://"+project_name+".apache.org\n"+
                         "  openhub : https://www.openhub.net/p/"+project_name+"\n"+
                         "version_control:\n"+
                         "  log: ../rawdata/git_repo/"+project_name+"/.git\n"+
                         "  log_url: https://github.com/apache/"+project_name+"\n"+
                         "  branch:\n"+
-                        "    ")
+                        "    - "+main_branch_name+"\n"+
+                        "mailing_list:\n"+
+                        "  mbox: ../rawdata/mbox/"+mbox_file_path+"\n"+
+                        "  domain: http://mail-archives.apache.org/mod_mbox\n"+
+                        "  list_key:\n"+
+                        "    - "+project_name+"-dev\n"+
+                        "issue_tracker:\n"+
+                        "  jira:\n"+    
+                        "    domain: https://issues.apache.org/jira\n"+
+                        "    project_key: "+str(project_name).upper()+"\n"+
+                        "    issues: ../rawdata/issue_tracker/"+project_name+"_issues-merged.json\n"+
+                        "    issue_comments: ../rawdata/issue_tracker/"+project_name+"_issues-merged.json\n"+
+                        "  github:\n"+
+                        "    owner: apache\n"+
+                        "    repo: activemq\n"+
+                        "    replies: ../rawdata/git_repo/"+project_name+"/\n"+
+                        "analysis:\n"+
+                        "  window:\n"+
+                        "    start_datetime: "+start_date+"\n"+
+                        "    end_datetime: "+end_date+"\n"+
+                        "    size_days: "+size_days+"\n"     
+                        )
                     
 
         with open(kaiaulu_path + os.sep + project_name, 'w') as file:
-            conf_file = yaml.dump(dict_file, file)
+            conf_file = file.write(configuration)
 
+        print(f"Complete !")
 
     except Exception as e:
         print(e)
 
 
 
+
+
+
 # Function for clone a repository
 def clone_repo(project_name : str, git_repo_path : str):
-    git.Repo.clone_from("https://github.com/apache/"+project_name, git_repo_path)
 
+    print("Cloning repository "+project_name+" ...")
+
+    git.Repo.clone_from("https://github.com/apache/"+project_name, git_repo_path)
+    
+    print("Repository "+project_name+" cloned!")
 
 
 
@@ -101,9 +140,11 @@ if __name__ == "__main__":
     # Args : 
     #   project_name
     #   kaiaulu_path
-    #   
+    #   start_date
+    #   end_date
+
     parser = argparse.ArgumentParser(
-    description='Script for create kaiaulu configuration file for an apache project')
+    description='Script for create kaiaulu configuration file for compute community smells for an Apache project.')
 
     # Apache project name
     parser.add_argument(
@@ -119,16 +160,32 @@ if __name__ == "__main__":
         help='Kaiaulu path',
     )
 
+    # Start date
+    parser.add_argument(
+        'start_date',
+        type=str,
+        help='Start date of the consider period',
+    )
+
+    # End date
+    parser.add_argument(
+        'end_date',
+        type=str,
+        help='End date of the consider period',
+    )
+
     args = parser.parse_args()
 
 
     # Clone the repository of the project
-    clone_repo(args.project_name, args.kaiaulu_path)
+    clone_repo(args.project_name, args.kaiaulu_path+"rawdata"+os.sep+"git_repo"+os.sep+args.project_name)
 
+    # Download the mbox file
+    download_mbox_apacheproject(args.project_name)
 
     # Create dir for configuration file
-    conf_path=mkdir_for_confFile(args.kaiaulu_path)
-
+    conf_path = mkdir_for_confFile(args.kaiaulu_path)
 
     # Create the configuration file
-    
+    configuration_file_builder(args.kaiaulu_path+"conf"+os.sep , args.project_name , args.kaiaulu_path+"rawdata"+os.sep+"mbox"+os.sep,
+                                args.start_date , args.end_date )

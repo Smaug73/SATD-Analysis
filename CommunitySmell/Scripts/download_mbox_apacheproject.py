@@ -11,14 +11,14 @@ import subprocess as subprocess
 
 # function for mkdir for store the file
 # parameter :   project  : string name of the project
-def mkdir_for_mbox(project : str):
+def mkdir_for_mbox(project : str , dir_mbox = '..' + os.sep + 'mboxFile'):
     
     print(f"Creating dir for Project : {str(project)} ")
 
     try:
     
         # directory for mbox file of projects
-        dir_mbox = '..' + os.sep + 'mboxFile' 
+        #dir_mbox = '..' + os.sep + 'mboxFile' 
 
         # create the directory for mbox if it does not exist, otherwise skip it
         if os.path.isdir(dir_mbox) is False:
@@ -82,7 +82,7 @@ def download_mbox_file_mounth(project : str, data: str):
 # from a start date to an end date.
 # Mounth format : yeardaymounth   2016-05  2016(year)-05(mounth)
 # Project name example: tinkertop
-def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str):
+def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str , output_dir = '..' + os.sep + 'mboxFile'):
     
     try:
 
@@ -96,7 +96,7 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
         temp_date = datetime.date(int(start_date_split[0]), int(start_date_split[1]), 1)
 
         # create the dir for store the file
-        dirpath = mkdir_for_mbox(project)
+        dirpath = mkdir_for_mbox(project, output_dir)
 
         while end_date >= temp_date :
             
@@ -145,7 +145,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
     description='Script for download mbox file for an apache project')
 
-    # Apache roject name
+    # Apache project name
     parser.add_argument(
         'project_name',
         type=str,
