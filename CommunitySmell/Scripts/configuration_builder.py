@@ -24,7 +24,7 @@ Information needed:
 '''
 
 #TO DO :
-#   aggiungere check per evitare di nuovo il cloning del repository
+
 
 
 import argparse
@@ -32,7 +32,7 @@ import subprocess as subprocess
 import os
 import git
 from git import Repo
-import download_mbox_apacheproject
+from download_mbox_apacheproject import download_mbox_start_end
 
 
 
@@ -109,7 +109,7 @@ def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file
                         )
                     
 
-        with open(kaiaulu_path + os.sep + project_name, 'w') as file:
+        with open(kaiaulu_path + os.sep + project_name + ".yml", 'w') as file:
             conf_file = file.write(configuration)
 
         print(f"Complete !")
@@ -127,9 +127,17 @@ def clone_repo(project_name : str, git_repo_path : str):
 
     print("Cloning repository "+project_name+" ...")
 
-    git.Repo.clone_from("https://github.com/apache/"+project_name, git_repo_path)
+    # clone only if the project doesn't exist, otherwise skip it
+    if os.path.isdir(git_repo_path) is False:
+        
+        git.Repo.clone_from("https://github.com/apache/"+project_name, git_repo_path)
     
-    print("Repository "+project_name+" cloned!")
+        print("Repository "+project_name+" cloned!")
+
+    else:
+        print("Repository "+project_name+" already exists ! ") 
+
+    
 
 
 
@@ -181,11 +189,11 @@ if __name__ == "__main__":
     clone_repo(args.project_name, args.kaiaulu_path+"rawdata"+os.sep+"git_repo"+os.sep+args.project_name)
 
     # Download the mbox file
-    download_mbox_apacheproject(args.project_name)
+    download_mbox_start_end(args.project_name, args.start_date, args.end_date, args.kaiaulu_path+"rawdata"+os.sep+"mbox")
 
     # Create dir for configuration file
     conf_path = mkdir_for_confFile(args.kaiaulu_path)
 
     # Create the configuration file
     configuration_file_builder(args.kaiaulu_path+"conf"+os.sep , args.project_name , args.kaiaulu_path+"rawdata"+os.sep+"mbox"+os.sep,
-                                args.start_date , args.end_date )
+                                args.start_date , args.end_date , str(90))
