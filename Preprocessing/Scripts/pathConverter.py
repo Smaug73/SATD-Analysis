@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+#SBATCH --partition=mcs.default.q
+#SBATCH --output=converter_%j.out
+
 from pydriller import Repository
 import argparse
 import os
