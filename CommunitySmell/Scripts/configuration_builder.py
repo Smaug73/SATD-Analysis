@@ -5,12 +5,15 @@ community smell script from kaiaulu.
 Only the information necessary for community smell computing is 
 insert in the file.
 
+IMPORTANT:  The download of the jira issues are not included,
+            check the directory where store it after download 
+            in the configuration file created by the script
+
 Information needed:
     
     apache project name
     git repository path
     git branch (only main/master branch is considered)
-        *controllare se c'e' un master branch o il main branch*
     
     start commit
     end commit
@@ -24,7 +27,7 @@ Information needed:
 '''
 
 #TO DO :
-#   aggiungere check per evitare di nuovo il cloning del repository
+
 
 
 import argparse
@@ -32,7 +35,7 @@ import subprocess as subprocess
 import os
 import git
 from git import Repo
-import download_mbox_apacheproject
+from download_mbox_apacheproject import download_mbox_start_end
 
 
 
@@ -87,7 +90,7 @@ def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file
                         "  branch:\n"+
                         "    - "+main_branch_name+"\n"+
                         "mailing_list:\n"+
-                        "  mbox: ../rawdata/mbox/"+mbox_file_path+"\n"+
+                        "  mbox: "+mbox_file_path+"\n"+
                         "  domain: http://mail-archives.apache.org/mod_mbox\n"+
                         "  list_key:\n"+
                         "    - "+project_name+"-dev\n"+
@@ -109,7 +112,7 @@ def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file
                         )
                     
 
-        with open(kaiaulu_path + os.sep + project_name, 'w') as file:
+        with open(kaiaulu_path + os.sep + project_name + ".yml", 'w') as file:
             conf_file = file.write(configuration)
 
         print(f"Complete !")
@@ -127,9 +130,17 @@ def clone_repo(project_name : str, git_repo_path : str):
 
     print("Cloning repository "+project_name+" ...")
 
-    git.Repo.clone_from("https://github.com/apache/"+project_name, git_repo_path)
+    # clone only if the project doesn't exist, otherwise skip it
+    if os.path.isdir(git_repo_path) is False:
+        
+        git.Repo.clone_from("https://github.com/apache/"+project_name, git_repo_path)
     
-    print("Repository "+project_name+" cloned!")
+        print("Repository "+project_name+" cloned!")
+
+    else:
+        print("Repository "+project_name+" already exists ! ") 
+
+    
 
 
 
@@ -164,14 +175,14 @@ if __name__ == "__main__":
     parser.add_argument(
         'start_date',
         type=str,
-        help='Start date of the consider period',
+        help='Start date of the consider period, formate:  YYYY-MM-DAY(year-mount-Day)',
     )
 
     # End date
     parser.add_argument(
         'end_date',
         type=str,
-        help='End date of the consider period',
+        help='End date of the consider period, formate : YYYY-MM-DAY(year-mount-Day)',
     )
 
     args = parser.parse_args()
@@ -181,11 +192,11 @@ if __name__ == "__main__":
     clone_repo(args.project_name, args.kaiaulu_path+"rawdata"+os.sep+"git_repo"+os.sep+args.project_name)
 
     # Download the mbox file
-    download_mbox_apacheproject(args.project_name)
+    mbox_path = download_mbox_start_end(args.project_name, args.start_date, args.end_date, args.kaiaulu_path+"rawdata"+os.sep+"mbox")
 
     # Create dir for configuration file
     conf_path = mkdir_for_confFile(args.kaiaulu_path)
 
     # Create the configuration file
-    configuration_file_builder(args.kaiaulu_path+"conf"+os.sep , args.project_name , args.kaiaulu_path+"rawdata"+os.sep+"mbox"+os.sep,
-                                args.start_date , args.end_date )
+    configuration_file_builder(args.kaiaulu_path+"conf"+os.sep , args.project_name , mbox_path,
+                                args.start_date , args.end_date , str(90))

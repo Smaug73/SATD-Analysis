@@ -18,7 +18,7 @@ def mkdir_for_mbox(project : str , dir_mbox = '..' + os.sep + 'mboxFile'):
     try:
     
         # directory for mbox file of projects
-        #dir_mbox = '..' + os.sep + 'mboxFile' 
+        # dir_mbox = '..' + os.sep + 'mboxFile' 
 
         # create the directory for mbox if it does not exist, otherwise skip it
         if os.path.isdir(dir_mbox) is False:
@@ -26,17 +26,20 @@ def mkdir_for_mbox(project : str , dir_mbox = '..' + os.sep + 'mboxFile'):
             print(f"Dir mbox create! ")
         else:
             print("Dir mbox already exists .. ")
-
+        
+        return dir_mbox
+        '''
         # path of mbox file of the proj
         dir_proj = dir_mbox + os.sep + project + os.sep
         
         # create the project directory if it does not exist, otherwise skip it
+        
         if os.path.isdir(dir_proj) is False:
             os.mkdir(dir_proj)
             print(f"Dir "+dir_proj+" create! ")
         else:
             print(f"Dir "+dir_proj+" already exists .. ")
-
+        '''
         # return the dir path where to store the mbox files of the project
         return dir_proj
         
@@ -114,7 +117,7 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
             if response.content != b'' and not('Message Not Found!' in response.content.decode("utf-8") ):
                 
                 # open the file and append to the end the content of the response
-                open(dirpath+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox", "a").write(response.content.decode("utf-8"))
+                open(dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox", "a").write(response.content.decode("utf-8"))
                 print('File downloaded and appended: '+dirpath+project+".mbox")
 
             else:
@@ -127,6 +130,8 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
             else :
                 # increment mounth
                 temp_date = datetime.date(temp_date.year, temp_date.month + 1, 1)
+        
+        return dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox"
 
 
     except Exception as e:
