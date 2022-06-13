@@ -18,10 +18,10 @@ import pandas as pd
 # whereas in checkstyle results the only given information is the name of the file.
 # If there are 2 or more homonimous files, it is impossible to say to which file the checkstyle results
 # (or PMD if the subpath is also the same) are referring to.
-def add_columns_and_convert_paths(directory, tool):
+def add_columns_and_convert_paths(directory, tool, projects):
 
     # Get the name of each project in the directory
-    projects = next(os.walk(directory))[1]
+    #projects = next(os.walk(directory))[1]
 
     for project in projects:
         repository = 'https://github.com/apache/' + project
@@ -36,8 +36,12 @@ def add_columns_and_convert_paths(directory, tool):
 
 
         for commit in commits:
+            try:
+                csv_violations = pd.read_csv(directory + os.sep + project + os.sep + commit + os.sep + tool + '-' + commit + '.csv')
+            except:
+                print('File: ' + directory + os.sep + project + os.sep + commit + os.sep + tool + '-' + commit + '.csv is empty')
+                continue
 
-            csv_violations = pd.read_csv(directory + os.sep + project + os.sep + commit + os.sep + tool + '-' + commit + '.csv')
 
             # Check if there is any entry
             # If there is at least one entry in the CSV, use PyDriller to get the original path of each file in the CSV
@@ -58,8 +62,12 @@ def add_columns_and_convert_paths(directory, tool):
             print('\nCommit: ' + commit_to_analyse.hash + ' (' + str(commit_count) + '/' + str(len(commits_to_be_traversed)) + ')')
             commit_count = commit_count + 1
 
-            csv_violations2 = pd.read_csv(directory + os.sep + project + os.sep + commit_to_analyse.hash + os.sep + tool + '-' + commit_to_analyse.hash + '.csv')
-            
+            try:
+                csv_violations2 = pd.read_csv(directory + os.sep + project + os.sep + commit_to_analyse.hash + os.sep + tool + '-' + commit_to_analyse.hash + '.csv')
+            except:
+                print('File: ' + directory + os.sep + project + os.sep + commit + os.sep + tool + '-' + commit_to_analyse.hash + '.csv is empty')
+                continue
+
             total_violations = csv_violations2['File'].unique()
             violations_count = 1
             print('Files with violations: ' + str(len(total_violations)))
@@ -145,6 +153,15 @@ if __name__ == "__main__":
                         required=True,
                         choices=['pmd', 'checkstyle']
                         )
+    
+    parser.add_argument(
+        '-p',
+        '--projects_to_analyse',
+        type=str,
+        nargs='+',
+        help='Projects to analyse',
+        required=True
+    )
 
     # Parsing the args
     args = parser.parse_args()
@@ -155,4 +172,6 @@ if __name__ == "__main__":
     # Analysis tool used
     tool = args.analysis_tool
 
-    add_columns_and_convert_paths(pathProjects, tool)
+    projects = args.projects_to_analyse
+
+    add_columns_and_convert_paths(pathProjects, tool, projects)

@@ -9,7 +9,7 @@ import os
 # Fan in and fan out are not computed correctly by pydriller.
 def calc_metrics(directory, projects):
     for project in projects:
-        csv_pydriller_metrics = pd.DataFrame(columns=['Project', 'Commit', 'File', 'Method', 'Start', 'End', 'Parameters', 'NLOC', 'Complexity'])
+        csv_pydriller_metrics = pd.DataFrame(columns=['Project', 'Commit', 'File', 'Method', 'Start', 'End', 'Parameters', 'Num_Parameters', 'NLOC', 'Complexity', 'Change_type'])
         
         repository = 'https://github.com/apache/' + project
 
@@ -31,11 +31,21 @@ def calc_metrics(directory, projects):
                     for m in f.methods:
                         new_row = pd.DataFrame({'Project': [project], 'Commit': [commit.hash], 'File': [f.new_path], 
                                                 'Method': [m.long_name], 'Start': [m.start_line], 'End': [m.end_line],
-                                                'Parameters': [m.parameters], 'NLOC': [m.nloc], 'Complexity' : [m.complexity]})
+                                                'Parameters': [m.parameters], 'Num_Parameters': [len(m.parameters)],
+                                                'NLOC': [m.nloc], 'Complexity' : [m.complexity], 'Change_type': [f.change_type.name]})
                         csv_pydriller_metrics = pd.concat([csv_pydriller_metrics, new_row], ignore_index=True, sort=False)
                         csv_pydriller_metrics.to_csv(directory + os.sep + 'pydriller_metrics_' + project + '.csv', index=False)
 
 
+def calc_metrics_file(directory, project, commit_hash, file, csv_pydriller_metrics, change_type):            
+    for m in file.methods:
+        new_row = pd.DataFrame({'Project': [project], 'Commit': [commit_hash], 'File': [file.new_path], 
+                                'Method': [m.long_name], 'Start': [m.start_line], 'End': [m.end_line],
+                                'Parameters': [m.parameters], 'Num_Parameters': [len(m.parameters)], 'NLOC': [m.nloc], 'Complexity' : [m.complexity],
+                                'Change_type': [change_type]})
+        csv_pydriller_metrics = pd.concat([csv_pydriller_metrics, new_row], ignore_index=True, sort=False)
+        #csv_pydriller_metrics.to_csv(directory + os.sep + 'pydriller_metrics_' + project + '.csv', index=False)
+        return pd.DataFrame(csv_pydriller_metrics)
 
 
 

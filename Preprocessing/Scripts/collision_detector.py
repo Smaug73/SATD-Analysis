@@ -174,7 +174,7 @@ def count_files_reanalysis_needed_pmd(directory, project, commit, homonymous_set
             #print('Exception for package: ' +  str(csv_static_analysis.at[i, 'Package']) + ' at line ' + str(i) + ' for commit ' + commit)
             package = ''
         filename = csv_static_analysis.at[i, 'File'].split('/')[-1]
-        subpath = package + os.sep + filename
+        subpath = package + '/' + filename
         if not(subpath in to_exclude) and (filename in modifications_dict) and (modifications_dict[filename] > 1):
             to_exclude.append(subpath)
             
