@@ -130,6 +130,8 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
             else :
                 # increment mounth
                 temp_date = datetime.date(temp_date.year, temp_date.month + 1, 1)
+        
+        return dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox"
 
 
     except Exception as e:

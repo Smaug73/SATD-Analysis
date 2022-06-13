@@ -5,12 +5,15 @@ community smell script from kaiaulu.
 Only the information necessary for community smell computing is 
 insert in the file.
 
+IMPORTANT:  The download of the jira issues are not included,
+            check the directory where store it after download 
+            in the configuration file created by the script
+
 Information needed:
     
     apache project name
     git repository path
     git branch (only main/master branch is considered)
-        *controllare se c'e' un master branch o il main branch*
     
     start commit
     end commit
@@ -87,7 +90,7 @@ def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file
                         "  branch:\n"+
                         "    - "+main_branch_name+"\n"+
                         "mailing_list:\n"+
-                        "  mbox: ../rawdata/mbox/"+mbox_file_path+"\n"+
+                        "  mbox: "+mbox_file_path+"\n"+
                         "  domain: http://mail-archives.apache.org/mod_mbox\n"+
                         "  list_key:\n"+
                         "    - "+project_name+"-dev\n"+
@@ -172,14 +175,14 @@ if __name__ == "__main__":
     parser.add_argument(
         'start_date',
         type=str,
-        help='Start date of the consider period',
+        help='Start date of the consider period, formate:  YYYY-MM-DAY(year-mount-Day)',
     )
 
     # End date
     parser.add_argument(
         'end_date',
         type=str,
-        help='End date of the consider period',
+        help='End date of the consider period, formate : YYYY-MM-DAY(year-mount-Day)',
     )
 
     args = parser.parse_args()
@@ -189,11 +192,11 @@ if __name__ == "__main__":
     clone_repo(args.project_name, args.kaiaulu_path+"rawdata"+os.sep+"git_repo"+os.sep+args.project_name)
 
     # Download the mbox file
-    download_mbox_start_end(args.project_name, args.start_date, args.end_date, args.kaiaulu_path+"rawdata"+os.sep+"mbox")
+    mbox_path = download_mbox_start_end(args.project_name, args.start_date, args.end_date, args.kaiaulu_path+"rawdata"+os.sep+"mbox")
 
     # Create dir for configuration file
     conf_path = mkdir_for_confFile(args.kaiaulu_path)
 
     # Create the configuration file
-    configuration_file_builder(args.kaiaulu_path+"conf"+os.sep , args.project_name , args.kaiaulu_path+"rawdata"+os.sep+"mbox"+os.sep,
+    configuration_file_builder(args.kaiaulu_path+"conf"+os.sep , args.project_name , mbox_path,
                                 args.start_date , args.end_date , str(90))
