@@ -17,7 +17,7 @@ def check_branches(directory):
     for project in projects:
         repository = 'https://github.com/apache/' + project
 
-        commits = next(os.walk(directory + '/' + project))[1]
+        commits = next(os.walk(directory + os.sep + project))[1]
 
         print('Project: ' + project)
         
@@ -40,7 +40,7 @@ def check_branches(directory):
             i = i + 1
     
     # Save the csv file in the repository directory          
-    csv_branches.to_csv(directory + '/csv_branches.csv')
+    csv_branches.to_csv(directory + os.sep + 'csv_branches.csv')
 
 
 
@@ -49,7 +49,7 @@ def check_branches(directory):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
-    description='Program for check the branch of all commits in the directory')
+    description='Program for check the branches of all commits in the directory')
 
     # Directory of projects being analysed
     parser.add_argument(

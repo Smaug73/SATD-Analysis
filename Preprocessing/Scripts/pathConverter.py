@@ -27,7 +27,7 @@ def add_columns_and_convert_paths(directory, tool):
         repository = 'https://github.com/apache/' + project
 
         # Get the hash of each commit in the project directory
-        commits = next(os.walk(directory + '/' + project))[1]
+        commits = next(os.walk(directory + os.sep + project))[1]
 
         # Only commits in which a violation was discovered should be traversed
         commits_to_be_traversed = []
@@ -37,7 +37,7 @@ def add_columns_and_convert_paths(directory, tool):
 
         for commit in commits:
 
-            csv_violations = pd.read_csv(directory + '/' + project + '/' + commit + '/' + tool + '-' + commit + '.csv')
+            csv_violations = pd.read_csv(directory + os.sep + project + os.sep + commit + os.sep + tool + '-' + commit + '.csv')
 
             # Check if there is any entry
             # If there is at least one entry in the CSV, use PyDriller to get the original path of each file in the CSV
@@ -58,7 +58,7 @@ def add_columns_and_convert_paths(directory, tool):
             print('\nCommit: ' + commit_to_analyse.hash + ' (' + str(commit_count) + '/' + str(len(commits_to_be_traversed)) + ')')
             commit_count = commit_count + 1
 
-            csv_violations2 = pd.read_csv(directory + '/' + project + '/' + commit_to_analyse.hash + '/' + tool + '-' + commit_to_analyse.hash + '.csv')
+            csv_violations2 = pd.read_csv(directory + os.sep + project + os.sep + commit_to_analyse.hash + os.sep + tool + '-' + commit_to_analyse.hash + '.csv')
             
             total_violations = csv_violations2['File'].unique()
             violations_count = 1
@@ -122,7 +122,7 @@ def add_columns_and_convert_paths(directory, tool):
                     if not(found):
                         print('File ' + violation_file_subpath + ' was not modified in this commit or it was deleted in this commit')
                     
-                    csv_violations2.to_csv(directory + '/' + project + '/' + commit_to_analyse.hash + '/' + 'new-' + tool + '-' + commit_to_analyse.hash + '.csv', index=False)  
+                    csv_violations2.to_csv(directory + os.sep + project + os.sep + commit_to_analyse.hash + os.sep + 'new-' + tool + '-' + commit_to_analyse.hash + '.csv', index=False)  
 
 if __name__ == "__main__":
 

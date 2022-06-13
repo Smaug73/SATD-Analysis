@@ -11,15 +11,15 @@ def convert_all_files(directory):
     for project in projects:
 
         # Get the hash of each commit in the project directory
-        commits = next(os.walk(directory + '/' + project))[1]
+        commits = next(os.walk(directory + os.sep + project))[1]
 
         for commit in commits:
             print('Commit: ' + commit)
-            filepath = directory + '/' + project + '/' + commit + '/checkstyle-' + commit + '.xml'
+            filepath = directory + os.sep + project + os.sep + commit + os.sep + 'checkstyle-' + commit + '.xml'
             convert_file(filepath)
 
 
-# Fuction for convert xml to csv
+# Function for convert xml to csv
 def convert_file(filepath):
     
     checkstyle_csv = pd.DataFrame(columns=['File', 'Line', 'Severity', 'Message', 'Source'])

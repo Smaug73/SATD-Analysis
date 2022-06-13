@@ -14,7 +14,7 @@ def calc_metrics(directory, projects):
         repository = 'https://github.com/apache/' + project
 
         # Get the hash of each commit in the project directory
-        commits = next(os.walk(directory + '/' + project))[1]
+        commits = next(os.walk(directory + os.sep + project))[1]
 
         print('\nProject: ' + project)
         print('Number of commits: ' + str(len(commits)))
@@ -33,7 +33,7 @@ def calc_metrics(directory, projects):
                                                 'Method': [m.long_name], 'Start': [m.start_line], 'End': [m.end_line],
                                                 'Parameters': [m.parameters], 'NLOC': [m.nloc], 'Complexity' : [m.complexity]})
                         csv_pydriller_metrics = pd.concat([csv_pydriller_metrics, new_row], ignore_index=True, sort=False)
-                        csv_pydriller_metrics.to_csv(directory + '/pydriller_metrics_' + project + '.csv', index=False)
+                        csv_pydriller_metrics.to_csv(directory + os.sep + 'pydriller_metrics_' + project + '.csv', index=False)
 
 
 

@@ -40,7 +40,7 @@ def count_collisions(directory, projects):
         repository = 'https://github.com/apache/' + project
 
         # Get the hash of each commit in the project directory
-        commits = next(os.walk(directory + '/' + project))[1]
+        commits = next(os.walk(directory + os.sep + project))[1]
 
         print('\nProject: ' + project)
         print('Number of commits: ' + str(len(commits)))
@@ -115,14 +115,14 @@ def count_collisions(directory, projects):
                     csv_files_with_collisions.loc[i] = [project, commit.hash, mod_file.new_path, 1]
                 else:
                     csv_files_with_collisions.loc[i] = [project, commit.hash, mod_file.new_path, 0]
-                csv_files_with_collisions.to_csv(directory + '/files_with_collisions' + string_projects_analysed + '.csv', index=False)
+                csv_files_with_collisions.to_csv(directory + os.sep + 'files_with_collisions' + string_projects_analysed + '.csv', index=False)
                 i = i + 1
                 download_Modifiedfile(mod_file, project, commit.hash)
                 files_downloaded_count = files_downloaded_count + 1
                 #print('\nFiles downloaded in project ' + project + ': ' + str(files_downloaded_count) + '/' + str(len(homonymous_modified_files_set)))
 
         csv_collision_counter.loc[j] = [project, modified_java_files_project_count, homonymous_files_in_project_count, len(commits), len(commits_with_collision_set)]
-        csv_collision_counter.to_csv(directory + '/project_collisions_count' + string_projects_analysed + '.csv', index=False)
+        csv_collision_counter.to_csv(directory + os.sep + 'project_collisions_count' + string_projects_analysed + '.csv', index=False)
         j = j + 1
         print('Total modified java files: ' + str(modified_java_files_project_count))
         print('Total homonymous files: ' + str(homonymous_files_in_project_count))
@@ -139,9 +139,9 @@ def count_collisions(directory, projects):
 #    That means that no violation was discovered during the analysis, but we don't know on which file the said analysis was conducted
 def count_files_reanalysis_needed_pmd(directory, project, commit, homonymous_set, modifications_dict):
     try:
-        csv_static_analysis = pd.read_csv(directory + '/' + project + '/' + commit + '/pmd-' + commit + '.csv')
+        csv_static_analysis = pd.read_csv(directory + os.sep + project + os.sep + commit + os.sep + 'pmd-' + commit + '.csv')
     except:
-        print('File: ' + directory + '/' + project + '/' + commit + '/pmd-' + commit + '.csv is empty')
+        print('File: ' + directory + os.sep + project + os.sep + commit + os.sep + 'pmd-' + commit + '.csv is empty')
         return len(homonymous_set), homonymous_set
     # Dictionary:
     # Key: subpath obtained concatenating package and filename
@@ -174,7 +174,7 @@ def count_files_reanalysis_needed_pmd(directory, project, commit, homonymous_set
             #print('Exception for package: ' +  str(csv_static_analysis.at[i, 'Package']) + ' at line ' + str(i) + ' for commit ' + commit)
             package = ''
         filename = csv_static_analysis.at[i, 'File'].split('/')[-1]
-        subpath = package + '/' + filename
+        subpath = package + os.sep + filename
         if not(subpath in to_exclude) and (filename in modifications_dict) and (modifications_dict[filename] > 1):
             to_exclude.append(subpath)
             
