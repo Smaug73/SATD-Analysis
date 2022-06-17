@@ -9,7 +9,7 @@ import os
 # Fan in and fan out are not computed correctly by pydriller.
 def calc_metrics(directory, projects):
     for project in projects:
-        csv_pydriller_metrics = pd.DataFrame(columns=['Project', 'Commit', 'File', 'Method', 'Start', 'End', 'Parameters', 'Num_Parameters', 'NLOC', 'Complexity'])
+        csv_pydriller_metrics = pd.DataFrame(columns=['Project', 'Commit', 'Timestamp', 'File', 'Method', 'Start', 'End', 'Parameters', 'Num_Parameters', 'NLOC', 'Complexity'])
         
         repository = 'https://github.com/apache/' + project
 
@@ -37,9 +37,9 @@ def calc_metrics(directory, projects):
                         csv_pydriller_metrics.to_csv(directory + os.sep + 'pydriller_metrics_' + project + '.csv', index=False)
 
 
-def calc_metrics_file(project, commit_hash, file, csv_pydriller_metrics):            
+def calc_metrics_file(project, commit_hash, commit_date, file, csv_pydriller_metrics):            
     for m in file.methods:
-        new_row = pd.DataFrame({'Project': [project], 'Commit': [commit_hash], 'File': [file.new_path], 
+        new_row = pd.DataFrame({'Project': [project], 'Commit': [commit_hash], 'Timestamp':[commit_date], 'File': [file.new_path], 
                                 'Method': [m.long_name], 'Start': [m.start_line], 'End': [m.end_line],
                                 'Parameters': [m.parameters], 'Num_Parameters': [len(m.parameters)], 'NLOC': [m.nloc], 'Complexity' : [m.complexity]})
         csv_pydriller_metrics = pd.concat([csv_pydriller_metrics, new_row], ignore_index=True, sort=False)
