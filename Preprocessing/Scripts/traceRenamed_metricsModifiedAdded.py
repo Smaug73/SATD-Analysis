@@ -3,10 +3,10 @@
 #SBATCH --output=collision_%j.out
 
 from pydriller import Repository
+from datetime import datetime
 import argparse
 import os
 import pandas as pd
-import string
 import sys
 
 sys.path.append(os.getcwd())
@@ -38,8 +38,11 @@ def trace_measure(directory, projects):
                         csv_trace = pd.concat([csv_trace, new_row], ignore_index=True, sort=False)
                         csv_trace.to_csv(directory + os.sep + 'trace_files_' + project + '.csv', index=False)
                     elif modified_file.change_type.name == 'ADD' or modified_file.change_type.name == 'MODIFY': 
-                        commit_date = str(commit.committer_date)
-                        csv_pydriller_metrics = calc_metrics_file(project, commit.hash, commit_date, modified_file, csv_pydriller_metrics)
+                        commit_timestamp = int(datetime.timestamp(commit.committer_date))
+                        #print(str(commit.committer_date) + ' -> ' + str(commit_timestamp))
+                        #print('Committer: ' + commit.committer.name + ' ' + commit.committer.email)
+                        #print('Timezone: ' + str(commit.committer_timezone) + '\n')
+                        csv_pydriller_metrics = calc_metrics_file(project, commit.hash, str(commit_timestamp), modified_file, csv_pydriller_metrics)
                         csv_pydriller_metrics.to_csv(directory + os.sep + 'pydriller_metrics_' + project + '.csv', index=False)
 
 
