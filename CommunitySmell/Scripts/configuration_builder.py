@@ -102,8 +102,23 @@ def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file
                         "    issue_comments: ../rawdata/issue_tracker/"+project_name+"_issues-merged.json\n"+
                         "  github:\n"+
                         "    owner: apache\n"+
-                        "    repo: activemq\n"+
-                        "    replies: ../rawdata/git_repo/"+project_name+"/\n"+
+                        "    repo: "+project_name+"\n"+
+                        #"    replies: ../rawdata/git_repo/"+project_name+"/\n"+
+                        "commit_message_id_regex:"
+                        "    issue_id: \#[0-9]+"
+                        #cve_id: ?
+
+                        "filter:"
+                        "keep_filepaths_ending_with:\n"+
+                        "    - cpp\n"+
+                        "    - c\n"+
+                        "    - h\n"+
+                        "    - java\n"+
+                        "    - js\n"+
+                        "    - py\n"+
+                        "    - cc\n"+
+                        "remove_filepaths_containing:\n"+
+                        "    - test\n"+
                         "analysis:\n"+
                         "  window:\n"+
                         "    start_datetime: "+start_date+"\n"+
