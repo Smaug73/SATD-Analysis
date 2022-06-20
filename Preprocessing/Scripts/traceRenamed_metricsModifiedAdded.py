@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #SBATCH --partition=mcs.default.q
-#SBATCH --output=collision_%j.out
+#SBATCH --output=measure_%j.out
 
 from pydriller import Repository
 from datetime import datetime
