@@ -30,6 +30,8 @@ def trace_measure(directory, projects):
         for commit in Repository(repository, only_commits=commits).traverse_commits():
             print('Commit: ' + commit.hash + ' (' + str(count_commits) + '/' + str(num_commits) + ')')
             count_commits = count_commits + 1
+            commit_timestamp = int(datetime.timestamp(commit.committer_date))
+            print(str(commit.committer_date) + ' -> ' + str(commit_timestamp) + '\n')
         #for commit in Repository(repository, single='23e8edd9791b5a2ac025c321f97a9dd2329bbeaa').traverse_commits():    
             for modified_file in commit.modified_files:
                 if modified_file.filename.endswith('.java') and not(modified_file.filename == 'package-info.java' or modified_file.filename == 'module-info.java'): 
@@ -37,9 +39,7 @@ def trace_measure(directory, projects):
                         new_row = pd.DataFrame({'Project': [project], 'Commit': [commit.hash], 'Old path': [modified_file.old_path], 'New path': [modified_file.new_path]})
                         csv_trace = pd.concat([csv_trace, new_row], ignore_index=True, sort=False)
                         csv_trace.to_csv(directory + os.sep + 'trace_files_' + project + '.csv', index=False)
-                    elif modified_file.change_type.name == 'ADD' or modified_file.change_type.name == 'MODIFY': 
-                        commit_timestamp = int(datetime.timestamp(commit.committer_date))
-                        #print(str(commit.committer_date) + ' -> ' + str(commit_timestamp))
+                    elif modified_file.change_type.name == 'ADD' or modified_file.change_type.name == 'MODIFY':  
                         #print('Committer: ' + commit.committer.name + ' ' + commit.committer.email)
                         #print('Timezone: ' + str(commit.committer_timezone) + '\n')
                         csv_pydriller_metrics = calc_metrics_file(project, commit.hash, str(commit_timestamp), modified_file, csv_pydriller_metrics)
