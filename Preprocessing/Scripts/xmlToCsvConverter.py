@@ -1,3 +1,4 @@
+from genericpath import isdir
 from xml.dom import minidom
 import pandas as pd
 import argparse
@@ -15,39 +16,45 @@ def convert_all_files(directory):
 
         for commit in commits:
             print('Commit: ' + commit)
+            checkstyle_csv = pd.DataFrame(columns=['File', 'Line', 'Severity', 'Message', 'Source'])
+            filepath_csv = directory + os.sep + project + os.sep + commit + os.sep + 'checkstyle-' + commit + '.csv'
+
+            filepaths = []
             filepath = directory + os.sep + project + os.sep + commit + os.sep + 'checkstyle-' + commit + '.xml'
-            convert_file(filepath)
+            if os.path.isfile(filepath):
+                filepaths.append(filepath)
+            else:
+                classes = next(os.walk(directory + os.sep + project + os.sep + commit))[2]
+                for cl in classes:
+                    if cl.endswith('.xml'):
+                        filepaths.append(directory + os.sep + project + os.sep + commit + os.sep + cl)
+            
+            convert_file(filepaths, checkstyle_csv, filepath_csv)    
 
 
 # Function for convert xml to csv
-def convert_file(filepath):
+def convert_file(filepaths, checkstyle_csv, filepath_csv):
     
-    checkstyle_csv = pd.DataFrame(columns=['File', 'Line', 'Severity', 'Message', 'Source'])
+    for filepath in filepaths:
+        # Parse an xml file by name
+        file_xml = minidom.parse(filepath)
 
-    # Parse an xml file by name
-    file_xml = minidom.parse(filepath)
+        # Parse all file elements
+        files = file_xml.getElementsByTagName('file')
 
-    # Parse all file elements
-    files = file_xml.getElementsByTagName('file')
+        for file in files:
+            print("\nFile name: " + file.getAttribute('name'))
 
-    i = 0
-    for file in files:
-        print("\nFile name: " + file.getAttribute('name'))
-
-        # Parse the errors of a file
-        errors = file.getElementsByTagName('error')
-        
-        # Create a new row and append it to the DataFrame
-        for error in errors:
-            checkstyle_csv.loc[i] = [file.getAttribute('name'), 
-                                    error.getAttribute('line'), 
-                                    error.getAttribute('severity'), 
-                                    error.getAttribute('message'), 
-                                    error.getAttribute('source')]
-            i = i + 1
-
-    filepath_csv = filepath.split('.')[0] + '.csv'
-    checkstyle_csv.to_csv(filepath_csv, index=False)
+            # Parse the errors of a file
+            errors = file.getElementsByTagName('error')
+            
+            # Create a new row and append it to the DataFrame
+            for error in errors:
+                new_row = pd.DataFrame({'File': [file.getAttribute('name')], 'Line': [error.getAttribute('line')], 
+                                        'Severity':[error.getAttribute('severity')], 'Message': [error.getAttribute('message')], 
+                                        'Source': [error.getAttribute('source')]})
+                checkstyle_csv = pd.concat([checkstyle_csv, new_row], ignore_index=True, sort=False)
+                checkstyle_csv.to_csv(filepath_csv, index=False)
 
 
 if __name__ == "__main__":
