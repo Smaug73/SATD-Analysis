@@ -550,3 +550,43 @@ print("End, save the results !")
 
 
 
+
+
+############ GRAPHS #####################
+
+print("Creating graphs ... ")
+
+project_collaboration_network <- recolor_network_by_community(git_network_authors,code_clusters)
+
+gcid <- igraph::graph_from_data_frame(d=project_collaboration_network[["edgelist"]],
+                                      directed = FALSE,
+                                      vertices = project_collaboration_network[["nodes"]])
+
+visIgraph(gcid,randomSeed = 1)
+
+# Save the graph
+#write_graph(gcid, "../rawdata/project_collaboration_network.txt")
+
+# Save the graph as html
+library(visNetwork)
+library(htmlwidgets)
+graphfile <- paste("../rawdata/graph/",project_name,"_collaboration_network_code_cluster.html", sep = "")
+saveWidget(visIgraph(gcid,randomSeed = 1), file = graphfile)
+
+
+project_collaboration_network <- recolor_network_by_community(reply_network_authors,mail_clusters)
+
+gcid <- igraph::graph_from_data_frame(d=project_collaboration_network[["edgelist"]],
+                                      directed = FALSE,
+                                      vertices = project_collaboration_network[["nodes"]])
+
+visIgraph(gcid,randomSeed = 1)
+
+# Save the graph as html
+library(visNetwork)
+library(htmlwidgets)
+graphfile <- paste("../rawdata/graph/",project_name,"_collaboration_network_mail_cluster.html", sep = "")
+saveWidget(visIgraph(gcid,randomSeed = 1), file = graphfile)
+
+print("Graphs saved !")
+

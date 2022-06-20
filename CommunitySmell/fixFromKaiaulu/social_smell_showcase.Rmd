@@ -57,7 +57,8 @@ We also provide the path for `tools.yml`. Kaiaulu does not implement all availab
 ```{r}
 tools_path <- "../tools.yml"
 #conf_path <- "../conf/helix.yml"
-conf_path <- "../conf/activemq.yml"
+#conf_path <- "../conf/activemq.yml"
+conf_path <- "../conf/cxf.yml"
 #conf_path <- "../conf/geronimo.yml"
 
 tool <- yaml::read_yaml(tools_path)
@@ -79,6 +80,8 @@ window_size <- conf[["analysis"]][["window"]][["size_days"]]
 mbox_path <- conf[["mailing_list"]][["mbox"]]
 github_replies_path <- conf[["issue_tracker"]][["github"]][["replies"]]
 jira_issue_comments_path <- conf[["issue_tracker"]][["jira"]][["issue_comments"]]
+
+project_name <- conf[["issue_tracker"]][["github"]][["repo"]]
 
 start_date <- conf[["analysis"]][["window"]][["start_datetime"]]
 end_date <- conf[["analysis"]][["window"]][["end_datetime"]]
@@ -364,7 +367,7 @@ if(!is.null(mbox_path)){
   
 }
 if(!is.null(jira_issue_comments_path)){
-  #project_jira <- parse_jira_replies(parse_jira(jira_issue_comments_path)) 
+  #project_jira <- parse_jira_replies(parse_jira(jira_issue_comments_path)) # versione originale SBAGLIATA
   project_jira <- parse_jira_from_percevaleJson(jira_issue_comments_path)
   # Timezone is embedded on separated field. All times shown in UTC.
   project_jira$reply_tz <- "0000"
@@ -557,6 +560,7 @@ for(j in 2:size_time_window){
     
   }
   if(ml_exist){
+    
     network_reply_slice <- transform_reply_to_bipartite_network(project_reply_slice)
     
     
@@ -629,6 +633,11 @@ for(j in 2:size_time_window){
                                                                  code_ml_both_devs)
 }
 smells_interval <- rbindlist(smells)
+
+# Save the Smells dataframe in a csv
+file_name <- paste("../rawdata/smell_data/",project_name,"_community_smells.csv", sep="")
+write.csv(smells_interval,file_name, row.names = FALSE)
+
 ```
 
 ## Community Inspection per Time Slice
@@ -636,6 +645,7 @@ smells_interval <- rbindlist(smells)
 This shows the last loop slice:
 
 ```{r}
+
 project_collaboration_network <- recolor_network_by_community(git_network_authors,code_clusters)
 
 gcid <- igraph::graph_from_data_frame(d=project_collaboration_network[["edgelist"]], 
@@ -643,6 +653,16 @@ gcid <- igraph::graph_from_data_frame(d=project_collaboration_network[["edgelist
                       vertices = project_collaboration_network[["nodes"]])
 
 visIgraph(gcid,randomSeed = 1)
+
+# Save the graph
+#write_graph(gcid, "../rawdata/project_collaboration_network.txt")
+
+# Save the graph as html
+library(visNetwork)
+library(htmlwidgets)
+graphfile <- paste("../rawdata/graph/",project_name,"_collaboration_network_code_cluster.html", sep = "")
+saveWidget(visIgraph(gcid,randomSeed = 1), file = graphfile)
+
 ```
 
 It may appear counter-intuitive the 5 connected nodes are not considered a single community, however recall the algorithm also consider the weights among the nodes. In this case, the algorithm did not consider the weight sufficiently high among the nodes to consider it a community. 
@@ -657,6 +677,12 @@ gcid <- igraph::graph_from_data_frame(d=project_collaboration_network[["edgelist
                       vertices = project_collaboration_network[["nodes"]])
 
 visIgraph(gcid,randomSeed = 1)
+
+# Save the graph as html
+library(visNetwork)
+library(htmlwidgets)
+graphfile <- paste("../rawdata/graph/",project_name,"_collaboration_network_mail_cluster.html", sep = "")
+saveWidget(visIgraph(gcid,randomSeed = 1), file = graphfile)
 ```
 
 
