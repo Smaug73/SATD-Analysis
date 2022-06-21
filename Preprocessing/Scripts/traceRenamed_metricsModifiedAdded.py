@@ -21,6 +21,7 @@ def trace_measure(directory, projects):
         repository = 'https://github.com/apache/' + project
 
         # Get the hash of each commit in the project directory
+        print ('Path to the project: ' + directory + os.sep + project)
         commits = next(os.walk(directory + os.sep + project))[1]
         num_commits = len(commits)
 
@@ -32,7 +33,7 @@ def trace_measure(directory, projects):
             count_commits = count_commits + 1
             commit_timestamp = int(datetime.timestamp(commit.committer_date))
             print(str(commit.committer_date) + ' -> ' + str(commit_timestamp) + '\n')
-        #for commit in Repository(repository, single='23e8edd9791b5a2ac025c321f97a9dd2329bbeaa').traverse_commits():    
+        #for commit in Repository(repository, single='23e8edd9791b5a2ac025c321f97a9dd2329bbeaa').traverse_commits(): 
             for modified_file in commit.modified_files:
                 if modified_file.filename.endswith('.java') and not(modified_file.filename == 'package-info.java' or modified_file.filename == 'module-info.java'): 
                     if modified_file.change_type.name == 'RENAME':
