@@ -16,7 +16,7 @@ def trace_measure(directory, projects):
     csv_trace = pd.DataFrame(columns=['Project', 'Commit', 'Old path', 'New path'])
     
     for project in projects:
-        csv_pydriller_metrics = pd.DataFrame(columns=['Project', 'Commit', 'Timestamp', 'File', 'Method', 'Start', 'End', 'Parameters', 'Num_Parameters', 'NLOC', 'Complexity'])
+        csv_pydriller_metrics = pd.DataFrame(columns=['Project', 'Commit', 'Datetime', 'Timestamp', 'File', 'Method', 'Begin--End', 'Parameters', '#Parameters', 'NLOC', 'Complexity'])
 
         repository = 'https://github.com/apache/' + project
 
@@ -32,7 +32,7 @@ def trace_measure(directory, projects):
             print('Commit: ' + commit.hash + ' (' + str(count_commits) + '/' + str(num_commits) + ')')
             count_commits = count_commits + 1
             commit_timestamp = int(datetime.timestamp(commit.committer_date))
-            print(str(commit.committer_date) + ' -> ' + str(commit_timestamp) + '\n')
+            #print(str(commit.committer_date) + ' -> ' + str(commit_timestamp) + '\n')
         #for commit in Repository(repository, single='23e8edd9791b5a2ac025c321f97a9dd2329bbeaa').traverse_commits(): 
             for modified_file in commit.modified_files:
                 if modified_file.filename.endswith('.java') and not(modified_file.filename == 'package-info.java' or modified_file.filename == 'module-info.java'): 
@@ -43,7 +43,7 @@ def trace_measure(directory, projects):
                     elif modified_file.change_type.name == 'ADD' or modified_file.change_type.name == 'MODIFY':  
                         #print('Committer: ' + commit.committer.name + ' ' + commit.committer.email)
                         #print('Timezone: ' + str(commit.committer_timezone) + '\n')
-                        csv_pydriller_metrics = calc_metrics_file(project, commit.hash, str(commit_timestamp), modified_file, csv_pydriller_metrics)
+                        csv_pydriller_metrics = calc_metrics_file(project, commit.hash, commit.committer_date, modified_file, csv_pydriller_metrics)
                         csv_pydriller_metrics.to_csv(directory + os.sep + 'pydriller_metrics_' + project + '.csv', index=False)
 
 

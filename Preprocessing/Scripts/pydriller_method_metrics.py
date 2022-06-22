@@ -1,4 +1,5 @@
 from pydriller import Repository
+from datetime import datetime
 import pandas as pd
 import argparse
 import os
@@ -9,7 +10,7 @@ import os
 # Fan in and fan out are not computed correctly by pydriller.
 def calc_metrics(directory, projects):
     for project in projects:
-        csv_pydriller_metrics = pd.DataFrame(columns=['Project', 'Commit', 'Timestamp', 'File', 'Method', 'Start', 'End', 'Parameters', 'Num_Parameters', 'NLOC', 'Complexity'])
+        csv_pydriller_metrics = pd.DataFrame(columns=['Project', 'Commit', 'Datetime', 'Timestamp', 'File', 'Method', 'Begin--End', 'Parameters', '#Parameters', 'NLOC', 'Complexity'])
         
         repository = 'https://github.com/apache/' + project
 
@@ -29,19 +30,20 @@ def calc_metrics(directory, projects):
                 if f.filename.endswith('.java'):
                     
                     for m in f.methods:
-                        new_row = pd.DataFrame({'Project': [project], 'Commit': [commit.hash], 'File': [f.new_path], 
-                                                'Method': [m.long_name], 'Start': [m.start_line], 'End': [m.end_line],
-                                                'Parameters': [m.parameters], 'Num_Parameters': [len(m.parameters)],
-                                                'NLOC': [m.nloc], 'Complexity' : [m.complexity]})
+                        commit_timestamp = int(datetime.timestamp(commit.committer_date))
+                        new_row = pd.DataFrame({'Project': [project], 'Commit': [commit.hash], 'Datetime':[commit.committer_date], 'Timestamp':[commit_timestamp], 
+                                                'File': [f.new_path], 'Method': [m.long_name], 'Begin--End': [str(m.start_line) + '--' + str(m.end_line)],
+                                                'Parameters': [m.parameters], '#Parameters': [len(m.parameters)], 'NLOC': [m.nloc], 'Complexity' : [m.complexity]})
                         csv_pydriller_metrics = pd.concat([csv_pydriller_metrics, new_row], ignore_index=True, sort=False)
                         csv_pydriller_metrics.to_csv(directory + os.sep + 'pydriller_metrics_' + project + '.csv', index=False)
 
 
 def calc_metrics_file(project, commit_hash, commit_date, file, csv_pydriller_metrics):            
     for m in file.methods:
-        new_row = pd.DataFrame({'Project': [project], 'Commit': [commit_hash], 'Timestamp':[commit_date], 'File': [file.new_path], 
-                                'Method': [m.long_name], 'Start': [m.start_line], 'End': [m.end_line],
-                                'Parameters': [m.parameters], 'Num_Parameters': [len(m.parameters)], 'NLOC': [m.nloc], 'Complexity' : [m.complexity]})
+        commit_timestamp = int(datetime.timestamp(commit_date))
+        new_row = pd.DataFrame({'Project': [project], 'Commit': [commit_hash], 'Datetime':[commit_date], 'Timestamp':[commit_timestamp], 
+                                'File': [file.new_path], 'Method': [m.long_name], 'Begin--End': [str(m.start_line) + '--' + str(m.end_line)],
+                                'Parameters': [m.parameters], '#Parameters': [len(m.parameters)], 'NLOC': [m.nloc], 'Complexity' : [m.complexity]})
         csv_pydriller_metrics = pd.concat([csv_pydriller_metrics, new_row], ignore_index=True, sort=False)
         #csv_pydriller_metrics.to_csv(directory + os.sep + 'pydriller_metrics_' + project + '.csv', index=False)
         
