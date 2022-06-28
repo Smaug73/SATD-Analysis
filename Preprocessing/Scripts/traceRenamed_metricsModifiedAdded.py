@@ -16,22 +16,23 @@ def trace_measure(directory, projects):
     csv_trace = pd.DataFrame(columns=['Project', 'Commit', 'Old path', 'New path'])
     
     for project in projects:
-        csv_pydriller_metrics = pd.DataFrame(columns=['Project', 'Commit', 'Datetime', 'Timestamp', 'File', 'Method', 'Begin--End', 'Parameters', '#Parameters', 'NLOC', 'Complexity'])
+        csv_pydriller_metrics = pd.DataFrame(columns=['Project', 'Branch', 'Commit', 'Datetime', 'Timestamp', 'File', 'Method', 'Begin--End', 'Parameters', '#Parameters', 'NLOC', 'Complexity'])
 
         repository = 'https://github.com/apache/' + project
 
         # Get the hash of each commit in the project directory
-        print ('Path to the project: ' + directory + os.sep + project)
-        commits = next(os.walk(directory + os.sep + project))[1]
-        num_commits = len(commits)
+        print ('Project: ' + project)
+        #commits = next(os.walk(directory + os.sep + project))[1]
+        #num_commits = len(commits)
 
-        print('\nProject: ' + project + ' with ' + str(len(commits)) + ' commits')
+        #print('\nProject: ' + project + ' with ' + str(len(commits)) + ' commits')
 
         count_commits = 1
-        for commit in Repository(repository, only_commits=commits).traverse_commits():
-            print('Commit: ' + commit.hash + ' (' + str(count_commits) + '/' + str(num_commits) + ')')
+        print('Start: ' + str(datetime.now))
+        for commit in Repository(repository, to=datetime(2020, 7, 20), only_no_merge=False).traverse_commits():
+            #print('Commit: ' + commit.hash + ' (' + str(count_commits) + '/' + str(num_commits) + ')')
             count_commits = count_commits + 1
-            commit_timestamp = int(datetime.timestamp(commit.committer_date))
+            #commit_timestamp = int(datetime.timestamp(commit.committer_date))
             #print(str(commit.committer_date) + ' -> ' + str(commit_timestamp) + '\n')
         #for commit in Repository(repository, single='23e8edd9791b5a2ac025c321f97a9dd2329bbeaa').traverse_commits(): 
             for modified_file in commit.modified_files:
@@ -45,6 +46,8 @@ def trace_measure(directory, projects):
                         #print('Timezone: ' + str(commit.committer_timezone) + '\n')
                         csv_pydriller_metrics = calc_metrics_file(project, commit.hash, commit.committer_date, modified_file, csv_pydriller_metrics)
                         csv_pydriller_metrics.to_csv(directory + os.sep + 'pydriller_metrics_' + project + '.csv', index=False)
+        print('End: ' + str(datetime.now))
+        print('Number of commits: ' + str(count_commits))
 
 
 
