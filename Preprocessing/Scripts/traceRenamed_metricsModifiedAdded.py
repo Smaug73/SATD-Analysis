@@ -3,7 +3,7 @@
 #SBATCH --output=measure_%j.out
 
 from pydriller import Repository
-from datetime import datetime
+import datetime
 import argparse
 import os
 import pandas as pd
@@ -28,9 +28,10 @@ def trace_measure(directory, projects):
         #print('\nProject: ' + project + ' with ' + str(len(commits)) + ' commits')
 
         count_commits = 1
-        print('Start: ' + str(datetime.now))
-        for commit in Repository(repository, to=datetime(2020, 7, 20), only_no_merge=False).traverse_commits():
-            #print('Commit: ' + commit.hash + ' (' + str(count_commits) + '/' + str(num_commits) + ')')
+        start_time = datetime.datetime.now()
+        print('Start: ' + datetime.date.strftime(start_time, "%m/%d/%Y, %H:%M:%S"))
+        for commit in Repository(repository, to=datetime.datetime(2020, 7, 20), only_no_merge=False).traverse_commits():
+            print('Commit: ' + commit.hash + ' (' + str(count_commits) + ')')
             count_commits = count_commits + 1
             #commit_timestamp = int(datetime.timestamp(commit.committer_date))
             #print(str(commit.committer_date) + ' -> ' + str(commit_timestamp) + '\n')
@@ -40,13 +41,14 @@ def trace_measure(directory, projects):
                     if modified_file.change_type.name == 'RENAME':
                         new_row = pd.DataFrame({'Project': [project], 'Commit': [commit.hash], 'Old path': [modified_file.old_path], 'New path': [modified_file.new_path]})
                         csv_trace = pd.concat([csv_trace, new_row], ignore_index=True, sort=False)
-                        csv_trace.to_csv(directory + os.sep + 'trace_files_' + project + '.csv', index=False)
+                        csv_trace.to_csv(directory + os.sep + 'renamed_files_' + project + '.csv', index=False)
                     elif modified_file.change_type.name == 'ADD' or modified_file.change_type.name == 'MODIFY':  
                         #print('Committer: ' + commit.committer.name + ' ' + commit.committer.email)
                         #print('Timezone: ' + str(commit.committer_timezone) + '\n')
                         csv_pydriller_metrics = calc_metrics_file(project, commit.hash, commit.committer_date, modified_file, csv_pydriller_metrics)
                         csv_pydriller_metrics.to_csv(directory + os.sep + 'pydriller_metrics_' + project + '.csv', index=False)
-        print('End: ' + str(datetime.now))
+        end_time = datetime.datetime.now()
+        print('End: ' + datetime.date.strftime(start_time, "%m/%d/%Y, %H:%M:%S"))
         print('Number of commits: ' + str(count_commits))
 
 
