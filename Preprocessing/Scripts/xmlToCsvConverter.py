@@ -6,6 +6,9 @@ from xml.dom import minidom
 import pandas as pd
 import argparse
 import os
+import sys
+
+sys.path.append(os.getcwd())
 
 # Function for explore dataset
 def convert_all_files(directory):
@@ -13,12 +16,15 @@ def convert_all_files(directory):
     projects = next(os.walk(directory))[1]
 
     for project in projects:
+        print('Project: ' + project)
 
         # Get the hash of each commit in the project directory
         commits = next(os.walk(directory + os.sep + project))[1]
+    
+        commit_count = 1
 
         for commit in commits:
-            print('Commit: ' + commit)
+            print('Commit: ' + commit + ' (' + str(commit_count) + '/' + str(len(commits) + ')'))
             checkstyle_csv = pd.DataFrame(columns=['File', 'Line', 'Severity', 'Message', 'Source'])
             filepath_csv = directory + os.sep + project + os.sep + commit + os.sep + 'checkstyle-' + commit + '.csv'
 
