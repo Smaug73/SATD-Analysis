@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+#SBATCH --partition=mcs.default.q
+#SBATCH --output=xml_to_csv_%j.out
 from genericpath import isdir
 from xml.dom import minidom
 import pandas as pd
