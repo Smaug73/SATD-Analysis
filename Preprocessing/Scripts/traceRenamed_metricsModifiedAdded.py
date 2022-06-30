@@ -30,7 +30,12 @@ def trace_measure(directory, projects):
         count_commits = 1
         start_time = datetime.datetime.now()
         print('Start: ' + datetime.date.strftime(start_time, "%m/%d/%Y, %H:%M:%S"))
-        for commit in Repository(repository, to=datetime.datetime(2020, 7, 20), only_no_merge=False).traverse_commits():
+
+        commits = Repository(repository, to=datetime.datetime(2020, 7, 20), only_no_merge=False).traverse_commits()
+        #commits_to_convert = commits
+        #commit_list = list(commits_to_convert)
+        #tot_commits = len(commit_list)
+        for commit in commits:
             print('Commit: ' + commit.hash + ' (' + str(count_commits) + ')')
             count_commits = count_commits + 1
             #commit_timestamp = int(datetime.timestamp(commit.committer_date))
@@ -48,7 +53,11 @@ def trace_measure(directory, projects):
                         csv_pydriller_metrics = calc_metrics_file(project, commit.hash, commit.committer_date, modified_file, csv_pydriller_metrics)
                         csv_pydriller_metrics.to_csv(directory + os.sep + 'pydriller_metrics_' + project + '.csv', index=False)
         end_time = datetime.datetime.now()
-        print('End: ' + datetime.date.strftime(start_time, "%m/%d/%Y, %H:%M:%S"))
+        print('End: ' + datetime.date.strftime(end_time, "%m/%d/%Y, %H:%M:%S"))
+        duration = end_time - start_time
+        seconds_in_day = 24 * 60 * 60
+        duration_tuple = divmod(duration.days * seconds_in_day + duration.seconds, 60)
+        print('The measurement lasted: ' + str(duration_tuple[0]) + ' minutes and ' + str(duration_tuple[1]) + ' seconds')
         print('Number of commits: ' + str(count_commits))
 
 
