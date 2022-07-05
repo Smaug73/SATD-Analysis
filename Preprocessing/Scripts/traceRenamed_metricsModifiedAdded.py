@@ -21,18 +21,16 @@ def trace_measure(directory, projects):
         print('Project: ' + project)
         print('Repo: ' + path_repo)
 
-        #TODO: find a way to count all the commits, not just the master commits
         commits = set()
         for ref in repo.references:
             for comm in repo.iter_commits(rev=ref.name):
-                if comm.committed_datetime.timestamp() < datetime.datetime.timestamp(datetime.datetime(2021, 7, 20)):
-                    commits.add(comm)
+                commits.add(comm)
         tot_commits = len(commits)
 
         count_commits = 1
         start_time = datetime.datetime.now()
 
-        for commit in Repository(path_repo, to=datetime.datetime(2021, 7, 20), only_no_merge=False).traverse_commits():
+        for commit in Repository(path_repo).traverse_commits():
             print('Commit: ' + commit.hash + ' (' + str(count_commits) + '/' + str(tot_commits) + ')')
             count_commits = count_commits + 1
         #for commit in Repository(repository, single='23e8edd9791b5a2ac025c321f97a9dd2329bbeaa').traverse_commits(): 
