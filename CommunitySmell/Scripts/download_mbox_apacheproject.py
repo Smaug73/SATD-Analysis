@@ -1,11 +1,16 @@
 # Script for download mbox files of a specific apache project
 import os
+from re import sub
 import requests
 import datetime
 import argparse
 import subprocess as subprocess
+import git
+import time
+from datetime import datetime as dateTime
 
-
+#   TO DO:
+#   - La data di inizio da considerare deve essere rintracciata dal primo commit del progetto 
 
 
 
@@ -140,6 +145,34 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
 
 
 
+# Function for find the date of the first commit (not good parameters but ...)
+def find_date_first_or_last_commit(repo_path : str , first_or_last : bool):
+
+    try:
+
+        #Repository
+        repo = git.Repo(repo_path)
+
+        gitR = repo.git
+
+        if first_or_last:
+            # Get the gitlog from the first commit and split
+            log_list = str(gitR.log('--reverse')).split('\n')
+        else :
+            # Get the gitlog from the last commit and split
+            log_list = str(gitR.log()).split('\n')
+
+
+        # Get the date of the first commit as datetime object
+        datetime_object = dateTime.strptime(' '.join(log_list[2][8:].split(' ')[:-1]), '%a %b %d %H:%M:%S %Y') 
+
+        # String of the date of the first commit
+        date_string = str(datetime_object.year) + '-' + str(datetime_object.month)
+
+        return date_string
+
+    except Exception as e:
+        print(e)
 
 
 
@@ -157,24 +190,48 @@ if __name__ == "__main__":
         help='Apache projects name',
     )
 
+
+    subparser = parser.add_subparsers()
+    parser_a = subparser.add_parser('from_date')
+    
     # Start date
-    parser.add_argument(
+    parser_a.add_argument(
         'start_date',
         type=str,
         help='Start date, formate:  YYYY-MM(year-mount)',
     )
 
     # End date
-    parser.add_argument(
+    parser_a.add_argument(
         'end_date',
         type=str,
         help='End date, formate:  YYYY-MM(year-mount)',
     )
 
+
+    parser_b = subparser.add_parser('from_git')
+
+    # Local path of the git project
+    parser_b.add_argument(
+        'path',
+        type=str,
+        help='Local path of the git project',
+    )
+
+
+
     # Parsing the args
     args = parser.parse_args()
 
-    download_mbox_start_end(args.project_name, args.star_date, args.end_date)
+    if 'start_date' in vars(args) :
+        download_mbox_start_end(args.project_name, args.star_date, args.end_date)
+
+    if 'path' in vars(args) :
+        download_mbox_start_end( args.project_name, find_date_first_or_last_commit(args.path, True), find_date_first_or_last_commit(args.path, False))
+        #print(find_date_first_or_last_commit(args.path, True))
+        #print(find_date_first_or_last_commit(args.path, False))
+
+
 
     # TEST ################################# 
     #download_mbox_file_mounth('tinkerpop','2019-05')
