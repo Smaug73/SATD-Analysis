@@ -19,29 +19,26 @@ def trace_measure(directory, projects):
         repo = Repo(path_repo)
 
         print('Project: ' + project)
-        print('Repo: ' + directory + os.sep + project)
+        print('Repo: ' + path_repo)
 
-        #TODO: find a way to count all the commits, not just the master commits
-        tot_commits = len(list(repo.iter_commits('HEAD')))
+        commits = set()
+        for ref in repo.references:
+            for comm in repo.iter_commits(rev=ref.name):
+                commits.add(comm)
+        tot_commits = len(commits)
 
         count_commits = 1
         start_time = datetime.datetime.now()
 
-        commits = Repository(path_repo, to=datetime.datetime(2020, 7, 20), only_no_merge=False).traverse_commits()
-        #commits_to_convert = commits
-        #commit_list = list(commits_to_convert)
-        #tot_commits = len(commit_list)
-        for commit in commits:
+        for commit in Repository(path_repo).traverse_commits():
             print('Commit: ' + commit.hash + ' (' + str(count_commits) + '/' + str(tot_commits) + ')')
             count_commits = count_commits + 1
-            #commit_timestamp = int(datetime.timestamp(commit.committer_date))
-            #print(str(commit.committer_date) + ' -> ' + str(commit_timestamp) + '\n')
         #for commit in Repository(repository, single='23e8edd9791b5a2ac025c321f97a9dd2329bbeaa').traverse_commits(): 
             for modified_file in commit.modified_files:
                 if modified_file.filename.endswith('.java') and not(modified_file.filename == 'package-info.java' or modified_file.filename == 'module-info.java'): 
                     if modified_file.change_type.name == 'RENAME':
-                        new_row = pd.DataFrame({'Project': [project], 'Commit': [commit.hash], 'Old path': [modified_file.old_path], 'New path': [modified_file.new_path]})
-                        csv_trace = pd.concat([csv_trace, new_row], ignore_index=True, sort=False)
+                        new_row_trace = pd.DataFrame({'Project': [project], 'Commit': [commit.hash], 'Old path': [modified_file.old_path], 'New path': [modified_file.new_path]})
+                        csv_trace = pd.concat([csv_trace, new_row_trace], ignore_index=True, sort=False)
                         csv_trace.to_csv(directory + os.sep + 'renamed_files_' + project + '.csv', index=False)
                     elif modified_file.change_type.name == 'ADD' or modified_file.change_type.name == 'MODIFY':  
                         #print('Committer: ' + commit.committer.name + ' ' + commit.committer.email)
@@ -49,12 +46,10 @@ def trace_measure(directory, projects):
 
                         for m in modified_file.methods:
                             commit_timestamp = int(datetime.datetime.timestamp(commit.committer_date))
-                            commit.branches
-                            new_row = pd.DataFrame({'Project': [project], 'Branches': [commit.branches], 'Commit': [commit.hash], 'Datetime':[commit.committer_date], 'Timestamp':[commit_timestamp], 
+                            new_row_metric = pd.DataFrame({'Project': [project], 'Branches': [commit.branches], 'Commit': [commit.hash], 'Datetime':[commit.committer_date], 'Timestamp':[commit_timestamp], 
                                     'File': [modified_file.new_path], 'Method': [m.long_name], 'Begin--End': [str(m.start_line) + '--' + str(m.end_line)],
                                     'Parameters': [m.parameters], '#Parameters': [len(m.parameters)], 'NLOC': [m.nloc], 'Complexity' : [m.complexity]})
-                            csv_pydriller_metrics = pd.concat([csv_pydriller_metrics, new_row], ignore_index=True, sort=False)
-                            #csv_pydriller_metrics = calc_metrics_file(project, commit.hash, commit.committer_date, modified_file, csv_pydriller_metrics)
+                            csv_pydriller_metrics = pd.concat([csv_pydriller_metrics, new_row_metric], ignore_index=True, sort=False)
                             csv_pydriller_metrics.to_csv(directory + os.sep + 'pydriller_metrics_' + project + '.csv', index=False)
         print('Start: ' + datetime.date.strftime(start_time, "%m/%d/%Y, %H:%M:%S"))
         end_time = datetime.datetime.now()
@@ -76,12 +71,12 @@ if __name__ == "__main__":
 
     # Path to repos of projects being analysed
     parser.add_argument(
-        'directory_projects',
+        'directory_repos',
         type=str,
-        help='Projects directory',
+        help='Repos directory',
     )
 
-    # Projects to be analysed
+    # Repos to be analysed
     parser.add_argument(
         '-p',
         '--projects_to_analyse',
@@ -96,7 +91,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Repos Directory
-    pathProjects = args.directory_projects
+    pathProjects = args.directory_repos
 
     projects = args.projects_to_analyse
     
