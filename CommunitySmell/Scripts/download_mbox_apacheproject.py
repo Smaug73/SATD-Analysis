@@ -123,7 +123,7 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
                 
                 # open the file and append to the end the content of the response
                 open(dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox", "a").write(response.content.decode("utf-8"))
-                print('File downloaded and appended: '+dirpath+project+".mbox")
+                print('File downloaded and appended: '+dirpath+os.sep+project+".mbox")
 
             else:
                 print("No data for this mounth: "+str(temp_date.year)+"-"+str(temp_date.month))
@@ -136,7 +136,8 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
                 # increment mounth
                 temp_date = datetime.date(temp_date.year, temp_date.month + 1, 1)
         
-        return dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox"
+        #return dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox"
+        return os.path.realpath(open(dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox", "a").name)
 
 
     except Exception as e:

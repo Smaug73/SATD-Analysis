@@ -9,14 +9,14 @@ IMPORTANT:  The download of the jira issues are not included,
             check the directory where store it after download 
             in the configuration file created by the script
 
-Information needed:
+Information needed for the configuration file:
     
     apache project name
     git repository path
     git branch (only main/master branch is considered)
     
-    start commit
-    end commit
+    start date
+    end date
     window size
     
     conf file path
@@ -35,6 +35,7 @@ import subprocess as subprocess
 import os
 import git
 from git import Repo
+from download_mbox_apacheproject import find_date_first_or_last_commit
 from download_mbox_apacheproject import download_mbox_start_end
 
 
@@ -67,7 +68,7 @@ def mkdir_for_confFile(kaiaulu_path : str):
 
 
 # Function for create the configuration file for an apache project
-def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file_path : str , start_date : str, end_date : str, size_days : str):
+def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file_path : str , start_date : str, end_date : str, size_days : str , jira_path : str , git_repo_path : str):
     
     try:
         print(f"Creating conf file for : {str(project_name)} ...")
@@ -85,7 +86,7 @@ def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file
                         "  website : https://"+project_name+".apache.org\n"+
                         "  openhub : https://www.openhub.net/p/"+project_name+"\n"+
                         "version_control:\n"+
-                        "  log: ../rawdata/git_repo/"+project_name+"/.git\n"+
+                        "  log: "+git_repo_path+"/.git\n"+
                         "  log_url: https://github.com/apache/"+project_name+"\n"+
                         "  branch:\n"+
                         "    - "+main_branch_name+"\n"+
@@ -98,8 +99,8 @@ def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file
                         "  jira:\n"+    
                         "    domain: https://issues.apache.org/jira\n"+
                         "    project_key: "+str(project_name).upper()+"\n"+
-                        "    issues: ../rawdata/issue_tracker/"+project_name+"_issues-merged.json\n"+
-                        "    issue_comments: ../rawdata/issue_tracker/"+project_name+"_issues-merged.json\n"+
+                        "    issues: "+jira_path+project_name+"_issues-merged.json\n"+
+                        "    issue_comments: ."+jira_path+project_name+"_issues-merged.json\n"+
                         "  github:\n"+
                         "    owner: apache\n"+
                         "    repo: "+project_name+"\n"+
@@ -172,13 +173,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
     description='Script for create kaiaulu configuration file for compute community smells for an Apache project.')
 
-    # Apache project name
-    parser.add_argument(
-        'project_name',
-        type=str,
-        help='Apache projects name',
-    )
-
     # Kaiaulu path
     parser.add_argument(
         'kaiaulu_path',
@@ -186,32 +180,108 @@ if __name__ == "__main__":
         help='Kaiaulu path',
     )
 
-    # Start date
+    # Jira issues path
     parser.add_argument(
+        'jira_path',
+        type=str,
+        help='Path to dir that containing all the jira issues for all project',
+    )
+
+
+    subparser = parser.add_subparsers()
+    
+    parser_from_date = subparser.add_parser('from_date' , description='Download a repo and using a starting date and an end date for conf')
+
+    # Apache project name
+    parser_from_date.add_argument(
+        'project_name',
+        type=str,
+        help='Apache projects name',
+    )
+
+    # Start date
+    parser_from_date.add_argument(
         'start_date',
         type=str,
         help='Start date of the consider period, formate:  YYYY-MM-DAY(year-mount-Day)',
     )
 
     # End date
-    parser.add_argument(
+    parser_from_date.add_argument(
         'end_date',
         type=str,
         help='End date of the consider period, formate : YYYY-MM-DAY(year-mount-Day)',
     )
 
+    # For parse projects from a directory that contain all the projects
+    parser_from_dir = subparser.add_parser('projects_dir')
+
+    # Path of dir containing all projects
+    parser_from_dir.add_argument(
+        'dir_path',
+        type=str,
+        help='Path of dir containing all projects',
+    )
+
+
     args = parser.parse_args()
 
-
-    # Clone the repository of the project
-    clone_repo(args.project_name, args.kaiaulu_path+"rawdata"+os.sep+"git_repo"+os.sep+args.project_name)
-
-    # Download the mbox file
-    mbox_path = download_mbox_start_end(args.project_name, args.start_date, args.end_date, args.kaiaulu_path+"rawdata"+os.sep+"mbox")
 
     # Create dir for configuration file
     conf_path = mkdir_for_confFile(args.kaiaulu_path)
 
-    # Create the configuration file
-    configuration_file_builder(args.kaiaulu_path+"conf"+os.sep , args.project_name , mbox_path,
-                                args.start_date , args.end_date , str(90))
+    # Clone the repo if the clone flag is True         ########################################
+    if 'project_name' in vars(args) :
+        
+        # Repo path used is the preconfigured repo path used by kaiaulu
+        repo_path = args.kaiaulu_path+"rawdata"+os.sep+"git_repo"+os.sep+args.project_name
+
+        # Clone the repository of the project
+        clone_repo(args.project_name, repo_path)
+
+        # Start and End date
+        start_date = find_date_first_or_last_commit(repo_path, True)
+        end_date = find_date_first_or_last_commit(repo_path, False)
+
+        # Download all the mail list
+        mbox_path = download_mbox_start_end( args.project_name, start_date, end_date)
+
+        # Create the configuration file
+        configuration_file_builder(args.kaiaulu_path+"conf"+os.sep , args.project_name , mbox_path,
+                                    start_date , end_date , str(90) , args.jira_path , repo_path)
+    
+
+    # If already have all the repositories in a dir #########################################
+    if 'dir_path' in vars(args):
+
+        # list of the names of the all projects
+        list_repo_name = []
+        
+        for rep in os.scandir(args.dir_path):
+            
+            if rep.is_dir():
+                list_repo_name.append(rep)
+
+        # debug 
+        print('Repositories found: ')
+        for rep in list_repo_name:
+            print(rep.name)
+        print()
+        
+        # Download the mbox file for all the repos
+        for rep in list_repo_name:
+
+            print("Download mbox files for : "+rep.name)
+            
+            # Start and End date
+            start_date = find_date_first_or_last_commit(rep.path, True)
+            end_date = find_date_first_or_last_commit(rep.path, False)
+
+            # Download all the mail list
+            mbox_path = download_mbox_start_end( rep.name , start_date, end_date)
+
+            # Create the configuration file
+            configuration_file_builder(args.kaiaulu_path+"conf"+os.sep , rep.name , mbox_path,
+                                    start_date , end_date , str(90) ,  args.jira_path , rep.path)
+
+        
