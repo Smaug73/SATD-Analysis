@@ -21,6 +21,7 @@ def trace_measure(directory, projects):
         print('Project: ' + project)
         print('Repo: ' + directory + os.sep + project)
 
+        #TODO: find a way to count all the commits, not just the master commits
         tot_commits = len(list(repo.iter_commits('HEAD')))
 
         count_commits = 1
