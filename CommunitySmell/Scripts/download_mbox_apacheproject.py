@@ -246,8 +246,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if 'start_date' in vars(args) :
-        download_mbox_start_end(args.project_name, args.star_date, args.end_date)
-
+        download_mbox_start_end(args.project_name, args.start_date, args.end_date)
+    
     if 'path' in vars(args) :
         download_mbox_start_end( args.project_name, find_date_first_or_last_commit(args.path, True), find_date_first_or_last_commit(args.path, False))
         #print(find_date_first_or_last_commit(args.path, True))
