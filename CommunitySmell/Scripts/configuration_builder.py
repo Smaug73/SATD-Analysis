@@ -35,6 +35,7 @@ import subprocess as subprocess
 import os
 import git
 from git import Repo
+from numpy import size
 from download_mbox_apacheproject import find_date_first_or_last_commit
 from download_mbox_apacheproject import download_mbox_start_end
 
@@ -49,7 +50,10 @@ def mkdir_for_confFile(kaiaulu_path : str):
     try:
     
         # directory for conf file of projects
-        dir_conf = kaiaulu_path + os.sep + 'conf' 
+        if kaiaulu_path.endswith(os.sep):
+            dir_conf = kaiaulu_path + 'conf'
+        else:
+            dir_conf = kaiaulu_path + os.sep + 'conf' 
 
         # create the directory for conf if it does not exist, otherwise skip it
         if os.path.isdir(dir_conf) is False:
@@ -77,11 +81,11 @@ def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file
         end_date = end_date+ " 00:00:00"
 
         # check witch is the default branch 
-        repo = Repo(args.kaiaulu_path+os.sep+"rawdata"+os.sep+"git_repo"+os.sep+project_name+os.sep)
+        repo = Repo(git_repo_path)
         head = repo.heads[0]
         main_branch_name = head.name
-        
-        
+
+
         configuration = str("project :\n"+
                         "  website : https://"+project_name+".apache.org\n"+
                         "  openhub : https://www.openhub.net/p/"+project_name+"\n"+
@@ -100,17 +104,17 @@ def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file
                         "    domain: https://issues.apache.org/jira\n"+
                         "    project_key: "+str(project_name).upper()+"\n"+
                         "    issues: "+jira_path+project_name+"_issues-merged.json\n"+
-                        "    issue_comments: ."+jira_path+project_name+"_issues-merged.json\n"+
+                        "    issue_comments: "+jira_path+project_name+"_issues-merged.json\n"+
                         "  github:\n"+
                         "    owner: apache\n"+
                         "    repo: "+project_name+"\n"+
                         #"    replies: ../rawdata/git_repo/"+project_name+"/\n"+
-                        "commit_message_id_regex:"
-                        "    issue_id: \#[0-9]+"
+                        "commit_message_id_regex:\n"
+                        "    issue_id: \#[0-9]+\n"
                         #cve_id: ?
 
-                        "filter:"
-                        "keep_filepaths_ending_with:\n"+
+                        "filter:\n"
+                        "  keep_filepaths_ending_with:\n"+
                         "    - cpp\n"+
                         "    - c\n"+
                         "    - h\n"+
@@ -118,7 +122,7 @@ def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file
                         "    - js\n"+
                         "    - py\n"+
                         "    - cc\n"+
-                        "remove_filepaths_containing:\n"+
+                        "  remove_filepaths_containing:\n"+
                         "    - test\n"+
                         "analysis:\n"+
                         "  window:\n"+
@@ -126,15 +130,24 @@ def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file
                         "    end_datetime: "+end_date+"\n"+
                         "    size_days: "+size_days+"\n"     
                         )
-                    
 
-        with open(kaiaulu_path + os.sep + project_name + ".yml", 'w') as file:
+        
+        
+
+        if kaiaulu_path.endswith('/'):
+            conf_file_path = kaiaulu_path + project_name + ".yml"
+        else:
+            conf_file_path = kaiaulu_path + os.sep + project_name + ".yml"
+
+        with open(conf_file_path, 'w') as file:
+        #with open(kaiaulu_path + os.sep + project_name + ".yml", 'w') as file:
             conf_file = file.write(configuration)
 
         print(f"Complete !")
 
     except Exception as e:
         print(e)
+        print('ERRORE configuration file non creato!')
 
 
 
@@ -247,7 +260,7 @@ if __name__ == "__main__":
         mbox_path = download_mbox_start_end( args.project_name, start_date, end_date)
 
         # Create the configuration file
-        configuration_file_builder(args.kaiaulu_path+"conf"+os.sep , args.project_name , mbox_path,
+        configuration_file_builder(conf_path , args.project_name , mbox_path,
                                     start_date , end_date , str(90) , args.jira_path , repo_path)
     
 
@@ -255,21 +268,32 @@ if __name__ == "__main__":
     if 'dir_path' in vars(args):
 
         # list of the names of the all projects
-        list_repo_name = []
+        list_repo_name = {}
         
         for rep in os.scandir(args.dir_path):
             
             if rep.is_dir():
-                list_repo_name.append(rep)
+                list_repo_name[rep.name] = rep
+                #list_repo_name.append(rep)
+
+        #list of the names of the project to skip and remove from the list
+        for f in os.scandir(args.kaiaulu_path+'conf'):
+            size = len(f.name)
+            if f.name.endswith('.yml') and list_repo_name.get(f.name[:size-4]) != None:
+                #list_repo_name.remove(f.name[:size-4])
+                list_repo_name.pop(f.name[:size-4])
+                print('Skip : '+f.name)
 
         # debug 
-        print('Repositories found: ')
-        for rep in list_repo_name:
-            print(rep.name)
+        print('Repositories : ')
+        for rep in list_repo_name.keys():
+            print(list_repo_name.get(rep))
         print()
         
         # Download the mbox file for all the repos
-        for rep in list_repo_name:
+        for repK in list_repo_name.keys():
+
+            rep = list_repo_name.get(repK)
 
             print("Download mbox files for : "+rep.name)
             
@@ -279,9 +303,9 @@ if __name__ == "__main__":
 
             # Download all the mail list
             mbox_path = download_mbox_start_end( rep.name , start_date, end_date)
-
+            
             # Create the configuration file
-            configuration_file_builder(args.kaiaulu_path+"conf"+os.sep , rep.name , mbox_path,
+            configuration_file_builder(conf_path , rep.name , mbox_path,
                                     start_date , end_date , str(90) ,  args.jira_path , rep.path)
 
         

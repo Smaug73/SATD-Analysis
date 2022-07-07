@@ -106,35 +106,49 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
         # create the dir for store the file
         dirpath = mkdir_for_mbox(project, output_dir)
 
-        while end_date >= temp_date :
-            
-            # request the mbox
-            #uri = 'https://mail-archives.apache.org/mod_mbox/'+project+'/'+data+'.mbox' NO old API
-            uri = 'https://lists.apache.org/api/mbox.lua?list=dev@'+project+'.apache.org&d='+str(temp_date.year)+'-'+str(temp_date.month)
-            print(uri)
-            
 
-            # download the file
-            response = requests.get(uri)
-    
-            # for save the file check if the content of the response is greater than 0 byte
-            # the api return a 0 byte response content there are no message for the data passed
-            if response.content != b'' and not('Message Not Found!' in response.content.decode("utf-8") ):
+        # check if the mbox file already exist
+        print(dirpath)
+        list_mbox_file = []
+        for mbox in os.scandir(dirpath):
+            list_mbox_file.append(mbox.name)
+        print("Mbox files:")
+        print(list_mbox_file)
+
+        print('Locking for : '+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox")
+        print()
+        if str(project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox") in list_mbox_file:
+            print("Mbox file already exist! Skipped")
+        else:    
+            while end_date >= temp_date :
                 
-                # open the file and append to the end the content of the response
-                open(dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox", "a").write(response.content.decode("utf-8"))
-                print('File downloaded and appended: '+dirpath+os.sep+project+".mbox")
+                # request the mbox
+                #uri = 'https://mail-archives.apache.org/mod_mbox/'+project+'/'+data+'.mbox' NO old API
+                uri = 'https://lists.apache.org/api/mbox.lua?list=dev@'+project+'.apache.org&d='+str(temp_date.year)+'-'+str(temp_date.month)
+                print(uri)
+                
 
-            else:
-                print("No data for this mounth: "+str(temp_date.year)+"-"+str(temp_date.month))
+                # download the file
+                response = requests.get(uri)
+        
+                # for save the file check if the content of the response is greater than 0 byte
+                # the api return a 0 byte response content there are no message for the data passed
+                if response.content != b'' and not('Message Not Found!' in response.content.decode("utf-8") ):
+                    
+                    # open the file and append to the end the content of the response
+                    open(dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox", "a").write(response.content.decode("utf-8"))
+                    print('File downloaded and appended: '+dirpath+os.sep+project+".mbox")
 
-            # increment temp_date
-            if temp_date.month >= 12:
-                # increment year
-                temp_date = datetime.date( temp_date.year+1, 1, 1)
-            else :
-                # increment mounth
-                temp_date = datetime.date(temp_date.year, temp_date.month + 1, 1)
+                else:
+                    print("No data for this mounth: "+str(temp_date.year)+"-"+str(temp_date.month))
+
+                # increment temp_date
+                if temp_date.month >= 12:
+                    # increment year
+                    temp_date = datetime.date( temp_date.year+1, 1, 1)
+                else :
+                    # increment mounth
+                    temp_date = datetime.date(temp_date.year, temp_date.month + 1, 1)
         
         #return dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox"
         return os.path.realpath(open(dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox", "a").name)
