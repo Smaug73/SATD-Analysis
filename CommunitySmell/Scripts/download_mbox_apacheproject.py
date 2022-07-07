@@ -1,6 +1,8 @@
 # Script for download mbox files of a specific apache project
+from enum import Flag
 import os
 from re import sub
+from typing_extensions import Required
 import requests
 import datetime
 import argparse
@@ -90,7 +92,7 @@ def download_mbox_file_mounth(project : str, data: str):
 # from a start date to an end date.
 # Mounth format : yeardaymounth   2016-05  2016(year)-05(mounth)
 # Project name example: tinkertop
-def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str , output_dir = '..' + os.sep + 'mboxFile'):
+def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str , mail_list : str , output_dir = '..' + os.sep + 'mboxFile' ):
     
     try:
 
@@ -124,7 +126,7 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
                 
                 # request the mbox
                 #uri = 'https://mail-archives.apache.org/mod_mbox/'+project+'/'+data+'.mbox' NO old API
-                uri = 'https://lists.apache.org/api/mbox.lua?list=dev@'+project+'.apache.org&d='+str(temp_date.year)+'-'+str(temp_date.month)
+                uri = 'https://lists.apache.org/api/mbox.lua?list='+mail_list+'@'+project+'.apache.org&d='+str(temp_date.year)+'-'+str(temp_date.month)
                 print(uri)
                 
 
@@ -212,6 +214,16 @@ if __name__ == "__main__":
         help='Apache projects name',
     )
 
+    # Mail list name
+    parser.add_argument(
+        '-ml',
+        '--mail_list_name',
+        type=str,
+        default= 'dev',
+        required= False,
+        help='Mail list name, default value : dev',
+    )
+
 
     subparser = parser.add_subparsers()
     parser_a = subparser.add_parser('from_date')
@@ -244,12 +256,12 @@ if __name__ == "__main__":
 
     # Parsing the args
     args = parser.parse_args()
-
+    print(args)
     if 'start_date' in vars(args) :
-        download_mbox_start_end(args.project_name, args.start_date, args.end_date)
+        download_mbox_start_end(args.project_name, args.start_date, args.end_date , args.mail_list_name)
     
     if 'path' in vars(args) :
-        download_mbox_start_end( args.project_name, find_date_first_or_last_commit(args.path, True), find_date_first_or_last_commit(args.path, False))
+        download_mbox_start_end( args.project_name, find_date_first_or_last_commit(args.path, True), find_date_first_or_last_commit(args.path, False) , args.mail_list_name)
         #print(find_date_first_or_last_commit(args.path, True))
         #print(find_date_first_or_last_commit(args.path, False))
 
