@@ -2,7 +2,6 @@
 from enum import Flag
 import os
 from re import sub
-from typing_extensions import Required
 import requests
 import datetime
 import argparse
