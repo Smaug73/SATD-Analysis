@@ -178,8 +178,15 @@ def find_date_first_or_last_commit(repo_path : str , first_or_last : bool):
             log_list = str(gitR.log()).split('\n')
 
 
+        # Find the date string, this is a more generic solution
+        date_s = ''
+        i = 0
+        while 'Date' not in date_s:
+            date_s = log_list[i]
+            i = i+1
+
         # Get the date of the first commit as datetime object
-        datetime_object = dateTime.strptime(' '.join(log_list[2][8:].split(' ')[:-1]), '%a %b %d %H:%M:%S %Y') 
+        datetime_object = dateTime.strptime(' '.join(date_s[8:].split(' ')[:-1]), '%a %b %d %H:%M:%S %Y') 
 
         # String of the date of the first commit
         date_string = str(datetime_object.year) + '-' + str(datetime_object.month)
