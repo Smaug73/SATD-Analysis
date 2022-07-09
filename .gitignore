@@ -4,6 +4,10 @@
 #CommunitySmell data
 /CommunitySmell/kaiaulu/rawdata/
 mboxFile/
+jiraIssues/
+Repo/
+kaiaulu/
+
 
 # General
 .DS_Store
