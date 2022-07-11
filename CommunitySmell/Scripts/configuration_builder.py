@@ -27,7 +27,16 @@ Information needed for the configuration file:
 '''
 
 #TO DO :
-
+#   UTILIZZARE PATH RELATIVI AL POSTO DI QUELLI ASSOLUTI !!
+#   In questo modo i configuration file e tutto il dataset è portabile
+#   I repository allora devono avere una precisa posizione all'interno del progetto per questioni di portabilità del dataset
+# 
+#   FIXARE IL PARAMETRO LIST-KEY per quanto riguarda le mail list, poichè è per la maggior parte solo dev (controllare come questo parametro viene utilizzato)
+#   FARE ATTENZIONE: Controllare i file mbox troppo piccoli rispetto al periodo di sviluppo considerato, potrebbero utilizzare una mail list differente
+#
+#   mail list con problemi:  log4j  non si capisce quale mail list bisogna utilizzare, 
+#                                   potrebbe essere meglio evitare evitare di utilizzare le mail in questo caso
+#                                   poichè non si capisce quale 
 
 
 import argparse
@@ -72,7 +81,7 @@ def mkdir_for_confFile(kaiaulu_path : str):
 
 
 # Function for create the configuration file for an apache project
-def configuration_file_builder(kaiaulu_path : str, project_name : str, mbox_file_path : str , start_date : str, end_date : str, size_days : str , jira_path : str , git_repo_path : str):
+def configuration_file_builder(kaiaulu_path : str , project_name : str, mbox_file_path : str , start_date : str, end_date : str, size_days : str , jira_path : str , git_repo_path : str):
     
     try:
         print(f"Creating conf file for : {str(project_name)} ...")
@@ -200,6 +209,15 @@ if __name__ == "__main__":
         help='Path to dir that containing all the jira issues for all project',
     )
 
+    # Mail list name
+    parser.add_argument(
+        '-ml',
+        '--mail_list_name',
+        type=str,
+        default= 'dev',
+        required= False,
+        help='Mail list name, default value : dev',
+    )
 
     subparser = parser.add_subparsers()
     
@@ -302,7 +320,7 @@ if __name__ == "__main__":
             end_date = find_date_first_or_last_commit(rep.path, False)
 
             # Download all the mail list
-            mbox_path = download_mbox_start_end( rep.name , start_date, end_date)
+            mbox_path = download_mbox_start_end( rep.name , start_date, end_date , args.mail_list_name)
             
             # Create the configuration file
             configuration_file_builder(conf_path , rep.name , mbox_path,

@@ -152,8 +152,12 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
                     temp_date = datetime.date(temp_date.year, temp_date.month + 1, 1)
         
         #return dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox"
-        return os.path.realpath(open(dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox", "a").name)
-
+        #return os.path.realpath(open(dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox", "a").name)
+        #FIX FOR RELATIVE PATH RETURN
+        if not str(output_dir).endswith('/'):
+            return output_dir+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox"
+        else:
+            return output_dir+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox"
 
     except Exception as e:
         print(e)
@@ -190,7 +194,7 @@ def find_date_first_or_last_commit(repo_path : str , first_or_last : bool):
         datetime_object = dateTime.strptime(' '.join(date_s[8:].split(' ')[:-1]), '%a %b %d %H:%M:%S %Y') 
 
         # String of the date of the first commit
-        date_string = str(datetime_object.year) + '-' + str(datetime_object.month)
+        date_string = str(datetime_object.year) + '-' + str(datetime_object.month) + '-' + str(datetime_object.day)
 
         return date_string
 
