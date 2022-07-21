@@ -1,11 +1,17 @@
 # Script for download mbox files of a specific apache project
+from enum import Flag
 import os
+from re import sub
 import requests
 import datetime
 import argparse
 import subprocess as subprocess
+import git
+import time
+from datetime import datetime as dateTime
 
-
+#   TO DO:
+#   - La data di inizio da considerare deve essere rintracciata dal primo commit del progetto 
 
 
 
@@ -85,7 +91,7 @@ def download_mbox_file_mounth(project : str, data: str):
 # from a start date to an end date.
 # Mounth format : yeardaymounth   2016-05  2016(year)-05(mounth)
 # Project name example: tinkertop
-def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str , output_dir = '..' + os.sep + 'mboxFile'):
+def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str , mail_list : str , output_dir = '..' + os.sep + 'mboxFile' ):
     
     try:
 
@@ -101,38 +107,57 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
         # create the dir for store the file
         dirpath = mkdir_for_mbox(project, output_dir)
 
-        while end_date >= temp_date :
-            
-            # request the mbox
-            #uri = 'https://mail-archives.apache.org/mod_mbox/'+project+'/'+data+'.mbox' NO old API
-            uri = 'https://lists.apache.org/api/mbox.lua?list=dev@'+project+'.apache.org&d='+str(temp_date.year)+'-'+str(temp_date.month)
-            print(uri)
-            
 
-            # download the file
-            response = requests.get(uri)
-    
-            # for save the file check if the content of the response is greater than 0 byte
-            # the api return a 0 byte response content there are no message for the data passed
-            if response.content != b'' and not('Message Not Found!' in response.content.decode("utf-8") ):
+        # check if the mbox file already exist
+        print(dirpath)
+        list_mbox_file = []
+        for mbox in os.scandir(dirpath):
+            list_mbox_file.append(mbox.name)
+        print("Mbox files:")
+        print(list_mbox_file)
+
+        print('Locking for : '+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox")
+        print()
+        if str(project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox") in list_mbox_file:
+            print("Mbox file already exist! Skipped")
+        else:    
+            while end_date >= temp_date :
                 
-                # open the file and append to the end the content of the response
-                open(dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox", "a").write(response.content.decode("utf-8"))
-                print('File downloaded and appended: '+dirpath+project+".mbox")
+                # request the mbox
+                #uri = 'https://mail-archives.apache.org/mod_mbox/'+project+'/'+data+'.mbox' NO old API
+                uri = 'https://lists.apache.org/api/mbox.lua?list='+mail_list+'@'+project+'.apache.org&d='+str(temp_date.year)+'-'+str(temp_date.month)
+                print(uri)
+                
 
-            else:
-                print("No data for this mounth: "+str(temp_date.year)+"-"+str(temp_date.month))
-
-            # increment temp_date
-            if temp_date.month >= 12:
-                # increment year
-                temp_date = datetime.date( temp_date.year+1, 1, 1)
-            else :
-                # increment mounth
-                temp_date = datetime.date(temp_date.year, temp_date.month + 1, 1)
+                # download the file
+                response = requests.get(uri)
         
-        return dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox"
+                # for save the file check if the content of the response is greater than 0 byte
+                # the api return a 0 byte response content there are no message for the data passed
+                if response.content != b'' and not('Message Not Found!' in response.content.decode("utf-8") ):
+                    
+                    # open the file and append to the end the content of the response
+                    open(dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox", "a").write(response.content.decode("utf-8"))
+                    print('File downloaded and appended: '+dirpath+os.sep+project+".mbox")
 
+                else:
+                    print("No data for this mounth: "+str(temp_date.year)+"-"+str(temp_date.month))
+
+                # increment temp_date
+                if temp_date.month >= 12:
+                    # increment year
+                    temp_date = datetime.date( temp_date.year+1, 1, 1)
+                else :
+                    # increment mounth
+                    temp_date = datetime.date(temp_date.year, temp_date.month + 1, 1)
+        
+        #return dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox"
+        #return os.path.realpath(open(dirpath+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox", "a").name)
+        #FIX FOR RELATIVE PATH RETURN
+        if not str(output_dir).endswith('/'):
+            return output_dir+os.sep+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox"
+        else:
+            return output_dir+project+"-from-"+start_date.isoformat()+"-to-"+end_date.isoformat()+".mbox"
 
     except Exception as e:
         print(e)
@@ -140,6 +165,41 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
 
 
 
+# Function for find the date of the first commit (not good parameters but ...)
+def find_date_first_or_last_commit(repo_path : str , first_or_last : bool):
+
+    try:
+
+        #Repository
+        repo = git.Repo(repo_path)
+
+        gitR = repo.git
+
+        if first_or_last:
+            # Get the gitlog from the first commit and split
+            log_list = str(gitR.log('--reverse')).split('\n')
+        else :
+            # Get the gitlog from the last commit and split
+            log_list = str(gitR.log()).split('\n')
+
+
+        # Find the date string, this is a more generic solution
+        date_s = ''
+        i = 0
+        while 'Date' not in date_s:
+            date_s = log_list[i]
+            i = i+1
+
+        # Get the date of the first commit as datetime object
+        datetime_object = dateTime.strptime(' '.join(date_s[8:].split(' ')[:-1]), '%a %b %d %H:%M:%S %Y') 
+
+        # String of the date of the first commit
+        date_string = str(datetime_object.year) + '-' + str(datetime_object.month) + '-' + str(datetime_object.day)
+
+        return date_string
+
+    except Exception as e:
+        print(e)
 
 
 
@@ -157,24 +217,58 @@ if __name__ == "__main__":
         help='Apache projects name',
     )
 
-    # Start date
+    # Mail list name
     parser.add_argument(
+        '-ml',
+        '--mail_list_name',
+        type=str,
+        default= 'dev',
+        required= False,
+        help='Mail list name, default value : dev',
+    )
+
+
+    subparser = parser.add_subparsers()
+    parser_a = subparser.add_parser('from_date')
+    
+    # Start date
+    parser_a.add_argument(
         'start_date',
         type=str,
         help='Start date, formate:  YYYY-MM(year-mount)',
     )
 
     # End date
-    parser.add_argument(
+    parser_a.add_argument(
         'end_date',
         type=str,
         help='End date, formate:  YYYY-MM(year-mount)',
     )
 
+
+    parser_b = subparser.add_parser('from_git')
+
+    # Local path of the git project
+    parser_b.add_argument(
+        'path',
+        type=str,
+        help='Local path of the git project',
+    )
+
+
+
     # Parsing the args
     args = parser.parse_args()
+    print(args)
+    if 'start_date' in vars(args) :
+        download_mbox_start_end(args.project_name, args.start_date, args.end_date , args.mail_list_name)
+    
+    if 'path' in vars(args) :
+        download_mbox_start_end( args.project_name, find_date_first_or_last_commit(args.path, True), find_date_first_or_last_commit(args.path, False) , args.mail_list_name)
+        #print(find_date_first_or_last_commit(args.path, True))
+        #print(find_date_first_or_last_commit(args.path, False))
 
-    download_mbox_start_end(args.project_name, args.star_date, args.end_date)
+
 
     # TEST ################################# 
     #download_mbox_file_mounth('tinkerpop','2019-05')
