@@ -64,7 +64,7 @@ def download_mbox_file_mounth(project : str, data: str):
 
         # uri
         #uri = 'https://mail-archives.apache.org/mod_mbox/'+project+'/'+data+'.mbox' NO old API
-        uri = 'https://lists.apache.org/api/mbox.lua?list=dev@'+project+'.apache.org&d='+data
+        uri = 'https://lists.apache.org/api/mbox.lua?list=dev@'+project+'.apache.org&data='+data
 
         # create the dir for store the file
         dirpath = mkdir_for_mbox(project)
@@ -125,7 +125,7 @@ def download_mbox_start_end(project : str, start_date_str: str, end_date_str:str
                 
                 # request the mbox
                 #uri = 'https://mail-archives.apache.org/mod_mbox/'+project+'/'+data+'.mbox' NO old API
-                uri = 'https://lists.apache.org/api/mbox.lua?list='+mail_list+'@'+project+'.apache.org&d='+str(temp_date.year)+'-'+str(temp_date.month)
+                uri = 'https://lists.apache.org/api/mbox.lua?list='+mail_list+'@'+project+'.apache.org&date='+str(temp_date.year)+'-'+str(temp_date.month)
                 print(uri)
                 
 
