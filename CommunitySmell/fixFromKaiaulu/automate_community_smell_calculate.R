@@ -34,7 +34,7 @@ require(knitr)
 require(visNetwork)
 
 # Yml file for the tools used by kaiaulu
-tools_path <- "/home/stefano/TesiMagistrale/kaiaulu/tools.yml"
+tools_path <- "../tools.yml"
 
 tool <- yaml::read_yaml(tools_path)
 
@@ -225,6 +225,19 @@ parse_jira_from_percevaleJson <- function(json_path) {
   return(project_jira)
 
 }
+
+
+print("Unzip jira ...")
+
+#Zipped jira json
+jira_zip_path <- paste(jira_issue_comments_path,'.gz',sep='')
+
+# UnZip the jira json file with gzip
+gzip_output <- system2('gzip',
+                    args = c('-d','-k',jira_zip_path),
+                    stdout = TRUE,
+                    stderr = FALSE)
+
 
 
 # Parse gitlog, they are used for create the collaboration graph
@@ -590,3 +603,15 @@ saveWidget(visIgraph(gcid,randomSeed = 1), file = graphfile)
 
 print("Graphs saved !")
 
+
+print("Delete unzip jira .... ")
+
+# Delete the jira json file
+delete_output <- system2('rm',
+                    args = c(jira_issue_comments_path),
+                    stdout = TRUE,
+                    stderr = FALSE)
+print()
+print()
+print()
+print(" END !!!")
