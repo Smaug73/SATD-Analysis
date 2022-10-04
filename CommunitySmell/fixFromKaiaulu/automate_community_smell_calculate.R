@@ -584,7 +584,7 @@ visIgraph(gcid,randomSeed = 1)
 library(visNetwork)
 library(htmlwidgets)
 graphfile <- paste("../rawdata/graph/",project_name,"_collaboration_network_code_cluster.html", sep = "")
-saveWidget(visIgraph(gcid,randomSeed = 1), file = graphfile)
+#saveWidget(visIgraph(gcid,randomSeed = 1), file = graphfile)
 
 
 project_collaboration_network <- recolor_network_by_community(reply_network_authors,mail_clusters)
@@ -599,7 +599,7 @@ visIgraph(gcid,randomSeed = 1)
 library(visNetwork)
 library(htmlwidgets)
 graphfile <- paste("../rawdata/graph/",project_name,"_collaboration_network_mail_cluster.html", sep = "")
-saveWidget(visIgraph(gcid,randomSeed = 1), file = graphfile)
+#saveWidget(visIgraph(gcid,randomSeed = 1), file = graphfile)
 
 print("Graphs saved !")
 
