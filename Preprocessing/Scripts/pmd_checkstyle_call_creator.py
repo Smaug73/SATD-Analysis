@@ -48,6 +48,7 @@ def checkstyle_call():
 
     # java -jar checkstyle-8.36-all.jar -c checkstyle-all-checks_v8.36.xml -f xml -o
 
+    #   FIX DA FARE : il file di configurazione va indicato in quale cartella si trova
     checkstyle = 'java -jar '+dir_checkstyle+'checkstyle-10.2-all.jar -c google_checkstyle_configuration.xml -f xml -o '
 
     
@@ -138,7 +139,7 @@ def pmd_call():
                 folder = path + commit_id + os.sep + file
 
                 #call = dir_pmd+'pmd-bin-6.45.0/bin/run.sh pmd -d '+ folder + ' -R rulesets/java/quickstart.xml -f csv --no-cache > ' + output
-                call = dir_pmd+'pmd-bin-6.45.0/bin/run.sh pmd -d '+ folder + ' -R rulesets/java/quickstart.xml -f csv --no-cache'
+                call = dir_pmd+'pmd-bin-6.50.0/bin/run.sh pmd -d '+ folder + ' -R rulesets/java/quickstart.xml -f csv --no-cache'
 
 
                 # lanch PMD for the specific file
