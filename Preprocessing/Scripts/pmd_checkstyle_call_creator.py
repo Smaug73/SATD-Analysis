@@ -3,14 +3,20 @@
 
 
 
+from genericpath import isdir
 import os
 import subprocess as subprocess
 
 
+
+# directory of the PMD output
+dir_pmd = '../pmd-bin-6.45.0/'
+# directory of the CheckStyle output
+dir_checkstyle = '../checkstyle/'
+
+
 # Launch Checkstyle
 def checkstyle_call():
-    # directory of the CheckStyle output
-    dir_checkstyle = '/home/stefano/TesiMagistrale/ProvePydriller/Checkstyle/'
 
     commit_id = "0a1b46ce0d436002e8abf9ae74a7ba7324fe093e"
 
@@ -23,10 +29,7 @@ def checkstyle_call():
     #### MakeDir for the analysis in the CheckStyle directory #######
     #### ...SATD_Analysis/Checkstyle/repository/*allrepository/*allcommits
 
-    dir_checkstyle_rep = dir_checkstyle+'repository'
-    # create the project directory if it does not exist, otherwise skit it
-    if os.path.isdir(dir_checkstyle_rep) is False:
-        os.mkdir(dir_checkstyle_rep)
+    
 
     dir_project_output= dir_checkstyle+'repository'+ os.sep +project
 
@@ -89,9 +92,6 @@ def checkstyle_call():
 
 # Launch PMD
 def pmd_call():
-
-    # directory of the CheckStyle output
-    dir_pmd = '/home/stefano/TesiMagistrale/ProvePydriller/PMD/'
 
     commit_id = "0a1b46ce0d436002e8abf9ae74a7ba7324fe093e"
 
@@ -158,8 +158,85 @@ def pmd_call():
 
 
 
+def read_rep(reps_path):
+
+    #   ogni repository ha una cartella il cui nome è il commit_id di riferimento
+
+    
+    #   Creiamo cartelle di output per le analisi di checkstyle e pmd   ############
+    
+    dir_pmd_rep = dir_pmd+'repository'
+
+    # create the project directory if it does not exist, otherwise skit it
+    if os.path.isdir(dir_pmd_rep) is False:
+        os.mkdir(dir_pmd_rep)
+    
+    dir_checkstyle_rep = dir_checkstyle+'repository'+os.sep
+    # create the project directory if it does not exist, otherwise skit it
+    if os.path.isdir(dir_checkstyle_rep) is False:
+        os.mkdir(dir_checkstyle_rep)
+
+    ################################################################################
+
+
+    #   scorriamo tutti i repository
+    for repo in os.listdir(reps_path):
+    
+        if os.path.isdir(reps_path+repo):
+            # per ogni repository creiamo cartella di output dei risultati
+            dir_pmd_output= dir_pmd_rep+ os.sep + repo
+
+            #   create the project directory if it does not exist, otherwise skit it
+            if os.path.isdir(dir_pmd_output) is False:
+                os.mkdir(dir_pmd_output)
+
+
+            dir_checkstyle_output= dir_checkstyle_rep + os.sep + repo
+
+            #   create the project directory if it does not exist, otherwise skit it
+            if os.path.isdir(dir_checkstyle_output) is False:
+                os.mkdir(dir_checkstyle_output)
+
+            
+
+            #   per ogni commit di una repo creiamo output dir
+            for commit in os.listdir(reps_path+repo):
+                
+                if os.path.isdir(reps_path+repo+os.sep+commit):
+
+                    commit_checkstyle_output = dir_checkstyle_output + os.sep + commit
+
+                    #   create the project directory if it does not exist, otherwise skit it
+                    if os.path.isdir(commit_checkstyle_output) is False:
+                        os.mkdir(commit_checkstyle_output)
+
+                    commit_pmd_output = dir_pmd_output + os.sep + commit
+                    
+                    #   create the project directory if it does not exist, otherwise skit it
+                    if os.path.isdir(commit_pmd_output) is False:
+                        os.mkdir(commit_pmd_output)
+
+
+                    # per ogni file nel commit eseguiamo analisi pmd e checkstyle
+                    for file in os.listdir(reps_path+os.sep+repo+os.sep+commit):
+                        
+                        if(os.path.isfile(file) and '.java' in file) :
+                            
+                            print(file)
+
+                            #launch pmd 
+                            
+                            #launch checkstyle
+
+
+
+
+
+
 
 if __name__ == "__main__":
 
+
+    read_rep('../Repository-fix/Repository-fix/')
     #checkstyle_call()
-    pmd_call()
+    #pmd_call()
