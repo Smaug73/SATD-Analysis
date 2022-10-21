@@ -53,7 +53,7 @@ def pmd_call(file_path,output_path):
     output_path = output_path.replace('java', '') + 'csv'
 
     #call = dir_pmd+'pmd-bin-6.45.0/bin/run.sh pmd -d '+ folder + ' -R rulesets/java/quickstart.xml -f csv --no-cache > ' + output
-    call = dir_pmd+'pmd-bin-6.50.0/bin/run.sh pmd -d '+ file_path + ' -R rulesets/java/quickstart.xml -f csv --no-cache ' 
+    call = dir_pmd+'/bin/run.sh pmd -d '+ file_path + ' -R rulesets/java/quickstart.xml -f csv --no-cache ' 
 
     # lanch PMD for the specific file
     try:
@@ -66,7 +66,7 @@ def pmd_call(file_path,output_path):
         print('Done.. ')
     except Exception:
         print("Errore lancio {}".format(command))
-        print(Exception)
+        print(Exception.__cause__)
 
 
 
@@ -155,6 +155,6 @@ def read_rep(reps_path):
 if __name__ == "__main__":
 
 
-    read_rep('../Repository-fix/')
+    read_rep('../Repository-fix/Repository-fix/')
     #checkstyle_call()
     #pmd_call()
