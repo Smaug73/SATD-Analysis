@@ -133,19 +133,19 @@ def read_rep(reps_path):
 
 
                     # per ogni file nel commit eseguiamo analisi pmd e checkstyle
-                    for file in os.listdir(reps_path+os.sep+repo+os.sep+commit):
+                    for file in os.listdir(reps_path+repo+os.sep+commit):
 
-                        file_path = reps_path+os.sep+repo+os.sep+commit+os.sep+file
+                        file_path = reps_path+repo+os.sep+commit+os.sep+file
                         
                         if(os.path.isfile(file_path) and '.java' in file) :
                             
-                            print('Analysis for : '+file)
+                            print('Analysis for : '+file_path)
 
                             #launch pmd 
-                            pmd_call(file_path , commit_pmd_output+os.sep+file)
+                            #pmd_call(file_path , commit_pmd_output+os.sep+file)
                             
                             #launch checkstyle
-                            checkstyle_call(file_path , commit_pmd_output+os.sep+file)
+                            #checkstyle_call(file_path , commit_pmd_output+os.sep+file)
 
                             print()
 
@@ -155,6 +155,6 @@ def read_rep(reps_path):
 if __name__ == "__main__":
 
 
-    read_rep('../Repository-fix/Repository-fix/')
+    read_rep('../Repository-fix/')
     #checkstyle_call()
     #pmd_call()
