@@ -8,6 +8,9 @@ jiraIssues/
 Repo/
 kaiaulu/
 
+#Preprocessing data
+/Repository-fix
+
 
 # General
 .DS_Store
