@@ -142,10 +142,10 @@ def read_rep(reps_path):
                             print('Analysis for : '+file_path)
 
                             #launch pmd 
-                            #pmd_call(file_path , commit_pmd_output+os.sep+file)
+                            pmd_call(file_path , commit_pmd_output+os.sep+file)
                             
                             #launch checkstyle
-                            #checkstyle_call(file_path , commit_pmd_output+os.sep+file)
+                            checkstyle_call(file_path , commit_pmd_output+os.sep+file)
 
                             print()
 
