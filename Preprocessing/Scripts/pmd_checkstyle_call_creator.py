@@ -10,7 +10,7 @@ import subprocess as subprocess
 
 
 # directory of the PMD output
-dir_pmd = '../pmd-bin-6.45.0/'
+dir_pmd = '../pmd-bin-6.50.0/'
 # directory of the CheckStyle output
 dir_checkstyle = '../checkstyle/'
 
