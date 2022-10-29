@@ -23,3 +23,80 @@
     #                   4.1 cercare il file pmd e checkstyle usando il commit per orientarci tra le cartelle
     #                   4.2 contare warning checkstyle e pmd per quel metodo controllando la riga nella quale di trova
     #                   4.3 aggiungere l'informazione all'interno del csv di pydriller
+
+
+import os
+from shutil import ExecError
+from numpy import size
+import pandas as pd
+
+
+
+
+#   Conta il numero di warning nella lista compresi tra le righe indicate
+def count_warning(start_line , end_line):
+    print()
+    #   Ritorno il numero di warning
+
+
+
+#   Per queste funzioni di count dei warning basta devono ritornare un dictionary all'interno del quale
+#   abbiamo come chiave la riga e come value il numero di warning per riga (non sappiamo se possono esserci più
+#   warning per riga)
+
+#   Funzione per leggere il singolo file checkstyle e contare i warnings e la riga dove si trovano
+def checkstyle_read(checkstyle_path):
+    print()
+    #   Ritorna una lista contenente per ogni warning la riga nella quale si trova(effetivamente serve anche solo la riga nella quale si trova)
+
+
+#   Funzione per leggere il singolo file pmd e contare i warnings e la riga nel quale si trovano
+def pmd_read(pmd_path):
+
+    try:
+        #   Leggiamo il csv di pmd
+        pmd_data = pd.read_csv(pmd_path)
+
+        #   Selezioniamo le righe presenti
+        pmd_lines = pmd_data["Line"]
+        
+        lines_dict = {}
+
+        for elem in pmd_lines :
+
+            if lines_dict.has_key(elem):
+                #   aggiorniamo il valore
+                lines_dict
+        #   Ritorna una lista nella quale per ogni warning abbiamo la riga nella quale si trova(serve anche solo la riga)
+
+    except Exception:
+        print("Errore lettura {}".format(pmd_path))
+        print(Exception.__cause__)
+
+
+
+
+
+
+if __name__ == "__main__":
+
+    #   Path alla cartella contenente tutte le analisi eseguite con pydriller
+    pydriller_project_dir = "../../Preprocessing/MetricsDataset"
+
+    #   Dobbiamo leggere uno per uno tutti i dataset
+    for repo_analysis in os.listdir(pydriller_project_dir):
+
+        pydriller_dateset_path = pydriller_project_dir+os.sep+repo_analysis
+
+        #   Controlliamo che il file sia corretto
+        if os.path.isfile(pydriller_dateset_path) and "pydriller" in repo_analysis and ".csv" in repo_analysis:
+            
+            print("Pydriller file: "+repo_analysis)
+            pydriller_data = pd.read_csv(pydriller_dateset_path)
+            print(pydriller_data.head())
+
+            #   Creiamo un nuovo dataset dove inserire i nuovi dati
+            #   Leggiamo riga per riga
+
+
+            break
