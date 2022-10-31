@@ -41,11 +41,11 @@ def count_warning(start_line , end_line, lines_dict):
         
         #   Counter dei warnings
         count = 0
-        
+    
         #    Per ogni riga che di trova tra start ed end cerchiamo nel dizionario
         for line in range(int(start_line),int(end_line)+1):
             
-            if line in lines_dict.keys():
+            if str(line) in lines_dict.keys():
                 #   Sommiamo a count il valore associato alla chiave line, che è un stringa
                 count += lines_dict[str(line)]
 
@@ -53,7 +53,7 @@ def count_warning(start_line , end_line, lines_dict):
 
     except Exception:
         print("Errore count warnings")
-        print(Exception.__cause__)
+        traceback.print_exc()
     
 
 
@@ -70,7 +70,7 @@ def checkstyle_read(checkstyle_path):
 
         #   Estraiamo tutti gli errori segnalati da checkstyle
         errors = checkstyle_xml.getElementsByTagName('error')
-
+        
         #   Per ogni errore lo inseriamo all'interno di un dizionario
         lines_dict = {}
 
@@ -78,11 +78,11 @@ def checkstyle_read(checkstyle_path):
         for elem in errors :
             
             #   se la riga considerata è già nel dizionario
-            if elem.attributes('line').value in lines_dict.keys():
+            if elem.attributes['line'].value in lines_dict.keys():
                 #   aggiorniamo il valore
-                lines_dict[elem] = lines_dict[elem] + 1
+                lines_dict[ elem.attributes['line'].value ] = lines_dict[elem.attributes['line'].value] + 1
             else:
-                lines_dict[elem] = 1
+                lines_dict[ elem.attributes['line'].value ] = 1
             
 
         return lines_dict
@@ -110,9 +110,9 @@ def pmd_read(pmd_path):
             #   se la riga considerata è già nel dizionario
             if elem in lines_dict.keys():
                 #   aggiorniamo il valore
-                lines_dict[elem] = lines_dict[elem] + 1
+                lines_dict[str(elem)] = lines_dict[str(elem)] + 1
             else:
-                lines_dict[elem] = 1
+                lines_dict[str(elem)] = 1
 
         #   Ritorna dizionario per ogni riga abbiamo numero di warning
         return lines_dict
