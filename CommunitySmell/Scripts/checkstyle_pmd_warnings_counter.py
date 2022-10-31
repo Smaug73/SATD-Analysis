@@ -34,6 +34,11 @@ from xml.dom import minidom
 
 
 
+pmd_path = ""
+checkstyle_path = ""
+output_dir = "../DatasetUpdate/"
+
+
 #   Conta il numero di warning nella lista compresi tra le righe indicate
 def count_warning(start_line , end_line, lines_dict):
     
@@ -95,6 +100,8 @@ def checkstyle_read(checkstyle_path):
 
 
 #   Funzione per leggere il singolo file pmd e contare i warnings e la riga nel quale si trovano
+#   ATTENZIONE, i pmd prodotti inizialmente sono in base al commit quindi possiedono tutti i valori 
+#   dei file modificati in quel commit, quindi bisogna modificare l'algoritmo in modo da cacciarsi i valori per i singoli file
 def pmd_read(pmd_path):
 
     try:
@@ -125,10 +132,67 @@ def pmd_read(pmd_path):
 
 
 
+#   Funzione per la creazione dei nuovi dataset con i dati di pmd e checkstyle
+def update_dataframe(pydriller_dateset_path,project_name):
+
+    print("Pydriller file: "+pydriller_dateset_path)
+    pydriller_data = pd.read_csv(pydriller_dateset_path)
+
+    #   Numero di righe del dataframe
+    lenght = len(pydriller_data.index)
+    print("Numero di righe: ",lenght)
+
+    #   Liste nelle quali inserire warning pmd e checkstyle
+    #   Come aggiungere una colonna http://pytolearn.csd.auth.gr/b4-pandas/40/moddfcols.html 
+    pmd_warnings = []
+    checkstyle_warnings = []
+
+    #  Leggiamo riga per riga
+    for i in range(0,lenght+1):
+
+        print(pydriller_data.iloc[i]['Project'])
+        print(pydriller_data.iloc[i]['Commit'])
+        print(pydriller_data.iloc[i]['File'])
+
+        #   Per avere prima riga e ultima riga del metodo
+        print(str(pydriller_data.iloc[i]['Begin--End']).split('--'))
+        
+        
+        break
+
+        #   Checkstyle
+        checkstyle_file_path = checkstyle_path+pydriller_data.iloc[i]['Project']+os.sep+pydriller_data.iloc[i]['Commit']+os.sep+pydriller_data.iloc[i]['File']+".xml"
+        checkstyle_dict =  checkstyle_read(checkstyle_file_path)
+        cs_count = count_warning(checkstyle_dict)
+        checkstyle_warnings.append(cs_count)
+
+        #   PMD 
+        pmd_file_path = pmd_path+pydriller_data.iloc[i]['Project']+os.sep+pydriller_data.iloc[i]['Commit']+os.sep+pydriller_data.iloc[i]['File']+".csv"
+        pmd_dict = pmd_read(pmd_file_path)
+        pmd_cuont = count_warning(pmd_dict)
+        pmd_warnings.append(pmd_cuont)
+
+    
+    #   Aggiungere le due colonne al dataframe
+    pydriller_data['pmd_warnings_numbers'] = pmd_warnings
+    
+    pydriller_data['checkstyle_warnings_numbers'] = checkstyle_warnings
+
+    #   Creiamo la cartella dove inserire gli output
+    if os.path.isdir(output_dir) is False:
+            os.mkdir(output_dir)
+            print(f"Dir conf create! ")
+
+    #   Salviamo il dataset
+    pydriller_data.to_csv(output_dir+"pydriller_checkstyle_pmd_metrics_commons-"+project_name+".csv")
+
+
+
+
 
 if __name__ == "__main__":
 
-
+    '''
     # TEST
     path_xml = "/home/stefano/SATD-Analysis/Preprocessing/1ace3061217340e4d5dae67d75532ec48efe32fb/tests#timing-tests#src#test##org#apache#activemq#artemis#tests#timing#core#server#impl#QueueImplTest.xml"
     path_csv = "/home/stefano/SATD-Analysis/Preprocessing/1ace3061217340e4d5dae67d75532ec48efe32fb/tests#unit-tests#src#test##org#apache#activemq#artemis#tests#unit#core#server#impl#QueueImplTest.csv"
@@ -159,14 +223,12 @@ if __name__ == "__main__":
         #   Controlliamo che il file sia corretto
         if os.path.isfile(pydriller_dateset_path) and "pydriller" in repo_analysis and ".csv" in repo_analysis:
             
-            print("Pydriller file: "+repo_analysis)
-            pydriller_data = pd.read_csv(pydriller_dateset_path)
-            print(pydriller_data.head())
+            update_dataframe(pydriller_dateset_path, repo_analysis)
+            #print(pydriller_data.head())
 
             #   Creiamo un nuovo dataset dove inserire i nuovi dati
             #   Leggiamo riga per riga
-
-
             break
+
+            
     
-    '''
