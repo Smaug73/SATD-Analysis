@@ -27,27 +27,71 @@
 
 import os
 from shutil import ExecError
+import traceback
 from numpy import size
 import pandas as pd
-
+from xml.dom import minidom
 
 
 
 #   Conta il numero di warning nella lista compresi tra le righe indicate
-def count_warning(start_line , end_line):
-    print()
-    #   Ritorno il numero di warning
+def count_warning(start_line , end_line, lines_dict):
+    
+    try:
+        
+        #   Counter dei warnings
+        count = 0
+        
+        #    Per ogni riga che di trova tra start ed end cerchiamo nel dizionario
+        for line in range(int(start_line),int(end_line)+1):
+            
+            if line in lines_dict.keys():
+                #   Sommiamo a count il valore associato alla chiave line, che è un stringa
+                count += lines_dict[str(line)]
+
+        return count
+
+    except Exception:
+        print("Errore count warnings")
+        print(Exception.__cause__)
+    
 
 
-
-#   Per queste funzioni di count dei warning basta devono ritornare un dictionary all'interno del quale
+#   Per queste funzioni di count dei warning basta ritornare un dictionary all'interno del quale
 #   abbiamo come chiave la riga e come value il numero di warning per riga (non sappiamo se possono esserci più
 #   warning per riga)
 
 #   Funzione per leggere il singolo file checkstyle e contare i warnings e la riga dove si trovano
 def checkstyle_read(checkstyle_path):
-    print()
-    #   Ritorna una lista contenente per ogni warning la riga nella quale si trova(effetivamente serve anche solo la riga nella quale si trova)
+
+    try:
+        #   Leggiamo il file xml dell'analisi di checkstyle
+        checkstyle_xml = minidom.parse(checkstyle_path)
+
+        #   Estraiamo tutti gli errori segnalati da checkstyle
+        errors = checkstyle_xml.getElementsByTagName('error')
+
+        #   Per ogni errore lo inseriamo all'interno di un dizionario
+        lines_dict = {}
+
+
+        for elem in errors :
+            
+            #   se la riga considerata è già nel dizionario
+            if elem.attributes('line').value in lines_dict.keys():
+                #   aggiorniamo il valore
+                lines_dict[elem] = lines_dict[elem] + 1
+            else:
+                lines_dict[elem] = 1
+            
+
+        return lines_dict
+
+    except Exception:
+        print("Errore lettura {}".format(checkstyle_path))
+        traceback.print_exc()
+
+
 
 
 #   Funzione per leggere il singolo file pmd e contare i warnings e la riga nel quale si trovano
@@ -63,15 +107,19 @@ def pmd_read(pmd_path):
         lines_dict = {}
 
         for elem in pmd_lines :
-
-            if lines_dict.has_key(elem):
+            #   se la riga considerata è già nel dizionario
+            if elem in lines_dict.keys():
                 #   aggiorniamo il valore
-                lines_dict
-        #   Ritorna una lista nella quale per ogni warning abbiamo la riga nella quale si trova(serve anche solo la riga)
+                lines_dict[elem] = lines_dict[elem] + 1
+            else:
+                lines_dict[elem] = 1
+
+        #   Ritorna dizionario per ogni riga abbiamo numero di warning
+        return lines_dict
 
     except Exception:
         print("Errore lettura {}".format(pmd_path))
-        print(Exception.__cause__)
+        traceback.print_exc()
 
 
 
@@ -79,6 +127,26 @@ def pmd_read(pmd_path):
 
 
 if __name__ == "__main__":
+
+
+    # TEST
+    path_xml = "/home/stefano/SATD-Analysis/Preprocessing/1ace3061217340e4d5dae67d75532ec48efe32fb/tests#timing-tests#src#test##org#apache#activemq#artemis#tests#timing#core#server#impl#QueueImplTest.xml"
+    path_csv = "/home/stefano/SATD-Analysis/Preprocessing/1ace3061217340e4d5dae67d75532ec48efe32fb/tests#unit-tests#src#test##org#apache#activemq#artemis#tests#unit#core#server#impl#QueueImplTest.csv"
+
+    pmd_warnings_dict = pmd_read(path_csv)
+    print(pmd_warnings_dict)
+    print()
+
+
+    checkstyle_warnings_dict = checkstyle_read(path_xml)
+    print(checkstyle_warnings_dict)
+    print()
+
+    print("Numero warnings pmd: ",count_warning('0','2000',pmd_warnings_dict))
+    print()
+    print("Numero warnings checkstyle: ",count_warning('0','2000',checkstyle_warnings_dict))
+
+    '''
 
     #   Path alla cartella contenente tutte le analisi eseguite con pydriller
     pydriller_project_dir = "../../Preprocessing/MetricsDataset"
@@ -100,3 +168,5 @@ if __name__ == "__main__":
 
 
             break
+    
+    '''
