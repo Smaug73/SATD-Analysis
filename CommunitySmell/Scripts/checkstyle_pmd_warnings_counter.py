@@ -36,7 +36,11 @@ from xml.dom import minidom
 
 pmd_path = ""
 checkstyle_path = ""
+fixed_repos_path = ""
 output_dir = "../DatasetUpdate/"
+homonymous_file_csv =  ""
+#   Path alla cartella contenente tutte le analisi eseguite con pydriller
+pydriller_project_dir = "../../Preprocessing/MetricsDataset"
 
 
 #   Conta il numero di warning nella lista compresi tra le righe indicate
@@ -133,11 +137,12 @@ def pmd_read(pmd_path):
 
 
 #   Funzione per la creazione dei nuovi dataset con i dati di pmd e checkstyle
-def update_dataframe(pydriller_dateset_path,project_name):
+def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
 
     print("Pydriller file: "+pydriller_dateset_path)
     pydriller_data = pd.read_csv(pydriller_dateset_path)
 
+    
     #   Numero di righe del dataframe
     lenght = len(pydriller_data.index)
     print("Numero di righe: ",lenght)
@@ -150,27 +155,54 @@ def update_dataframe(pydriller_dateset_path,project_name):
     #  Leggiamo riga per riga
     for i in range(0,lenght+1):
 
-        print(pydriller_data.iloc[i]['Project'])
-        print(pydriller_data.iloc[i]['Commit'])
-        print(pydriller_data.iloc[i]['File'])
+        row = pydriller_data.iloc[i]
+
+        print(row['Project'])
+        print(row['Commit'])
+        print(row['File'])
 
         #   Per avere prima riga e ultima riga del metodo
-        print(str(pydriller_data.iloc[i]['Begin--End']).split('--'))
+        print(str(row['Begin--End']).split('--'))
         
         
-        break
 
-        #   Checkstyle
-        checkstyle_file_path = checkstyle_path+pydriller_data.iloc[i]['Project']+os.sep+pydriller_data.iloc[i]['Commit']+os.sep+pydriller_data.iloc[i]['File']+".xml"
-        checkstyle_dict =  checkstyle_read(checkstyle_file_path)
-        cs_count = count_warning(checkstyle_dict)
-        checkstyle_warnings.append(cs_count)
+        #   Controlliamo se non fa parte degli omonimi
+        homonymous = homonymous_data.loc[(homonymous_data['Commit'] == row['Commit']) and (homonymous_data['File'] == row['File'])]
+        
+        #   Controlliamo che homonymous abbia almeno 1 row
+        if len(homonymous) == 1:
 
-        #   PMD 
-        pmd_file_path = pmd_path+pydriller_data.iloc[i]['Project']+os.sep+pydriller_data.iloc[i]['Commit']+os.sep+pydriller_data.iloc[i]['File']+".csv"
-        pmd_dict = pmd_read(pmd_file_path)
-        pmd_cuont = count_warning(pmd_dict)
-        pmd_warnings.append(pmd_cuont)
+            #   I dati devono essere letti dal repository fixed
+            #   Cambiamo / in #
+            file_name = str(row['File']).replace("/","#")
+            
+            #   Checkstyle
+            checkstyle_file_path = fixed_repos_path+row['Project']+os.sep+row['Commit']+os.sep+file_name+".xml"
+            checkstyle_dict =  checkstyle_read(checkstyle_file_path)
+            cs_count = count_warning(checkstyle_dict)
+            checkstyle_warnings.append(cs_count)
+
+            #   PMD
+            pmd_file_path = fixed_repos_path+row['Project']+os.sep+row['Commit']+os.sep+file_name+".csv"
+            pmd_dict = pmd_read(pmd_file_path)
+            pmd_cuont = count_warning(pmd_dict)
+            pmd_warnings.append(pmd_cuont)
+
+
+        else:
+            #   Caso non omonimo
+            
+            #   Checkstyle
+            checkstyle_file_path = checkstyle_path+pydriller_data.iloc[i]['Project']+os.sep+pydriller_data.iloc[i]['Commit']+os.sep+pydriller_data.iloc[i]['File']+".xml"
+            checkstyle_dict =  checkstyle_read(checkstyle_file_path)
+            cs_count = count_warning(checkstyle_dict)
+            checkstyle_warnings.append(cs_count)
+
+            #   PMD 
+            pmd_file_path = pmd_path+pydriller_data.iloc[i]['Project']+os.sep+pydriller_data.iloc[i]['Commit']+os.sep+pydriller_data.iloc[i]['File']+".csv"
+            pmd_dict = pmd_read(pmd_file_path)
+            pmd_cuont = count_warning(pmd_dict)
+            pmd_warnings.append(pmd_cuont)
 
     
     #   Aggiungere le due colonne al dataframe
@@ -212,8 +244,9 @@ if __name__ == "__main__":
 
     '''
 
-    #   Path alla cartella contenente tutte le analisi eseguite con pydriller
-    pydriller_project_dir = "../../Preprocessing/MetricsDataset"
+    #   Carico dataset file omonimi 
+    print("Loading homonymous file dataset: "+homonymous_file_csv)
+    homonymous_data = pd.read_csv(homonymous_file_csv)
 
     #   Dobbiamo leggere uno per uno tutti i dataset
     for repo_analysis in os.listdir(pydriller_project_dir):
@@ -223,7 +256,7 @@ if __name__ == "__main__":
         #   Controlliamo che il file sia corretto
         if os.path.isfile(pydriller_dateset_path) and "pydriller" in repo_analysis and ".csv" in repo_analysis:
             
-            update_dataframe(pydriller_dateset_path, repo_analysis)
+            update_dataframe(pydriller_dateset_path, repo_analysis, homonymous_data)
             #print(pydriller_data.head())
 
             #   Creiamo un nuovo dataset dove inserire i nuovi dati
