@@ -39,7 +39,7 @@ import gc
 pmd_path = ""
 checkstyle_path = ""
 fixed_repos_path = ""
-output_dir = "../DatasetUpdate/"
+output_dir = "../pmd_checkstyle_dataset_update/"
 homonymous_file_csv =  ""
 #   Path alla cartella contenente tutte le analisi eseguite con pydriller
 pydriller_project_dir = "../../Preprocessing/MetricsDataset"
@@ -49,7 +49,6 @@ pydriller_project_dir = "../../Preprocessing/MetricsDataset"
 def count_warning(start_line , end_line, lines_dict):
     
     try:
-        
         #   Counter dei warnings
         count = 0
     
@@ -66,6 +65,9 @@ def count_warning(start_line , end_line, lines_dict):
         print("Errore count warnings")
         traceback.print_exc()
     
+
+
+
 
 
 #   Per queste funzioni di count dei warning basta ritornare un dictionary all'interno del quale
@@ -85,7 +87,6 @@ def checkstyle_read(checkstyle_path):
         #   Per ogni errore lo inseriamo all'interno di un dizionario
         lines_dict = {}
 
-
         for elem in errors :
             
             #   se la riga considerata è già nel dizionario
@@ -95,16 +96,18 @@ def checkstyle_read(checkstyle_path):
             else:
                 lines_dict[ elem.attributes['line'].value ] = 1
 
-        #   Garbage Collector call
-        del errors
-        del checkstyle_xml 
-        gc.collect()    
-
+            
         return lines_dict
 
     except Exception:
-        print("Errore lettura {}".format(checkstyle_path))
+        print("Errore checkstyle_read {}".format(checkstyle_path))
         traceback.print_exc()
+
+    finally:
+    #   Garbage Collector call
+        del errors
+        del checkstyle_xml 
+        gc.collect()
 
 
 
@@ -120,9 +123,12 @@ def pmd_read(pmd_path, file_path = "", old_v = False):
 
         #   Per la vecchia versione dobbiamo filtrare le righe del file che ci interessa
         if old_v :
-            #   Il campo File deve contenere il path del file che stiamo analizzando
-            pmd_data = pmd_data[file_path in str(pmd_data['File'])]
+            #   Il campo File deve contenere il nome del file che stiamo analizzando
+            split_path = str(file_path).split("/")
+            file_name = split_path[len(split_path)-1]
+            pmd_data = pmd_data[pmd_data['File'].str.contains(file_name)]
             
+            print("DEBUG: pmd data selected: ")
             print(pmd_data)
 
 
@@ -139,17 +145,20 @@ def pmd_read(pmd_path, file_path = "", old_v = False):
             else:
                 lines_dict[str(elem)] = 1
 
+        #   Ritorna dizionario per ogni riga abbiamo numero di warning
+        return lines_dict
+
+    except Exception:
+        print("Errore pmd_read: {}".format(pmd_path))
+        traceback.print_exc()
+    
+    finally:
         #   Garbage Collector call
         del pmd_data
         del pmd_lines 
         gc.collect()
 
-        #   Ritorna dizionario per ogni riga abbiamo numero di warning
-        return lines_dict
 
-    except Exception:
-        print("Errore lettura {}".format(pmd_path))
-        traceback.print_exc()
 
 
 
@@ -173,7 +182,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
         checkstyle_warnings = []
 
         #  Leggiamo riga per riga
-        for i in range(0,lenght+1):
+        for i in range(0,lenght):
 
             row = pydriller_data.iloc[i]
 
@@ -184,10 +193,12 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
             #   Per avere prima riga e ultima riga del metodo
             print(str(row['Begin--End']).split('--'))
             
+            #   Inizio e fine metodo
+            start_end_method_index = str(row['Begin--End']).split('--')
             
 
             #   Controlliamo se non fa parte degli omonimi
-            homonymous = homonymous_data.loc[(homonymous_data['Commit'] == row['Commit']) and (homonymous_data['File'] == row['File'])]
+            homonymous = homonymous_data.loc[(homonymous_data['Commit'] == row['Commit']) & (homonymous_data['File'] == row['File'])]
             
             #   Controlliamo che homonymous abbia almeno 1 row
             if len(homonymous) == 1:
@@ -196,44 +207,83 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                 #   Cambiamo / in #
                 file_name = str(row['File']).replace("/","#")
                 
-                #   Checkstyle
-                checkstyle_file_path = fixed_repos_path+row['Project']+os.sep+row['Commit']+os.sep+file_name+".xml"
-                print("checkstyle_file_path: "+checkstyle_file_path)
+                try:
+                    #   Checkstyle
+                    checkstyle_file_path = fixed_repos_path+row['Project']+os.sep+row['Commit']+os.sep+file_name+".xml"
+                    print("checkstyle_file_path: "+checkstyle_file_path)
 
-                checkstyle_dict =  checkstyle_read(checkstyle_file_path)
-                cs_count = count_warning(checkstyle_dict)
+                    checkstyle_dict =  checkstyle_read(checkstyle_file_path)
+                    cs_count = count_warning(checkstyle_dict)
+                
+                except Exception:
+                    print("Errore lettura file Checkstyle...")
+                    traceback.print_exc()
+                    #   Per mantenere la consistenza all'interno del file count lo assegnamo a None in modo
+                    cs_count = None
+
+                #   Aggiorniamo lista Checkstyle
                 checkstyle_warnings.append(cs_count)
 
                 #   PMD
-                pmd_file_path = fixed_repos_path+row['Project']+os.sep+row['Commit']+os.sep+file_name+".csv"
-                print("pmd_file_path: "+pmd_file_path)
-                
-                pmd_dict = pmd_read(pmd_file_path)
-                pmd_cuont = count_warning(pmd_dict)
-                pmd_warnings.append(pmd_cuont)
+                try:
+                    pmd_file_path = fixed_repos_path+row['Project']+os.sep+row['Commit']+os.sep+file_name+".csv"
+                    print("pmd_file_path: "+pmd_file_path)
+
+                    pmd_dict = pmd_read(pmd_file_path)
+                    pmd_count = count_warning(pmd_dict)
+
+                except Exception:
+                    print("Errore lettura file PMD...")
+                    traceback.print_exc()
+                    #   Per mantenere la consistenza all'interno del file count lo assegnamo a None 
+                    pmd_count = None
+
+                #   Aggiorniamo lista PMD
+                pmd_warnings.append(pmd_count)
+
 
 
             else:
                 #   Caso non omonimo
                 
-                #   Checkstyle
-                #   Estrapoliamo solo il nome del file che ci serve
-                list_s = str(row['Commit']).split("/")
-                file_name = list_s[len(list_s)-1]
-                checkstyle_file_path = checkstyle_path+row['Project']+os.sep+row['Commit']+os.sep+"checkstyle-"+file_name
-                print("checkstyle_file_path: "+checkstyle_file_path)
+                try:
+                    #   Checkstyle
+                    #   Estrapoliamo solo il nome del file che ci serve
+                    list_s = str(row['File']).split("/")
+                    file_name = list_s[len(list_s)-1]
+                    file_name = file_name.replace("java","xml")
+                    checkstyle_file_path = checkstyle_path+row['Project']+os.sep+row['Commit']+os.sep+"checkstyle-"+file_name
+                    print("checkstyle_file_path: "+checkstyle_file_path)
+                    
+                    checkstyle_dict =  checkstyle_read(checkstyle_file_path)
+                    cs_count = count_warning(checkstyle_dict, start_end_method_index[0], start_end_method_index[1])
                 
-                checkstyle_dict =  checkstyle_read(checkstyle_file_path)
-                cs_count = count_warning(checkstyle_dict)
+                except Exception:
+                    print("Errore lettura file Checkstyle...")
+                    traceback.print_exc()
+                    #   Per mantenere la consistenza all'interno del file count lo assegnamo a None 
+                    cs_count = None
+                
+                #   Aggiorniamo lista warning checkstyle
                 checkstyle_warnings.append(cs_count)
 
-                #   PMD 
-                pmd_file_path = pmd_path+row['Project']+os.sep+row['Commit']+os.sep+"pmd-"+row['Commit']+".csv"
-                print("pmd_file_path: "+pmd_file_path)
 
-                pmd_dict = pmd_read(pmd_file_path , str(row['File']), True)
-                pmd_cuont = count_warning(pmd_dict)
-                pmd_warnings.append(pmd_cuont)
+                try:
+                    #   PMD 
+                    pmd_file_path = pmd_path+row['Project']+os.sep+row['Commit']+os.sep+"pmd-"+row['Commit']+".csv"
+                    print("pmd_file_path: "+pmd_file_path)
+
+                    pmd_dict = pmd_read(pmd_file_path , str(row['File']), True)
+                    pmd_count = count_warning(pmd_dict, start_end_method_index[0], start_end_method_index[1])
+
+                except Exception:
+                    print("Errore lettura file PMD...")
+                    traceback.print_exc()
+                    #   Per mantenere la consistenza all'interno del file count lo assegnamo a None
+                    pmd_count = None
+
+                #   Aggiorniamo lista warning pmd
+                pmd_warnings.append(pmd_count)
 
 
         
@@ -250,9 +300,15 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
         #   Salviamo il dataset
         pydriller_data.to_csv(output_dir+"pydriller_checkstyle_pmd_metrics_commons-"+project_name+".csv")
 
-        print(f"File "+output_dir+"pydriller_checkstyle_pmd_metrics_commons-"+project_name+".csv SAVED!")
+        print("File "+output_dir+"pydriller_checkstyle_pmd_metrics_commons-"+project_name+".csv SAVED!")
 
-        #   Garbage Collector call
+
+    except Exception:
+        print("Errore in update_dataframe ...")
+        traceback.print_exc()
+
+    finally:
+    #   Garbage Collector call
         del pydriller_data
         del pmd_dict
         del pmd_warnings 
@@ -260,9 +316,8 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
         del checkstyle_warnings
         gc.collect()
 
-    except Exception:
-        print("Errore in update_dataframe ...")
-        traceback.print_exc()
+
+
 
 
 
