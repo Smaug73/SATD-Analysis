@@ -24,7 +24,7 @@ def checkstyle_call(file_path,output_path):
     # java -jar checkstyle-8.36-all.jar -c checkstyle-all-checks_v8.36.xml -f xml -o
 
     #   FIX DA FARE : il file di configurazione va indicato in quale cartella si trova
-    checkstyle = 'java -jar '+dir_checkstyle+'checkstyle-10.2-all.jar -c '+dir_checkstyle+'google_checkstyle_configuration.xml -f xml -o '
+    checkstyle = 'java -jar '+dir_checkstyle+'checkstyle-10.2-all.jar -c '+dir_checkstyle+'checkstyle-all-checks_v8.36.xml -f xml -o '
 
     output_path = output_path.replace('java', '') + 'xml'
 
@@ -142,7 +142,7 @@ def read_rep(reps_path):
                             print('Analysis for : '+file_path)
 
                             #launch pmd 
-                            pmd_call(file_path , commit_pmd_output+os.sep+file)
+                            #pmd_call(file_path , commit_pmd_output+os.sep+file)
                             
                             #launch checkstyle
                             checkstyle_call(file_path , commit_pmd_output+os.sep+file)
