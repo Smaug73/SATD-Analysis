@@ -126,11 +126,9 @@ def pmd_read(pmd_path, file_path = "", old_v = False):
             #   Il campo File deve contenere il nome del file che stiamo analizzando
             split_path = str(file_path).split("/")
             file_name = split_path[len(split_path)-1]
+            #   Selezioniamo solo le righe che contengono il nome del file da analizzare
             pmd_data = pmd_data[pmd_data['File'].str.contains(file_name)]
             
-            print("DEBUG: pmd data selected: ")
-            print(pmd_data)
-
 
         #   Selezioniamo le righe presenti
         pmd_lines = pmd_data["Line"]
@@ -174,7 +172,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
         
         #   Numero di righe del dataframe
         lenght = len(pydriller_data.index)
-        print("Numero di righe: ",lenght)
+        print("Numero di righe del csv: ",lenght)
 
         #   Liste nelle quali inserire warning pmd e checkstyle
         #   Come aggiungere una colonna http://pytolearn.csd.auth.gr/b4-pandas/40/moddfcols.html 
@@ -183,15 +181,10 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
 
         #  Leggiamo riga per riga
         for i in range(0,lenght):
+            
+            print("Analisi riga: "+i)
 
             row = pydriller_data.iloc[i]
-
-            print(row['Project'])
-            print(row['Commit'])
-            print(row['File'])
-
-            #   Per avere prima riga e ultima riga del metodo
-            print(str(row['Begin--End']).split('--'))
             
             #   Inizio e fine metodo
             start_end_method_index = str(row['Begin--End']).split('--')
@@ -202,7 +195,8 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
             
             #   Controlliamo che homonymous abbia almeno 1 row
             if len(homonymous) == 1:
-
+                
+                print("Il file è presenete nella lista degli OMONIMI")
                 #   I dati devono essere letti dal repository fixed
                 #   Cambiamo / in #
                 file_name = str(row['File']).replace("/","#")
@@ -248,7 +242,8 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
 
             else:
                 #   Caso non omonimo
-                
+                print("Il file NON HA OMONIMI")
+
                 try:
                     #   Checkstyle
                     #   Estrapoliamo solo il nome del file che ci serve
@@ -360,13 +355,12 @@ if __name__ == "__main__":
 
         #   Controlliamo che il file sia corretto
         if os.path.isfile(pydriller_dateset_path) and "pydriller" in repo_analysis and ".csv" in repo_analysis:
-            
+
+
             update_dataframe(pydriller_dateset_path, repo_analysis, homonymous_data)
             #print(pydriller_data.head())
 
             #   Creiamo un nuovo dataset dove inserire i nuovi dati
             #   Leggiamo riga per riga
-            break
-
             
     
