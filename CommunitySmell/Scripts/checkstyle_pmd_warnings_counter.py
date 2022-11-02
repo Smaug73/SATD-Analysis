@@ -206,10 +206,13 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                 #   I dati devono essere letti dal repository fixed
                 #   Cambiamo / in #
                 file_name = str(row['File']).replace("/","#")
-                
+
+                file_name_checkstyle = file_name[:-4]+"xml"
+                file_name_pmd = file_name[:-4]+"csv"
+
                 try:
                     #   Checkstyle
-                    checkstyle_file_path = fixed_repos_path+row['Project']+os.sep+row['Commit']+os.sep+file_name+".xml"
+                    checkstyle_file_path = fixed_repos_path+row['Project']+os.sep+row['Commit']+os.sep+file_name_checkstyle
                     print("checkstyle_file_path: "+checkstyle_file_path)
 
                     checkstyle_dict =  checkstyle_read(checkstyle_file_path)
@@ -226,7 +229,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
 
                 #   PMD
                 try:
-                    pmd_file_path = fixed_repos_path+row['Project']+os.sep+row['Commit']+os.sep+file_name+".csv"
+                    pmd_file_path = fixed_repos_path+row['Project']+os.sep+row['Commit']+os.sep+file_name_pmd
                     print("pmd_file_path: "+pmd_file_path)
 
                     pmd_dict = pmd_read(pmd_file_path)
@@ -251,7 +254,8 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                     #   Estrapoliamo solo il nome del file che ci serve
                     list_s = str(row['File']).split("/")
                     file_name = list_s[len(list_s)-1]
-                    file_name = file_name.replace("java","xml")
+                    file_name = file_name[:-4]+"xml"
+
                     checkstyle_file_path = checkstyle_path+row['Project']+os.sep+row['Commit']+os.sep+"checkstyle-"+file_name
                     print("checkstyle_file_path: "+checkstyle_file_path)
                     
