@@ -182,7 +182,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
         #  Leggiamo riga per riga
         for i in range(0,lenght):
             
-            print("Analisi riga: "+i)
+            print("Analisi riga: ",i)
 
             row = pydriller_data.iloc[i]
             
@@ -210,7 +210,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                     print("checkstyle_file_path: "+checkstyle_file_path)
 
                     checkstyle_dict =  checkstyle_read(checkstyle_file_path)
-                    cs_count = count_warning(checkstyle_dict)
+                    cs_count = count_warning(start_end_method_index[0], start_end_method_index[1],checkstyle_dict)
                 
                 except Exception:
                     print("Errore lettura file Checkstyle...")
@@ -227,7 +227,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                     print("pmd_file_path: "+pmd_file_path)
 
                     pmd_dict = pmd_read(pmd_file_path)
-                    pmd_count = count_warning(pmd_dict)
+                    pmd_count = count_warning(start_end_method_index[0], start_end_method_index[1],pmd_dict)
 
                 except Exception:
                     print("Errore lettura file PMD...")
@@ -255,7 +255,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                     print("checkstyle_file_path: "+checkstyle_file_path)
                     
                     checkstyle_dict =  checkstyle_read(checkstyle_file_path)
-                    cs_count = count_warning(checkstyle_dict, start_end_method_index[0], start_end_method_index[1])
+                    cs_count = count_warning(start_end_method_index[0], start_end_method_index[1], checkstyle_dict)
                 
                 except Exception:
                     print("Errore lettura file Checkstyle...")
@@ -273,7 +273,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                     print("pmd_file_path: "+pmd_file_path)
 
                     pmd_dict = pmd_read(pmd_file_path , str(row['File']), True)
-                    pmd_count = count_warning(pmd_dict, start_end_method_index[0], start_end_method_index[1])
+                    pmd_count = count_warning(start_end_method_index[0], start_end_method_index[1], pmd_dict)
 
                 except Exception:
                     print("Errore lettura file PMD...")
