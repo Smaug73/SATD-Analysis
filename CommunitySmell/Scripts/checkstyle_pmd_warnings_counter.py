@@ -31,6 +31,7 @@ import traceback
 from numpy import size
 import pandas as pd
 from xml.dom import minidom
+import argparse
 #   Forziamo utilizzo garbage collection per diminuire memoria utilizzata
 import gc
 
@@ -179,10 +180,14 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
         pmd_warnings = []
         checkstyle_warnings = []
 
+
         #  Leggiamo riga per riga
         for i in range(0,lenght):
             
-            print("Analisi riga: ",i)
+            #   Percentuale
+            perc = i * 100 / lenght
+            if perc % 5 == 0 :
+                print("Percentuale righe: ",perc," %")
 
             row = pydriller_data.iloc[i]
             
@@ -207,13 +212,13 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                 try:
                     #   Checkstyle
                     checkstyle_file_path = fixed_repos_path+row['Project']+os.sep+row['Commit']+os.sep+file_name_checkstyle
-                    print("checkstyle_file_path: "+checkstyle_file_path)
+                    #print("checkstyle_file_path: "+checkstyle_file_path)
 
                     checkstyle_dict =  checkstyle_read(checkstyle_file_path)
                     cs_count = count_warning(start_end_method_index[0], start_end_method_index[1],checkstyle_dict)
                 
                 except Exception:
-                    print("Errore lettura file Checkstyle...")
+                    print("Errore lettura file Checkstyle..."+checkstyle_file_path)
                     traceback.print_exc()
                     #   Per mantenere la consistenza all'interno del file count lo assegnamo a None in modo
                     cs_count = None
@@ -230,7 +235,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                     pmd_count = count_warning(start_end_method_index[0], start_end_method_index[1],pmd_dict)
 
                 except Exception:
-                    print("Errore lettura file PMD...")
+                    print("Errore lettura file PMD..."+pmd_file_path)
                     traceback.print_exc()
                     #   Per mantenere la consistenza all'interno del file count lo assegnamo a None 
                     pmd_count = None
@@ -242,7 +247,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
 
             else:
                 #   Caso non omonimo
-                print("Il file NON HA OMONIMI")
+                #print("Il file NON HA OMONIMI")
 
                 try:
                     #   Checkstyle
@@ -252,13 +257,13 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                     file_name = file_name[:-4]+"xml"
 
                     checkstyle_file_path = checkstyle_path+row['Project']+os.sep+row['Commit']+os.sep+"checkstyle-"+file_name
-                    print("checkstyle_file_path: "+checkstyle_file_path)
+                    #print("checkstyle_file_path: "+checkstyle_file_path)
                     
                     checkstyle_dict =  checkstyle_read(checkstyle_file_path)
                     cs_count = count_warning(start_end_method_index[0], start_end_method_index[1], checkstyle_dict)
                 
                 except Exception:
-                    print("Errore lettura file Checkstyle...")
+                    print("Errore lettura file Checkstyle..."+checkstyle_file_path)
                     traceback.print_exc()
                     #   Per mantenere la consistenza all'interno del file count lo assegnamo a None 
                     cs_count = None
@@ -270,13 +275,13 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                 try:
                     #   PMD 
                     pmd_file_path = pmd_path+row['Project']+os.sep+row['Commit']+os.sep+"pmd-"+row['Commit']+".csv"
-                    print("pmd_file_path: "+pmd_file_path)
+                    #print("pmd_file_path: "+pmd_file_path)
 
                     pmd_dict = pmd_read(pmd_file_path , str(row['File']), True)
                     pmd_count = count_warning(start_end_method_index[0], start_end_method_index[1], pmd_dict)
 
                 except Exception:
-                    print("Errore lettura file PMD...")
+                    print("Errore lettura file PMD..."+pmd_file_path)
                     traceback.print_exc()
                     #   Per mantenere la consistenza all'interno del file count lo assegnamo a None
                     pmd_count = None
@@ -297,9 +302,9 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                 print(f"Dir conf create! ")
 
         #   Salviamo il dataset
-        pydriller_data.to_csv(output_dir+"pydriller_checkstyle_pmd_metrics_commons-"+project_name+".csv")
+        pydriller_data.to_csv(output_dir+"pydriller_checkstyle_pmd_metrics_commons-"+project_name)
 
-        print("File "+output_dir+"pydriller_checkstyle_pmd_metrics_commons-"+project_name+".csv SAVED!")
+        print("File "+output_dir+"pydriller_checkstyle_pmd_metrics_commons-"+project_name+" SAVED!")
 
 
     except Exception:
@@ -324,26 +329,87 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
 
 if __name__ == "__main__":
 
+    # Args : directory of projects
+    parser = argparse.ArgumentParser(
+                description='Script for download mbox file for an apache project')
+
+    # Apache project name
+    parser.add_argument(
+        'project_name',
+        type=str,
+        help='Apache projects name',
+    )
+
+    # Apache projects directory
+    parser.add_argument(
+        'git_repos_dir',
+        type=str,
+        help='Git repositories directory',
+    )
+
+    # pydriller_project_dir file
+    parser.add_argument(
+        'pydriller_project_dir',
+        type=str,
+        help='Pydriller repositories',
+    )
+
+    # Pmd directory
+    parser.add_argument(
+        'pmd_path',
+        type=str,
+        help='PMD repository directory',
+    )
+
+    # Checkstyle repository
+    parser.add_argument(
+        'checkstyle_path',
+        type=str,
+        help='Checkstyle repository directory',
+    )
+
+    # homonymous_file_csv file
+    parser.add_argument(
+        'homonymous_file_csv',
+        type=str,
+        help='Homonymous csv file',
+    )
+
+    # fixed_repos_path file
+    parser.add_argument(
+        'fixed_repos_path',
+        type=str,
+        help='Fixed repositories of homonimous files',
+    )
+
+
+    # output directory
+    parser.add_argument(
+        'output_dir',
+        type=str,
+        help='Output directory',
+    )
+
+    args = parser.parse_args()
+
+
+    #   Carichiamo gli omonimi
+    homonymous_data = pd.read_csv(homonymous_file_csv)
+    output_dir = args.output_dir
+    checkstyle_path = args.checkstyle_path
+    pmd_path = args.pmd_path
+    git_repos_dir = args.git_repos_dir
+    fixed_repos_path = args.fixed_repos_path
+    pydriller_project_dir = args.pydriller_project_dir
+
+
+    #   Avviamo l'analisi
+    pydriller_dateset_path = args.pydriller_project_dir + os.sep + "pydriller_metrics_" + args.project_name + ".csv"
+
+    if os.path.isfile(pydriller_dateset_path) :
+            update_dataframe(pydriller_dateset_path, args.project_name, homonymous_data)
+
     '''
-    # TEST
-    path_xml = "/home/stefano/SATD-Analysis/Preprocessing/1ace3061217340e4d5dae67d75532ec48efe32fb/tests#timing-tests#src#test##org#apache#activemq#artemis#tests#timing#core#server#impl#QueueImplTest.xml"
-    path_csv = "/home/stefano/SATD-Analysis/Preprocessing/1ace3061217340e4d5dae67d75532ec48efe32fb/tests#unit-tests#src#test##org#apache#activemq#artemis#tests#unit#core#server#impl#QueueImplTest.csv"
-
-    pmd_warnings_dict = pmd_read(path_csv)
-    print(pmd_warnings_dict)
-    print()
-
-
-    checkstyle_warnings_dict = checkstyle_read(path_xml)
-    print(checkstyle_warnings_dict)
-    print()
-
-    print("Numero warnings pmd: ",count_warning('0','2000',pmd_warnings_dict))
-    print()
-    print("Numero warnings checkstyle: ",count_warning('0','2000',checkstyle_warnings_dict))
-
-    '''
-
     #   Carico dataset file omonimi 
     print("Loading homonymous file dataset: "+homonymous_file_csv)
     homonymous_data = pd.read_csv(homonymous_file_csv)
@@ -358,9 +424,6 @@ if __name__ == "__main__":
 
 
             update_dataframe(pydriller_dateset_path, repo_analysis, homonymous_data)
-            #print(pydriller_data.head())
-
-            #   Creiamo un nuovo dataset dove inserire i nuovi dati
-            #   Leggiamo riga per riga
+     '''      
             
     
