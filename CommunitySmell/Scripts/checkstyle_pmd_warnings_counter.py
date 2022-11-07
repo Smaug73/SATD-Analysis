@@ -394,7 +394,7 @@ if __name__ == "__main__":
 
 
     #   Carichiamo gli omonimi
-    homonymous_data = pd.read_csv(homonymous_file_csv)
+    homonymous_data = pd.read_csv(args.homonymous_file_csv)
     output_dir = args.output_dir
     checkstyle_path = args.checkstyle_path
     pmd_path = args.pmd_path
