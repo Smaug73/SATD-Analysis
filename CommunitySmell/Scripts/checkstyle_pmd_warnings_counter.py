@@ -408,7 +408,7 @@ if __name__ == "__main__":
 
 
     #   Avviamo l'analisi
-    pydriller_dateset_path = args.pydriller_project_dir + os.sep + "pydriller_metrics_" + args.project_name + ".csv"
+    pydriller_dateset_path = args.pydriller_project_dir + "pydriller_metrics_" + args.project_name + ".csv"
 
     if os.path.isfile(pydriller_dateset_path) :
             update_dataframe(pydriller_dateset_path, args.project_name, homonymous_data)
