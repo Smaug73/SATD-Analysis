@@ -222,6 +222,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                     traceback.print_exc()
                     #   Per mantenere la consistenza all'interno del file count lo assegnamo a None in modo
                     cs_count = None
+                    print("\nPercentuale righe: ",perc," % \n")
 
                 #   Aggiorniamo lista Checkstyle
                 checkstyle_warnings.append(cs_count)
@@ -239,6 +240,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                     traceback.print_exc()
                     #   Per mantenere la consistenza all'interno del file count lo assegnamo a None 
                     pmd_count = None
+                    print("\nPercentuale righe: ",perc," % \n")
 
                 #   Aggiorniamo lista PMD
                 pmd_warnings.append(pmd_count)
@@ -267,6 +269,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                     traceback.print_exc()
                     #   Per mantenere la consistenza all'interno del file count lo assegnamo a None 
                     cs_count = None
+                    print("\nPercentuale righe: ",perc," % \n")
                 
                 #   Aggiorniamo lista warning checkstyle
                 checkstyle_warnings.append(cs_count)
@@ -285,6 +288,7 @@ def update_dataframe(pydriller_dateset_path, project_name, homonymous_data):
                     traceback.print_exc()
                     #   Per mantenere la consistenza all'interno del file count lo assegnamo a None
                     pmd_count = None
+                    print("\nPercentuale righe: ",perc," % \n")
 
                 #   Aggiorniamo lista warning pmd
                 pmd_warnings.append(pmd_count)
