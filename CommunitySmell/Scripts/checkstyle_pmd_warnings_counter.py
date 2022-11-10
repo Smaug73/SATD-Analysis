@@ -30,7 +30,7 @@ from shutil import ExecError
 import traceback
 from numpy import size
 import pandas as pd
-from xml.dom import minidom
+import xml.etree.ElementTree as ET
 import argparse
 #   Forziamo utilizzo garbage collection per diminuire memoria utilizzata
 import gc
@@ -80,10 +80,12 @@ def checkstyle_read(checkstyle_path):
 
     try:
         #   Leggiamo il file xml dell'analisi di checkstyle
-        checkstyle_xml = minidom.parse(checkstyle_path)
+        checkstyle_xml = ET.parse(checkstyle_path)
 
         #   Estraiamo tutti gli errori segnalati da checkstyle
-        errors = checkstyle_xml.getElementsByTagName('error')
+        root = checkstyle_xml.getroot()
+        root = root.find('file')
+        errors = root.findall('error')
         
         #   Per ogni errore lo inseriamo all'interno di un dizionario
         lines_dict = {}
@@ -91,13 +93,13 @@ def checkstyle_read(checkstyle_path):
         for elem in errors :
             
             #   se la riga considerata è già nel dizionario
-            if elem.attributes['line'].value in lines_dict.keys():
-                #   aggiorniamo il valore
-                lines_dict[ elem.attributes['line'].value ] = lines_dict[elem.attributes['line'].value] + 1
+            if elem.get('line') in lines_dict.keys():
+            #   aggiorniamo il valore
+                lines_dict[ elem.get('line') ] = lines_dict[elem.get('line')] + 1
             else:
-                lines_dict[ elem.attributes['line'].value ] = 1
+                lines_dict[ elem.get('line') ] = 1
 
-            
+      
         return lines_dict
 
     except Exception:
