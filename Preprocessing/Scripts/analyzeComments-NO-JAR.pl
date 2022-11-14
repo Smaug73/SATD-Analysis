@@ -285,7 +285,7 @@ for my $commit (@commits){
 							$v=~s/^\d+\s//g;
 							$com=~s/\(/ /g;
 							$com=~s/\)/ /g;
-							if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/){
+							if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/i){
 								$v=~s/,/ /g;
 								$v=~s/\s+/ /g;
 								my $beginEnd = searchBeginEnd($s, \%mmethodsCurrent);		
@@ -314,7 +314,7 @@ for my $commit (@commits){
 								my $com = $v;
 								$com=~s/\(/ /g;
 								$com=~s/\)/ /g;
-								if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/){
+								if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/i){
 									$v=~s/,/ /g;
 									$v=~s/\s+/ /g;
 									my $beginEnd = searchBeginEnd($s, \%mmethodsCurrent);		
@@ -336,7 +336,7 @@ for my $commit (@commits){
 								$v=~s/^\d+\s//g;
 								$com =~s/\(/ /g;
 								$com =~s/\)/ /g;	
-								if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/){
+								if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/i){
 									$v=~s/,/ /g;
 									$v=~s/\s+/ /g;
 									my $beginEnd = searchBeginEnd($s, \%mmethodsPrevious);		
@@ -364,7 +364,7 @@ for my $commit (@commits){
 							$v=~s/^\d+\s//g;
 							$com =~s/\(/ /g;
 							$com =~s/\)/ /g;
-							if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/){
+							if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/i){
 								$v=~s/,/ /g;
 								$v=~s/\s+/ /g;
 								my $beginEnd = searchBeginEnd($s, \%mmethodsPrevious);		
@@ -524,7 +524,7 @@ for my $commit (@commits){
 						$v=~s/^\d+\s//g;
 						$com=~s/\(/ /g;
 						$com=~s/\)//g;
-						if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/){
+						if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/i){
 							$v=~s/,/ /g;
 							$v=~s/\s+/ /g;
 							my $beginEnd = searchBeginEnd($s, \%mmethods);		
