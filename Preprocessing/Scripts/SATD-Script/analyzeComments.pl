@@ -230,21 +230,21 @@ for my $commit (@commits){
 			my $previous = $basePath."temporary/previous/".$fields[$#fields];
 			
 			if ((-e $current) && (-e $previous)){
-				$command = "perl ".$pathexsigscript." ".$current." ".$srcmlPath;
+				$command = "perl -w ".$pathexsigscript." ".$current." ".$srcmlPath;
 				$execute = `$command`;
 				my @methodsCurrent = split("\n",$execute);
 				chomp(@methodsCurrent);
-				$command = "perl ".$pathexsigscript." ".$previous." ".$srcmlPath;
+				$command = "perl -w ".$pathexsigscript." ".$previous." ".$srcmlPath;
 				$execute = `$command`;
 				my @methodsPrevious = split("\n",$execute);
 				chomp(@methodsPrevious);
 
-				$command = "perl ".$pathexcommentsscript." ".$srcmlPath." ".$current;
+				$command = "perl -w ".$pathexcommentsscript." ".$srcmlPath." ".$current;
 				$execute = `$command`;
 				my @commentsCurrent = split("\n",$execute);
 				chomp(@commentsCurrent);
 
-				$command = "perl ".$pathexcommentsscript." ".$srcmlPath." ".$previous;
+				$command = "perl -w ".$pathexcommentsscript." ".$srcmlPath." ".$previous;
 				$execute = `$command`;
 				my @commentsPrevious = split("\n",$execute);
 				chomp(@commentsPrevious);
@@ -285,7 +285,7 @@ for my $commit (@commits){
 							$v=~s/^\d+\s//g;
 							$com=~s/\(/ /g;
 							$com=~s/\)/ /g;
-							if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/){
+							if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/i){
 								$v=~s/,/ /g;
 								$v=~s/\s+/ /g;
 								my $beginEnd = searchBeginEnd($s, \%mmethodsCurrent);		
@@ -319,7 +319,7 @@ for my $commit (@commits){
 								my $com = $v;
 								$com=~s/\(/ /g;
 								$com=~s/\)/ /g;
-								if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/){
+								if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/i){
 									$v=~s/,/ /g;
 									$v=~s/\s+/ /g;
 									my $beginEnd = searchBeginEnd($s, \%mmethodsCurrent);		
@@ -346,7 +346,7 @@ for my $commit (@commits){
 								$v=~s/^\d+\s//g;
 								$com =~s/\(/ /g;
 								$com =~s/\)/ /g;	
-								if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/){
+								if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/i){
 									$v=~s/,/ /g;
 									$v=~s/\s+/ /g;
 									my $beginEnd = searchBeginEnd($s, \%mmethodsPrevious);		
@@ -379,7 +379,7 @@ for my $commit (@commits){
 							$v=~s/^\d+\s//g;
 							$com =~s/\(/ /g;
 							$com =~s/\)/ /g;
-							if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/){
+							if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/i){
 								$v=~s/,/ /g;
 								$v=~s/\s+/ /g;
 								my $beginEnd = searchBeginEnd($s, \%mmethodsPrevious);		
@@ -436,12 +436,12 @@ for my $commit (@commits){
 			my $current = $basePath."temporary/current/".$fields[$#fields];
 
 			if (-e $current){
-				$command = "perl ".$pathexsigscript." ".$current." ".$srcmlPath;
+				$command = "perl -w ".$pathexsigscript." ".$current." ".$srcmlPath;
 				$execute = `$command`;
 				my @methods = split("\n",$execute);
 				chomp(@methods);
 
-				$command = "perl ".$pathexcommentsscript." ".$srcmlPath." ".$current;
+				$command = "perl -w ".$pathexcommentsscript." ".$srcmlPath." ".$current;
 				$execute = `$command`;
 				my @comments = split("\n",$execute);
 				chomp(@comments);
@@ -466,7 +466,7 @@ for my $commit (@commits){
 						$v=~s/^\d+\s//g;
 						$com=~s/\(/ /g;
 						$com=~s/\)//g;
-						if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/){
+						if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/i){
 							$v=~s/,/ /g;
 							$v=~s/\s+/ /g;
 							my $beginEnd = searchBeginEnd($s, \%mmethods);		
@@ -520,12 +520,12 @@ for my $commit (@commits){
 			my $previous = $basePath."temporary/previous/".$fields[$#fields];
 
 			if (-e $previous){
-				$command = "perl ".$pathexsigscript." ".$previous." ".$srcmlPath;
+				$command = "perl -w ".$pathexsigscript." ".$previous." ".$srcmlPath;
 				$execute = `$command`;
 				my @methods = split("\n",$execute);
 				chomp(@methods);
 
-				$command = "perl ".$pathexcommentsscript." ".$srcmlPath." ".$previous;
+				$command = "perl -w ".$pathexcommentsscript." ".$srcmlPath." ".$previous;
 				$execute = `$command`;
 				my @comments = split("\n",$execute);
 				chomp(@comments);
@@ -550,7 +550,7 @@ for my $commit (@commits){
 						$v=~s/^\d+\s//g;
 						$com=~s/\(/ /g;
 						$com=~s/\)//g;
-						if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/){
+						if ($com=~/\b(TODO|FIXME|HACK|XXX)\b/i){
 							$v=~s/,/ /g;
 							$v=~s/\s+/ /g;
 							my $beginEnd = searchBeginEnd($s, \%mmethods);		
