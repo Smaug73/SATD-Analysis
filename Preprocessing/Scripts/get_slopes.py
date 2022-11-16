@@ -6,6 +6,7 @@ import argparse
 import os
 import subprocess 
 import git
+from scipy import stats
 
 
 def get_previous_commits(repos_directory, metrics_directory, projects):
@@ -24,6 +25,7 @@ def get_previous_commits(repos_directory, metrics_directory, projects):
         for commit in commits:
         '''           
         commits_dataset= pd.read_csv(metrics_directory + os.sep + 'pydriller_metrics_' + project + '.csv')
+        final_array = np.zeros((commits_dataset.shape[0], 3))
 
         commits = commits_dataset['Commit'].unique()
 
@@ -32,6 +34,8 @@ def get_previous_commits(repos_directory, metrics_directory, projects):
         count_commits = 0
         rows = []
 
+        x = np.arange(10)
+        
         
         for commit in commits:
             start_time_commit = datetime.datetime.now()
@@ -48,70 +52,93 @@ def get_previous_commits(repos_directory, metrics_directory, projects):
 
             for file in modified_files:
                 files_dict[file] = []
-                prev_commits = runCmdList(['git', 'log', '--oneline', '--full-history', '--pretty=format:"%H"' '--follow', file], path_repo)
+                prev_commits = runCmdList(['git', 'log', '--oneline', '--full-history', '--pretty=format:\"%H\"', '--follow', file], path_repo)
                 i = 0
                 for prev_commit in prev_commits:
-                    files_dict[file].append(prev_commit)
+                    files_dict[file].append(prev_commit.replace('\"',''))
                     i = i + 1
-                    if i == 8:
+                    if i == 10:
                         break
             
             #print('Commit: ' + commit + '\n' + str(files_dict) + '\n\n')
             for file in files_dict:
-                if len(files_dict[file]) >= 9:
-                    new_row = [commit, file, files_dict[file][0], files_dict[file][1], files_dict[file][2], files_dict[file][3], files_dict[file][4],
-                            files_dict[file][5], files_dict[file][6], files_dict[file][7], files_dict[file][8]]
-                    print(new_row + '\n ')
-                    rows.append('NEW ROW: ' + new_row)
-                else:
-                    print('ELSE\n' + str(files_dict[file]))
-            '''
-            for other_commit in commits:
-                if (other_commit != commit):
-                    other_modified_files = commits_dataset[commits_dataset['Commit'] == other_commit]['File'].unique()
-                    if any(x in modified_files for x in other_modified_files):
-                        range = other_commit + '..' + commit
-                        lines = runCmdList(['git', 'rev-list', '--ancestry-path', range, '--count'], path_repo)
-                        hops = int(lines[0])
-
-                        #hops = len(repo.git.rev_list('--ancestry-path',range))
-                        if hops != 0:
-                            #print('\n' + "Current commit: " + commit + "   Ancestor: " +  other_commit + "   Hops:" + str(hops))
-                            for file in modified_files:
+                methods = commits_dataset[commits_dataset['Commit'] == commit][commits_dataset['File'] == file]['Method']
+                for method in methods:
+                    #print('METHOD: ' + method)
+                    index_current = ((commits_dataset[commits_dataset['Commit'] == commit])[commits_dataset['File'] == file])[commits_dataset['Method'] == method].index[0]
+                    #print('CURRENT INDEX: ' + str(index_current))
+                    if len(files_dict[file]) >= 10:
+                        #print('METHOD: ' + method)
+                        y_loc = np.zeros((10))
+                        y_params = np.zeros((10))
+                        y_complex = np.zeros((10))
+                        try:
+                            for j in range(0, 10):
+                                other_commit = files_dict[file][j]
+                                #print('OTHER COMMIT: ' + other_commit)
+                                index = commits_dataset[commits_dataset['Commit'] == other_commit][commits_dataset['File'] == file][commits_dataset['Method'] == method].index[0]
+                                y_loc[9 - j] = commits_dataset.iloc[index]['NLOC']
+                                y_params[9 - j] = commits_dataset.iloc[index]['#Parameters']
+                                y_complex[9 - j] = commits_dataset.iloc[index]['Complexity']
                                 
-                                if file in other_modified_files:
-                                    if file not in files_dict:
-                                        files_dict[file] = {}
-                                    if hops not in files_dict[file]:
-                                        files_dict[file][hops] = set()
-                                    files_dict[file][hops].add(other_commit)
+                            #print('\ny_loc:')
+                            #print(y_loc)
+                            #print('\ny_params:')
+                            #print(y_params)
+                            #print('\ny_complex:')
+                            #print(y_complex)
+                            
+                            try:
+                                slope_loc, intercept, r, p, std_err = stats.linregress(x, y_loc)
+                            except Exception as e:
+                                print(e)
+                            final_array[index_current, 0] = slope_loc
+                            #print('slope loc final array: ' + str(final_array[index_current, 0]))
 
-            #print('Commit: ' + commit + '\n' + str(files_dict) + '\n\n')
-            for file in files_dict:
-                if len(files_dict[file]) >= 9:
-                    print('\nCommit: ' + commit + ' file: ' + file + '\n' + str(files_dict[file]) + '\n\n')
-                    prev_commits_dict = {}
-                    i = 1
-                    for k in sorted((files_dict[file])):
-                        if i < 10:
-                            prev_commits_dict[i] = files_dict[file][k]
-                            print('\n' + str(i) + ' :' + str(files_dict[file][k]) + ' hops: ' + str(k) + '\n')
-                            i = i + 1
-                        else:
-                            break
+                            try:
+                                slope_params, intercept, r, p, std_err = stats.linregress(x, y_params)
+                            except Exception as e:
+                                print(e)
+                            final_array[index_current, 1] = slope_params
 
-                    new_row = [commit, file, prev_commits_dict[1], prev_commits_dict[2], prev_commits_dict[3], prev_commits_dict[4], prev_commits_dict[5],
-                        prev_commits_dict[6], prev_commits_dict[7], prev_commits_dict[8], prev_commits_dict[9]]
-                    rows.append(new_row)
-            '''
+                            try:
+                                slope_complex, intercept, r, p, std_err = stats.linregress(x, y_complex)
+                            except Exception as e:
+                                print(e)
+                            final_array[index_current, 2] = slope_complex
+                        except:
+                            final_array[index_current, 0] = np.NaN
+                            final_array[index_current, 1] = np.NaN
+                            final_array[index_current, 2] = np.NaN
+
+                    #print('IF ' + file + ' ' + str(len(files_dict[file])) + '\n' + str(files_dict[file]))
+                    #new_row = [commit, file, files_dict[file][1], files_dict[file][2], files_dict[file][3], files_dict[file][4], files_dict[file][5],
+                    #        files_dict[file][6], files_dict[file][7], files_dict[file][8], files_dict[file][9]]
+                    #rows.append(new_row)
+
+                    else:
+                        #print('\nELSE\n')
+                        #index_current = commits_dataset[commits_dataset['Commit'] == commit][commits_dataset['File'] == file][commits_dataset['Method'] == method].index[0]
+                        final_array[index_current, 0] = np.NaN
+                        final_array[index_current, 1] = np.NaN
+                        final_array[index_current, 2] = np.NaN
+            
             end_time_commit = datetime.datetime.now()
             duration_commit = end_time_commit - start_time_commit
             seconds_in_day = 24 * 60 * 60
             duration_tuple_commit = divmod(duration_commit.days * seconds_in_day + duration_commit.seconds, 60)
+            print(x)
             print('The measurement for commit ' + commit + ' lasted: ' + str(duration_tuple_commit[0]) + ' minutes and ' + str(duration_tuple_commit[1]) + ' seconds')
         
-        csv_previous_commits = pd.DataFrame(rows, columns=['Commit', 'File', 'Commit-1', 'Commit-2', 'Commit-3', 'Commit-4', 'Commit-5', 'Commit-6', 'Commit-7', 'Commit-8', 'Commit-9'])
-        csv_previous_commits.to_csv('previous_commits_'+ project + '.csv', index=False)
+
+        #csv_previous_commits = pd.DataFrame(rows, columns=['Commit', 'File', 'Commit-1', 'Commit-2', 'Commit-3', 'Commit-4', 'Commit-5', 'Commit-6', 'Commit-7', 'Commit-8', 'Commit-9'])
+        #csv_previous_commits.to_csv('previous_commits_'+ project + '.csv', index=False)
+        lst = final_array.tolist()
+        #print(final_array)
+        #print(lst)
+        slopes_dataframe = pd.DataFrame(lst, columns =['NLOC_slope', 'Params_slope', 'Complexity_slope'])
+        slopes_dataframe.to_csv('slopes_'+ project + '.csv', index=False)
+
         end_time = datetime.datetime.now()
         print('End: ' + datetime.date.strftime(end_time, "%m/%d/%Y, %H:%M:%S"))
         duration = end_time - start_time
