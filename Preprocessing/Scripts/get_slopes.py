@@ -30,7 +30,7 @@ def get_previous_commits(repos_directory, metrics_directory, projects):
         print('\nCommits: ' + str(len(commits)))
 
         count_commits = 0
-        rows = []
+        #rows = []
 
         x = np.arange(10)
         
@@ -48,7 +48,9 @@ def get_previous_commits(repos_directory, metrics_directory, projects):
             
             modified_files = commits_dataset[commits_dataset['Commit'] == commit]['File'].unique()
 
+            start_time_ten_files = datetime.datetime.now()
             for file in modified_files:
+                start_time_single_file = datetime.datetime.now()
                 files_dict[file] = []
                 prev_commits = runCmdList(['git', 'log', '--oneline', '--full-history', '--pretty=format:\"%H\"', '--follow', file], path_repo)
                 i = 0
@@ -56,10 +58,24 @@ def get_previous_commits(repos_directory, metrics_directory, projects):
                     files_dict[file].append(prev_commit.replace('\"',''))
                     i = i + 1
                     if i == 10:
+                        end_time_single_file = datetime.datetime.now()
+                        duration_single_file = end_time_single_file - start_time_single_file
+                        seconds_in_day = 24 * 60 * 60
+                        duration_tuple_single_file = divmod(duration_single_file.days * seconds_in_day + duration_single_file.seconds, 60)
+                        print('The extraction of 10 previous commits for the file ' + file + ' lasted: ' + str(duration_tuple_single_file[0]) + ' minutes and ' + str(duration_tuple_single_file[1]) + ' seconds')                    
+        
                         break
-            
+            end_time_ten_files = datetime.datetime.now()
+            duration_ten_files = end_time_ten_files - start_time_ten_files
+            seconds_in_day = 24 * 60 * 60
+            duration_tuple_ten_files = divmod(duration_ten_files.days * seconds_in_day + duration_ten_files.seconds, 60)
+            print('The extraction of 10 previous commits for all the modified files in the commit ' + commit + ' lasted: ' + str(duration_tuple_ten_files[0]) + ' minutes and ' + str(duration_tuple_ten_files[1]) + ' seconds')                    
+        
+
             #print('Commit: ' + commit + '\n' + str(files_dict) + '\n\n')
+            start_time_get_all_slopes = datetime.datetime.now()
             for file in files_dict:
+                start_time_slopes_single_file = datetime.datetime.now()
                 methods = commits_dataset[commits_dataset['Commit'] == commit][commits_dataset['File'] == file]['Method']
                 for method in methods:
                     #print('METHOD: ' + method)
@@ -85,7 +101,7 @@ def get_previous_commits(repos_directory, metrics_directory, projects):
                             #print(y_params)
                             #print('\ny_complex:')
                             #print(y_complex)
-                            
+                            start_time_linregr = datetime.datetime.now()
                             try:
                                 slope_loc, intercept, r, p, std_err = stats.linregress(x, y_loc)
                             except Exception as e:
@@ -104,6 +120,13 @@ def get_previous_commits(repos_directory, metrics_directory, projects):
                             except Exception as e:
                                 print(e)
                             final_array[index_current, 2] = slope_complex
+
+                            end_time_linregr = datetime.datetime.now()
+                            duration_linregr  = end_time_linregr  - start_time_linregr
+                            seconds_in_day = 24 * 60 * 60
+                            duration_tuple_linregr  = divmod(duration_linregr.days * seconds_in_day + duration_linregr.seconds, 60)
+                            print('The linear regression calculation for method ' + method + ' in file ' + file + ' lasted: ' + str(duration_tuple_linregr[0]) + ' minutes and ' + str(duration_tuple_linregr[1]) + ' seconds')
+        
                         except:
                             final_array[index_current, 0] = np.NaN
                             final_array[index_current, 1] = np.NaN
@@ -120,7 +143,25 @@ def get_previous_commits(repos_directory, metrics_directory, projects):
                         final_array[index_current, 0] = np.NaN
                         final_array[index_current, 1] = np.NaN
                         final_array[index_current, 2] = np.NaN
+
+
+                end_time_slopes_single_file = datetime.datetime.now()
+                duration_slopes_single_file  = end_time_slopes_single_file  - start_time_slopes_single_file 
+                seconds_in_day = 24 * 60 * 60
+                duration_tuple_slopes_single_file  = divmod(duration_slopes_single_file.days * seconds_in_day + duration_slopes_single_file.seconds, 60)
+                #print(x)
+                print('The slope extraction for all methods in file ' + file + ' lasted: ' + str(duration_tuple_slopes_single_file[0]) + ' minutes and ' + str(duration_tuple_slopes_single_file[1]) + ' seconds')
+        
             
+            
+            end_time_get_all_slopes = datetime.datetime.now()
+            duration_get_all_slopes  = end_time_get_all_slopes  - start_time_get_all_slopes 
+            seconds_in_day = 24 * 60 * 60
+            duration_tuple_get_all_slopes  = divmod(duration_get_all_slopes.days * seconds_in_day + duration_get_all_slopes.seconds, 60)
+            #print(x)
+            print('The slope extraction for method ' + method + ' in file ' + file + ' lasted: ' + str(duration_tuple_get_all_slopes[0]) + ' minutes and ' + str(duration_tuple_get_all_slopes[1]) + ' seconds')
+        
+
             end_time_commit = datetime.datetime.now()
             duration_commit = end_time_commit - start_time_commit
             seconds_in_day = 24 * 60 * 60
