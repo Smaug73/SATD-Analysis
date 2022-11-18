@@ -1,11 +1,9 @@
 import numpy as np
-from sklearn.linear_model import LinearRegression
 import datetime
 import pandas as pd
 import argparse
 import os
 import subprocess 
-import git
 from scipy import stats
 
 
@@ -127,7 +125,7 @@ def get_previous_commits(repos_directory, metrics_directory, projects):
             duration_commit = end_time_commit - start_time_commit
             seconds_in_day = 24 * 60 * 60
             duration_tuple_commit = divmod(duration_commit.days * seconds_in_day + duration_commit.seconds, 60)
-            print(x)
+            #print(x)
             print('The measurement for commit ' + commit + ' lasted: ' + str(duration_tuple_commit[0]) + ' minutes and ' + str(duration_tuple_commit[1]) + ' seconds')
         
 
