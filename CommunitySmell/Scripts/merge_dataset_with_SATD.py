@@ -21,11 +21,19 @@ def update_dataframe( pydriller_dataset, satd_dataset , satd_path, output_path, 
 
         #   Ci deve essere una riga per ogni metodo, per ogni metodo dobbiamo vedere se c'e' almeno un SATD
         commits = satd_dataset['Commit'].unique()
+        lenght = len(commits)
 
         # Nuovo dataset
         rows = []
+        i=0
 
         for commit in commits:
+            
+            i=i+1
+            #   Percentuale
+            perc = i * 100 / lenght
+            if perc % 5 == 0 :
+                print("Percentuale commits: ",perc," %")
 
             #   New subset
             subset_commit = satd_dataset[satd_dataset['Commit'] == commit]
@@ -42,15 +50,17 @@ def update_dataframe( pydriller_dataset, satd_dataset , satd_path, output_path, 
                 for method in methods:
                     
                     methods_subset = file_subset[file_subset['Signature'] == method]
-                    #print(methods_subset)
-                    if True in methods_subset['CommentType'].isin(['SATD']):
-                        #   Cerchiamo la prima riga con il SATD
-                        old_row = methods_subset[methods_subset['CommentType'] == 'SATD']
-                        rows.append(old_row.iloc[0])
 
-                    else:
-                        #print(methods_subset.iloc[0])
-                        rows.append(methods_subset.iloc[0])
+                    if not methods_subset.empty : 
+                    #print(methods_subset)
+                        if True in methods_subset['CommentType'].isin(['SATD']):
+                            #   Cerchiamo la prima riga con il SATD
+                            old_row = methods_subset[methods_subset['CommentType'] == 'SATD']
+                            rows.append(old_row.iloc[0])
+
+                        else:
+                            #print(methods_subset.iloc[0])
+                            rows.append(methods_subset.iloc[0])
 
         #   Salviamo dataset nuovo
         new_satd_dataset = pd.DataFrame(rows, columns =  satd_dataset.columns)
