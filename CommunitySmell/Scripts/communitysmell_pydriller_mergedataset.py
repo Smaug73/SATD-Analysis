@@ -16,10 +16,10 @@ import gc
 
 
 #   Path utili
-pydriller_project_dir = ""
-community_smell_dir = ""
-repos_dir = ""
-output_dir = ""
+pydriller_project_path = "/home/stefano/SATD-Analysis/CommunitySmell/dataset-finale/cayenne_dataset.csv"
+community_smell_path = "/home/stefano/SATD-Analysis/CommunitySmell/kaiaulu/rawdata/smell_data/cayenne_community_smells.csv"
+repos_dir = "/home/stefano/SATD-Analysis/CommunitySmell/Repo/"
+output_dir = "/home/stefano/SATD-Analysis/CommunitySmell/dataset-finale/"
 
 
 
@@ -32,6 +32,7 @@ def community_smell_read( cs_path , repo_name):
         community_smell_dataset = pd.read_csv(cs_path)
 
         repo_path = repos_dir+repo_name+os.sep
+        print(repo_path)
         repo = git.Repo(repo_path)
 
         #   Associo ad ogni commit la riga del file corrispondente
@@ -44,7 +45,7 @@ def community_smell_read( cs_path , repo_name):
         #  Leggiamo riga per riga
         for i in range(0,lenght):
 
-            print("Analisi riga: "+i)
+            print("Analisi riga: ",i)
 
             row = community_smell_dataset.iloc[i]
 
@@ -52,7 +53,7 @@ def community_smell_read( cs_path , repo_name):
             if str(row['commit_interval']) != 'NA'  :
 
                 #   Start and End Commit
-                start_end_commits = str(row['Begin--End']).split('-')
+                start_end_commits = str(row['commit_interval']).split('-')
 
                 #   Lista commit da start commit ad end commit
                 commits = repo.git.rev_list('--ancestry-path',start_end_commits[0]+'..'+start_end_commits[1])
@@ -162,9 +163,9 @@ def update_dataframe( pydriller_path, commits_dict , project_name):
                 print(f"Dir conf create! ")
 
         #   Salviamo il dataset
-        pydriller_data.to_csv(output_dir+"pydriller_checkstyle_pmd_metrics_commons_communitySmell--"+project_name+".csv")
+        pydriller_data.to_csv(output_dir+project_name+"-CS_dataset"+".csv")
 
-        print("File "+output_dir+"pydriller_checkstyle_pmd_metrics_commons_communitySmell--"+project_name+".csv SAVED!")
+        print("File "+output_dir+project_name+"-CS_dataset SAVED!")
         
 
 
@@ -189,6 +190,7 @@ def update_dataframe( pydriller_path, commits_dict , project_name):
 
 if __name__ == "__main__":
 
+    '''
     #   Dobbiamo leggere uno per uno tutti i dataset
     for repo_analysis in os.listdir(pydriller_project_dir):
 
@@ -213,3 +215,10 @@ if __name__ == "__main__":
             #   Cancelliamo il dizionario dei commit
             del commits_dict
             gc.collect()
+    
+    '''
+
+    commits_dict =  community_smell_read( community_smell_path , 'cayenne')
+    print(commits_dict)
+
+    update_dataframe (pydriller_project_path, commits_dict, 'cayenne')
