@@ -3,6 +3,7 @@ from shutil import ExecError
 import traceback
 from numpy import size
 import pandas as pd
+import argparse
 
 
 
@@ -149,18 +150,44 @@ def update_satd_dataset(satd_dataset, satd_path) :
 if __name__ == "__main__":
 
 
+    # Args : directory of projects
+    parser = argparse.ArgumentParser(
+                description='Script for merge CommunitySmells dataset with pydriller-slope-warning dataset')
+    
+    parser.add_argument(
+        'project_name',
+        type=str,
+        help='Projects name',
+    )
 
-    output_path = '/home/stefano/SATD-Analysis/CommunitySmell/dataset-finale/'
-    slope_pydrill_path = '/home/stefano/SATD-Analysis/Preprocessing/Results_dataset/Slopes/slopes_complete_commons-math.csv'
-    satd_path = '/home/stefano/SATD-Analysis/Preprocessing/SATD-dataset/commons-math-Comments.csv'
-    project_name = 'commons-math'
+    parser.add_argument(
+        'satd_dataset_path',
+        type=str,
+        help='SATD csv dataset path',
+    )
+
+    parser.add_argument(
+        'pydriller_project_path',
+        type=str,
+        help='Pydriller csv dataset path',
+    )
+
+    parser.add_argument(
+        'output_dir',
+        type=str,
+        help='Output path',
+    )
+
+
+    args = parser.parse_args()
+    
     #   Load pydriller csv
-    pydriller_dataset = pd.read_csv(slope_pydrill_path)
+    pydriller_dataset = pd.read_csv(args.pydriller_project_path)
 
     #   Load SATD csv
-    satd_dataset = pd.read_csv(satd_path)
+    satd_dataset = pd.read_csv(args.satd_dataset_path)
 
 
     #   Update dataframe
-    update_dataframe(pydriller_dataset,satd_dataset, satd_path, output_path , project_name )
+    update_dataframe(pydriller_dataset, satd_dataset, args.satd_dataset_path , args.output_dir , args.project_name )
 

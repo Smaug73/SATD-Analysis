@@ -1,30 +1,19 @@
 #   Script for the join of community smell csv and pydriller csv
 
 
-
-
-
 import os
 from shutil import ExecError
 import traceback
 from numpy import size
 import pandas as pd
 import git
-#   Forziamo utilizzo garbage collection per diminuire memoria utilizzata
-import gc
+import argparse
 
 
 
-#   Path utili
-pydriller_project_path = "/home/stefano/SATD-Analysis/CommunitySmell/dataset-finale/cayenne_dataset.csv"
-community_smell_path = "/home/stefano/SATD-Analysis/CommunitySmell/kaiaulu/rawdata/smell_data/cayenne_community_smells.csv"
-repos_dir = "/home/stefano/SATD-Analysis/CommunitySmell/Repo/"
-output_dir = "/home/stefano/SATD-Analysis/CommunitySmell/dataset-finale/"
 
-
-
-#   Funzione per la lettura dei file riguardante i Community Smell
-def community_smell_read( cs_path , repo_name):
+#   Function for read community smells csv dataset and create the 
+def community_smell_read( cs_path , repo_name, repos_dir):
     
     try:
 
@@ -45,12 +34,10 @@ def community_smell_read( cs_path , repo_name):
         #  Leggiamo riga per riga
         for i in range(0,lenght):
 
-            print("Analisi riga: ",i)
-
             row = community_smell_dataset.iloc[i]
 
             #   Potrebbero esserci righe alle quali non e' associato nessun commit
-            if str(row['commit_interval']) != 'NA'  :
+            if str(row['commit_interval']) != 'nan'  :
 
                 #   Start and End Commit
                 start_end_commits = str(row['commit_interval']).split('-')
@@ -68,6 +55,8 @@ def community_smell_read( cs_path , repo_name):
                 #   Aggiungiamo ogni commit al dictionary
                 for commit in commitsList:
                     commit_row_dict[commit] = row
+        
+        print("Dictionary created !")
 
         #   Ritorniamo il dizionario
         return commit_row_dict
@@ -83,8 +72,8 @@ def community_smell_read( cs_path , repo_name):
 
 
 
-#   Funzione per creare dataset aggiornato
-def update_dataframe( pydriller_path, commits_dict , project_name):
+#   Function for update pydriller dataset with community smells using the dictionaty created by community_smell_read() function
+def update_dataframe( pydriller_path, commits_dict , project_name, output_dir):
 
     try:
 
@@ -177,11 +166,6 @@ def update_dataframe( pydriller_path, commits_dict , project_name):
         print("Errore lettura update_dataframe ...")
         traceback.print_exc()
 
-    finally:
-    #   Garbage Collector call
-        del pydriller_data
-        gc.collect()
-
 
 
 
@@ -190,35 +174,47 @@ def update_dataframe( pydriller_path, commits_dict , project_name):
 
 if __name__ == "__main__":
 
-    '''
-    #   Dobbiamo leggere uno per uno tutti i dataset
-    for repo_analysis in os.listdir(pydriller_project_dir):
-
-        pydriller_dateset_path = pydriller_project_dir+os.sep+repo_analysis
-
-        #   Controlliamo che il file sia corretto
-        if os.path.isfile(pydriller_dateset_path) and "pydriller" in repo_analysis and ".csv" in repo_analysis:
-            
-            #   Nome del repository
-            repo_name = repo_analysis[18:]
-            repo_name = repo_name[:-4]
-            
-            #   Path community smell csv
-            cs_path = community_smell_dir+repo_name+'_community_smells.csv'
-            
-            #   Creiamo dizionario commit   
-            commits_dict =  community_smell_read( cs_path , repo_name)
-
-            #   Creiamo nuovo dataset
-            update_dataframe (pydriller_dateset_path, commits_dict, repo_name)
-
-            #   Cancelliamo il dizionario dei commit
-            del commits_dict
-            gc.collect()
+    # Args : directory of projects
+    parser = argparse.ArgumentParser(
+                description='Script for merge CommunitySmells dataset with pydriller-slope-warning dataset')
     
-    '''
+    parser.add_argument(
+        'project_name',
+        type=str,
+        help='Projects name',
+    )
 
-    commits_dict =  community_smell_read( community_smell_path , 'cayenne')
-    print(commits_dict)
+    parser.add_argument(
+        'community_smell_path',
+        type=str,
+        help='Community Smells csv dataset path',
+    )
 
-    update_dataframe (pydriller_project_path, commits_dict, 'cayenne')
+    parser.add_argument(
+        'pydriller_project_path',
+        type=str,
+        help='Pydriller csv dataset path',
+    )
+
+    parser.add_argument(
+        'git_repos_dir',
+        type=str,
+        help='Git repositories directory',
+    )
+
+    parser.add_argument(
+        'output_dir',
+        type=str,
+        help='Output path',
+    )
+
+
+    args = parser.parse_args()
+
+
+    #   Get a dictionary that map commits with the corresponding row of community smells dataset
+    commits_dict =  community_smell_read( args.community_smell_path , args.project_name ,args.git_repos_dir)
+
+
+    #   Use the dictionary for add the corresponding community smells data to the pydriller dataset
+    update_dataframe (args.pydriller_project_path, commits_dict, args.project_name, args.output_dir)
