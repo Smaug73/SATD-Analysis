@@ -10,15 +10,21 @@ import argparse
 
 
 #   Function for read community smells csv dataset and create the 
-def community_smell_read(cs_path, satd_path , repo_name, repos_dir, output_dir, project_name):
+def community_smell_read(cs_path, satd_path , repo_name, repos_dir, output_dir):
     
     try:
         #   Lettura csv
         print("Lettura community_smell_dataset: "+cs_path)
         community_smell_dataset = pd.read_csv(cs_path)
 
+        #   eliminiamo righe con valori di commit interval vuoti
+        #community_smell_dataset = community_smell_dataset.drop(community_smell_dataset[community_smell_dataset.commit_interval == 'NA'].index)
+        community_smell_dataset = community_smell_dataset.dropna(axis=0, subset=['commit_interval'])
+
         print("Lettura satd_path: "+satd_path)
         satd_dataset = pd.read_csv(satd_path)
+
+        #   rimuoviamo i SATD rimossi perche' vogliamo considerare solo quelli introdotti
 
 
         repo_path = repos_dir+repo_name+os.sep
@@ -26,7 +32,8 @@ def community_smell_read(cs_path, satd_path , repo_name, repos_dir, output_dir, 
         repo = git.Repo(repo_path)
 
         #   lista numero di satd per periodo
-        satd_count_column = []
+        satd_added_count_column = []
+        satd_removed_count_column = []
 
         #   Numero di righe del dataframe
         lenght = len(community_smell_dataset.index)
@@ -35,11 +42,11 @@ def community_smell_read(cs_path, satd_path , repo_name, repos_dir, output_dir, 
         #  Leggiamo riga per riga
         for i in range(0,lenght):
 
-            
-            row = [community_smell_dataset.iloc[i],satd_count]
+            row = community_smell_dataset.iloc[i]
+            #print(row)
 
             #   Potrebbero esserci righe alle quali non e' associato nessun commit
-            if str(row['commit_interval']) != 'nan'  :
+            if str(row['commit_interval']) != 'NA'  :
 
                 #   Start and End Commit
                 start_end_commits = str(row['commit_interval']).split('-')
@@ -55,18 +62,21 @@ def community_smell_read(cs_path, satd_path , repo_name, repos_dir, output_dir, 
                 commitsList.append(start_end_commits[1])
 
                 #   calcoliamo i satd all'interno di questo insieme di commit
-                satd_count= count_satd(satd_dataset,commitsList)
+                satd_added_count, satd_removed_count= count_satd(satd_dataset,commitsList)
                 
                 #   Aggiungiamo numero satd alla lista
-                satd_count_column.append(satd_count)
-        
+                satd_added_count_column.append(satd_added_count)
+                satd_removed_count_column.append(satd_removed_count) 
+
+
         #   Aggiungiamo la nuova colonna
-        community_smell_dataset['SATDnum'] = satd_count_column
+        community_smell_dataset['SATD_added_num'] = satd_added_count_column
+        community_smell_dataset['SATD_removed_num'] = satd_removed_count_column
 
         #   Salviamo il nuovo dataset
-        community_smell_dataset.to_csv(+output_dir+project_name+"-communitysmell_satdnum_dataset.csv")
+        community_smell_dataset.to_csv(output_dir+repo_name+"-communitysmell_satdnum_dataset.csv")
 
-        print("File "+output_dir+project_name+"-communitysmell_satdnum_dataset SAVED!")
+        print("File "+output_dir+repo_name+"-communitysmell_satdnum_dataset SAVED!")
 
     except Exception:
 
@@ -81,21 +91,38 @@ def count_satd(satd_dataset,commits_list):
 
     try:
         
-        satd_count = 0
+        satd_added_count = 0
+        satd_removed_count = 0
 
         for commit in commits_list:
             
             #   filtro per trovare tutte le righe del commit 
-            subset_commit = satd_dataset[satd_dataset['Commit'] == commit]
+            subset_commit = satd_dataset[(satd_dataset['Commit'] == commit) & (satd_dataset['CommentType'] == 'SATD')]
+            
+            #   controllo che il subset non e' vuoto
+            if not subset_commit.empty:
 
-            #   conto numero satd
-            count  = subset_commit['CommentType'].value_counts()['SATD']
+                #   conto numero satd aggiunti e rimossi
+                count_changes = subset_commit['TypeOfChange'].value_counts()
+                
+                if not count_changes.empty :
+                    
+                    if 'ADDED' in count_changes:
+                        count_a  = count_changes['ADDED']
+                    else:
+                        count_a = 0
 
-            #  ritorno numero satd 
-            satd_count += count
+                    if 'REMOVED' in count_changes:
+                        count_r  = count_changes['REMOVED']
+                    else:
+                        count_r = 0
+
+                    #  aggiorno numero satd 
+                    satd_added_count += count_a
+                    satd_removed_count += count_r
 
 
-        return satd_count
+        return satd_added_count, satd_removed_count
 
     except Exception:
 
@@ -109,7 +136,7 @@ if __name__ == "__main__":
 
     # Args : directory of projects
     parser = argparse.ArgumentParser(
-                description='Script for create dataset with number of SATD added in each period of dataset of CommunitySmells')
+                description='Script for create dataset with number of SATD added and removed in each period of dataset of CommunitySmells')
     
     parser.add_argument(
         'project_name',
@@ -144,10 +171,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-
-    #   Get a dictionary that map commits with the corresponding row of community smells dataset
-    commits_dict =  community_smell_read( args.community_smell_path , args.project_name ,args.git_repos_dir)
-
-
-    #   Use the dictionary for add the corresponding community smells data to the pydriller dataset
-    update_dataframe (args.pydriller_project_path, commits_dict, args.project_name, args.output_dir)
+    community_smell_read(args.community_smell_path, args.satd_path, args.project_name , args.git_repos_dir, args.output_dir)
