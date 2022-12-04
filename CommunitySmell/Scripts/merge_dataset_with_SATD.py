@@ -53,19 +53,22 @@ def update_dataframe( pydriller_dataset, satd_dataset , satd_path, output_path, 
                     methods_subset = file_subset[file_subset['Signature'] == method]
 
                     if not methods_subset.empty : 
-                    #print(methods_subset)
-                        if True in methods_subset['CommentType'].isin(['SATD']):
+                        #print(methods_subset)
+                        if 'SATD' in methods_subset['CommentType']:
                             #   Cerchiamo la prima riga con il SATD
                             old_row = methods_subset[methods_subset['CommentType'] == 'SATD']
+                            #print(old_row)
+                            #   Aggiungiamo la riga per questo metodo contente il SATD
                             rows.append(old_row.iloc[0])
 
                         else:
                             #print(methods_subset.iloc[0])
+                            #   Aggiungiamo la riga, indica che non contiene il SATD in questo caso
                             rows.append(methods_subset.iloc[0])
 
-        #   Salviamo dataset nuovo
+        #   Salviamo dataset nuovo degli SATD, questo conterra' solo se c'e' oppure no SATD in un metodo
         new_satd_dataset = pd.DataFrame(rows, columns =  satd_dataset.columns)
-        new_satd_dataset.to_csv( satd_path+'-NEW' + '.csv', index=False)
+        new_satd_dataset.to_csv( satd_path+'-NEW-only-one-method-only-added-SATD' + '.csv', index=False)
 
         print("SATD DATASET MODIFICATO")
 
@@ -152,7 +155,7 @@ if __name__ == "__main__":
 
     # Args : directory of projects
     parser = argparse.ArgumentParser(
-                description='Script for merge CommunitySmells dataset with pydriller-slope-warning dataset')
+                description='Script for merge SATD dataset with pydriller-slope-warning dataset')
     
     parser.add_argument(
         'project_name',
@@ -185,7 +188,7 @@ if __name__ == "__main__":
     pydriller_dataset = pd.read_csv(args.pydriller_project_path)
 
     #   Load SATD csv
-    satd_dataset = pd.read_csv(args.satd_dataset_path)
+    satd_dataset = pd.read_csv(args.satd_dataset_path, sep=",")
 
 
     #   Update dataframe
