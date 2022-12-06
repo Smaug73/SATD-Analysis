@@ -84,6 +84,31 @@ def correlation(df, output):
 
 
 
+def histogram(df,output):
+
+    df['SATD_added_num'].hist(bins=15,grid=True,color='#86bf91', zorder=2, rwidth=0.9)
+    #plt.show()
+    plt.savefig(output+"_SATD_added_num_histogram.png", bbox_inches="tight")
+    plt.clf()
+
+    df['missing_links'].hist(bins=15,grid=True,color='#86bf91', zorder=2, rwidth=0.9)
+    #plt.show()
+    plt.savefig(output+"_missing_links_histogram.png", bbox_inches="tight")
+    plt.clf()
+
+    df['org_silo'].hist(bins=15,grid=True,color='#86bf91', zorder=2, rwidth=0.9)
+    #plt.show()
+    plt.savefig(output+"_org_silo_histogram.png", bbox_inches="tight")
+    plt.clf()
+
+    df['radio_silence'].hist(bins=15,grid=True,color='#86bf91', zorder=2, rwidth=0.9)
+    #plt.show()
+    plt.savefig(output+"_radio_silence_histogram.png", bbox_inches="tight")
+    plt.clf()
+
+
+
+
 
 if __name__ == "__main__":
 
@@ -92,7 +117,8 @@ if __name__ == "__main__":
     boxplot_folder ='/home/stefano/SATD-Analysis/CommunitySmell/communitysmells_SATD_dataset/boxplot/'
     plot_folder='/home/stefano/SATD-Analysis/CommunitySmell/communitysmells_SATD_dataset/plot/'
     correlation_folder='/home/stefano/SATD-Analysis/CommunitySmell/communitysmells_SATD_dataset/correlation/'
-    
+    histogram_folder='/home/stefano/SATD-Analysis/CommunitySmell/communitysmells_SATD_dataset/histogram/'
+
     #   Scorriamo tutti i dataset contenuti nella cartella
     for f in os.scandir(dataset_folder):
         
@@ -107,4 +133,6 @@ if __name__ == "__main__":
             #if f.name != 'dataset_complete.csv':
                 #line_plot(dataset, plot_folder+f.name+'_lineplot.png')
             
-            correlation(dataset,correlation_folder+f.name)        
+            #correlation(dataset,correlation_folder+f.name)        
+            if f.name == 'dataset_complete.csv':
+                histogram(dataset,histogram_folder+f.name)
