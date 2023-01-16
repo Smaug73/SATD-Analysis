@@ -27,7 +27,7 @@ def get_previous_commits(repos_directory, metrics_directory, projects, output_pa
         x = np.arange(10)
         
         # For each commit create a dictionary (key: file; value: list of 10 most recent commits in which the file was modified);
-        # For each file in the dictionary scn all its method and for each of them calculate the slope for the 3 metrics
+        # For each file in the dictionary scan all its method and for each of them calculate the slope of the 3 metrics
         for commit in commits:
 
             count_commits = count_commits + 1
@@ -56,7 +56,6 @@ def get_previous_commits(repos_directory, metrics_directory, projects, output_pa
                     if i == 10:
                         break
             
-            #print('Commit: ' + commit + '\n' + str(files_dict) + '\n\n')
             
             for file in files_dict:
                 file_subset = subset_commit[subset_commit['File'] == file]
@@ -65,12 +64,15 @@ def get_previous_commits(repos_directory, metrics_directory, projects, output_pa
 
                 for method in methods:
                     index_current = ((commits_dataset[commits_dataset['Commit'] == commit])[commits_dataset['File'] == file])[commits_dataset['Method'] == method].index[0]
-                    #print('CURRENT INDEX: ' + str(index_current))
+                    
                     if len(files_dict[file]) >= 10:
-                        #print('METHOD: ' + method)
                         y_loc = np.zeros((10))
                         y_params = np.zeros((10))
                         y_complex = np.zeros((10))
+
+                        # Try to calculate, for each method in each file in the dictionary, the slope of the 3 metrics (NLOC, Complexity, #Parameters);
+                        # If there are less than 10 commits in which the file was modified, set all the slopes of all of its methods to NaN.
+                        # If the method was added in one of the 9 most recent commits, set its slopes to NaN.
                         try:
                             
                             filtered_dataset = getLastTenMeasures(commits_dataset,files_dict[file], file , method)
@@ -82,19 +84,12 @@ def get_previous_commits(repos_directory, metrics_directory, projects, output_pa
                                     y_params[j] = filtered_dataset.iloc[j]['#Parameters']
                                     y_complex[j] = filtered_dataset.iloc[j]['Complexity']
                                     
-                                #print('\ny_loc:')
-                                #print(y_loc)
-                                #print('\ny_params:')
-                                #print(y_params)
-                                #print('\ny_complex:')
-                                #print(y_complex)
                                 
                                 try:
                                     slope_loc, intercept, r, p, std_err = stats.linregress(x, y_loc)
                                 except Exception as e:
                                     print(e)
                                 final_array[index_current, 0] = slope_loc
-                                #print('slope loc final array: ' + str(final_array[index_current, 0]))
 
                                 try:
                                     slope_params, intercept, r, p, std_err = stats.linregress(x, y_params)
@@ -123,8 +118,6 @@ def get_previous_commits(repos_directory, metrics_directory, projects, output_pa
 
 
                     else:
-                        #print('\nELSE\n')
-                        #index_current = commits_dataset[commits_dataset['Commit'] == commit][commits_dataset['File'] == file][commits_dataset['Method'] == method].index[0]
                         final_array[index_current, 0] = np.NaN
                         final_array[index_current, 1] = np.NaN
                         final_array[index_current, 2] = np.NaN
