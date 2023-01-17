@@ -15,13 +15,13 @@
    
    Es: python pathConverter.py /Users/user/Desktop/PMD_dataset/ -at pmd -p aries openjpa drill
    
-   The output is a new CSV file in each commit of every given project, identical to the one input except for the path of the files in the "File" column.
+   The output is a new CSV file in each commit of every given project, identical to the one in input except for the path of the files in the "File" column.
    
-   **This script has already been run for all projects**
+   **This script has already been run for all projects.**
    
 3. xmlToCsvConverter.py -> converts the xml format files to csv files.It requires 1 parameter in input:
    - path to the directory containing the Checkstyle results (in XML format) of all projects.
    
    Es: python xmlToCsvConverter.py /Users/user/Desktop/Checkstyle_dataset/
    
-   **This script hasn't been run for any project, because it was not actually needed in the following step: counting of the number of warnings per method**
+   **This script hasn't been run for any project, because it was not actually needed in the following step: counting of the number of warnings per method.**
