@@ -17,13 +17,13 @@ def count_collisions(directory, projects):
     print('Projects analysed in this process: ' + str(projects))
     
     csv_files_with_collisions = pd.DataFrame(columns=['Project', 'Commit', 'File', 'Is PMD Needed'])
-    csv_collision_counter = pd.DataFrame(columns=['Project', 'Total Modifications', 'Num of Homonymous Files', 'Total Commits', 'Num of Commits with Homonymous Files'])
+    #csv_collision_counter = pd.DataFrame(columns=['Project', 'Total Modifications', 'Num of Homonymous Files', 'Total Commits', 'Num of Commits with Homonymous Files'])
 
     # Index for acessing rows in csv_files_with_collisions DataFrame
     i = 0
 
     # Index for acessing rows in csv_collision_counter DataFrame
-    j = 0
+    #j = 0
 
     # Consider only the added and changed files
     accepted_changes = ['MODIFY', 'ADD']
@@ -121,9 +121,9 @@ def count_collisions(directory, projects):
                 files_downloaded_count = files_downloaded_count + 1
                 #print('\nFiles downloaded in project ' + project + ': ' + str(files_downloaded_count) + '/' + str(len(homonymous_modified_files_set)))
 
-        csv_collision_counter.loc[j] = [project, modified_java_files_project_count, homonymous_files_in_project_count, len(commits), len(commits_with_collision_set)]
-        csv_collision_counter.to_csv(directory + os.sep + 'project_collisions_count' + string_projects_analysed + '.csv', index=False)
-        j = j + 1
+        #csv_collision_counter.loc[j] = [project, modified_java_files_project_count, homonymous_files_in_project_count, len(commits), len(commits_with_collision_set)]
+        #csv_collision_counter.to_csv(directory + os.sep + 'project_collisions_count' + string_projects_analysed + '.csv', index=False)
+        #j = j + 1
         print('Total modified java files: ' + str(modified_java_files_project_count))
         print('Total homonymous files: ' + str(homonymous_files_in_project_count))
         print('Files to be reanalysed with PMD: ' + str(files_to_reanalyse_count))
