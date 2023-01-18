@@ -337,7 +337,7 @@ if __name__ == "__main__":
 
     # Args : directory of projects
     parser = argparse.ArgumentParser(
-                description='Script for download mbox file for an apache project')
+                description='Script for count pmd and checkstyle warnings')
 
     # Apache project name
     parser.add_argument(
