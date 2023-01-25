@@ -1,6 +1,6 @@
 This is the list of all the script used for the thesis.
 
-NOTE:  Read or launch the scripts for know what is the input and output.
+NOTE:  Read or launch the scripts with -h for know what is the input and output.
 
 
 
