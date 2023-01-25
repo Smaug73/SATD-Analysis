@@ -25,3 +25,24 @@
    Es: python xmlToCsvConverter.py /Users/user/Desktop/Checkstyle_dataset/
    
    **This script hasn't been run for any project, because it was not actually needed in the following step: counting of the number of warnings per method.**
+
+4. download_modFile_commit.py -> download all the modified files for all commits of a given repository:
+   - repository name
+   
+   The output is a directory containing a subdirectory for all the commits and the modified files.
+
+5. pmd_checkstyle_call_creator.py -> lanch pmd and checkstyle for analyze modified files of a commit:
+   - directory with subdirectory for each repos inside, containing modified files.
+
+   The output is a directory with subdirectory for each repos inside, containing pmd and checkstyle analysis for each modified files.
+
+6. unzipCheckstyleRepositoryData.py -> Unzip a checkstyle zipped directory.
+
+
+
+
+
+
+
+
+  
