@@ -1,4 +1,4 @@
-There are the list of all the script used for the thesis.
+This is the list of all the script used for the thesis.
 
 NOTE:  Read or launch the scripts for know what is the input and output.
 
